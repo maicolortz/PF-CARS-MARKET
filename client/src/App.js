@@ -7,6 +7,7 @@ function App() {
   return (
     <div className="App">
       <h1>PROYECTO FINAL</h1>
+      <h2>estos son cambios en la rama prueba</h2>
     </div>
   );
 }
