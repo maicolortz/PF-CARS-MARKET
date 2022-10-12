@@ -3,7 +3,7 @@ import React from 'react';
 // import { Counter } from './features/counter/Counter';//ESTO ES DE REDUX TOOLKIT
 import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
-import Home from './components/Home.js'
+import Home from './components/Home/Home.jsx'
 import FormRegister from './components/FormRegister.js'
 import FormCar from './components/FormCar/FormCar.js'; 
 import CardDetail from './components/CardDetail/CardDetail.js'
