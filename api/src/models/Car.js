@@ -58,7 +58,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     price: {
-    type: DataTypes.STRING
-    }
+    type: DataTypes.DECIMAL(15,2),
+    },
+    condition: {
+      type: DataTypes.ENUM('Nuevo','Usado'),
+    },
+    transmition: {
+      type: DataTypes.ENUM('Automatico','Sincronico'),
+    },
   });
 };
