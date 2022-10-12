@@ -2,14 +2,32 @@ import React from 'react';
 
 // import { Counter } from './features/counter/Counter';//ESTO ES DE REDUX TOOLKIT
 import './App.css';
-
+import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import Home from './components/Home.js'
+import FormRegister from './components/FormRegister.js'
+import FormCar from './components/FormCar.js'; 
+import CardDetail from './components/CardDetail.js'
+import Login from './components/Login.js'
+import PageNotFound from './components/PageNotFound.js'
+import EditCard from './components/EditCard.js'
 function App() {
   return (
-    <div className="App">
-      <h1>PROYECTO FINAL</h1>
-      <h2>estos son cambios en la rama prueba</h2>
-      <h3>jaimito el cartero</h3>
-    </div>
+    <>
+   
+    
+      <BrowserRouter>
+        <Routes>  
+          <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/createuser' element={<FormRegister/>} />
+          <Route path='/createcar' element={<FormCar/>} />
+          <Route path='/edit-car/:id' element={<EditCard/>} />
+          <Route path='/car/:id' element={<CardDetail/>} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
+
+    </>
   );
 }
 
