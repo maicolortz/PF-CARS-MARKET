@@ -5,8 +5,8 @@ import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Home from './components/Home.js'
 import FormRegister from './components/FormRegister.js'
-import FormCar from './components/FormCar.js'; 
-import CardDetail from './components/CardDetail.js'
+import FormCar from './components/FormCar/FormCar.js'; 
+import CardDetail from './components/CardDetail/CardDetail.js'
 import Login from './components/Login.js'
 import PageNotFound from './components/PageNotFound.js'
 import EditCard from './components/EditCard.js'
