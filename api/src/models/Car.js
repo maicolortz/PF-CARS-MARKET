@@ -46,13 +46,13 @@ module.exports = (sequelize) => {
       allowNull:false,
       required: true,
     },
-    descripcionLong: {
-      type: DataTypes.STRING,
+    descriptionLong: {
+      type: DataTypes.STRING(1000),
       allowNull:false,
       required: true,
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(500),
     },
     location: {
       type: DataTypes.STRING,
