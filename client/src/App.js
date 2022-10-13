@@ -13,8 +13,6 @@ import EditCard from './components/EditCard.js'
 function App() {
   return (
     <>
-   
-    
       <BrowserRouter>
         <Routes>  
           <Route path='/' element={<Home/>}/>
