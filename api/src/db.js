@@ -34,14 +34,14 @@ const { Car, User, Transaction, Consult } = sequelize.models;
 
 // Aca vendrian las relaciones
 
-User.hasMany(Car, { through: 'user_car' });
-Car.belongsTo(User, { through: 'user_car' });
+User.hasMany(Car);
+Car.belongsTo(User);
 
-User.hasMany(Consult, { through: 'user_consult' });
-Consult.belongsTo(User, { through: 'user_consult' });
+User.hasMany(Consult);
+Consult.belongsTo(User);
 
-User.hasMany(Transaction, { through: 'user_transaction' });
-Transaction.belongsTo(User, { through: 'user_transaction' });
+User.hasMany(Transaction);
+Transaction.belongsTo(User);
 
 
 module.exports = {
