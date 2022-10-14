@@ -14,12 +14,19 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       required: true,
-      
+      get(){
+        const lower = this.getDataValue('name');
+        return lower ? lower.toLowerCase() : null;
+      }
     },
     brand: {
       type: DataTypes.STRING, 
       allowNull:false,
       required: true,
+      get(){
+        const lower = this.getDataValue('brand');
+        return lower ? lower.toLowerCase() : null;
+      }
     },
     model: {
       type: DataTypes.STRING,

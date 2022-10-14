@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function getCars() {
   return async function (dispatch) {
-    let json = await axios.get("/cars");
+    let json = await axios.get("/");
     return dispatch({
       type: "GET_CARS",
       payload: json.data,
