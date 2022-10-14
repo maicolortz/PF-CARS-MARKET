@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { postCar, getCars } from "../../Redux/Actions";
 import './FormCar.css';
 
 
@@ -11,35 +12,21 @@ function FormCar() {
 
     const [state, setState] = useState({
         name: "",
-        marca: "",
-        modelo: "",
+        brand: "",
+        model: "",
         color: "",
-        año: "",
-        kilometros: "",
-        ubicacion: "",
-        precio: "",
-        descripcionLarga: "",
-        imagen: "",
+        year: "",
+        kilometres: "",
+        location: "",
+        price: "",
+        descriptionLong: "",
+        descriptionShort: "",
+        image: "",
     })
 
     const [errors, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        dispatch()
-        setState({
-            name: "",
-            marca: "",
-            modelo: "",
-            color: "",
-            año: "",
-            kilometros: "",
-            ubicacion: "",
-            precio: "",
-            descripcionLarga: "",
-            imagen: "",
-        })
-    }
+
 
     function validate(state) {
         let errors = {};
@@ -49,31 +36,31 @@ function FormCar() {
         } else if (!/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g.test(state.name)) {
             errors.name = "El titulo no puede tener caracteres especiales"
         }
-        if(!state.marca){
-            errors.marca = "Se requiere marca del auto"
+        if(!state.brand){
+            errors.brand = "Se requiere marca del auto"
         }
-        if(!state.modelo){
-            errors.modelo = "Se requiere modelo del auto"
+        if(!state.model){
+            errors.model = "Se requiere modelo del auto"
         }
         if(!state.color){
             errors.color = "Se requiere un color"
         }
-        if(!state.año){
-            errors.año = "Se requiere año del auto"
-        } else if(state.año < 1900 || state.año > 2024) {
-            errors.año = "Año invalido"
+        if(!state.year){
+            errors.year = "Se requiere año del auto"
+        } else if(state.year < 1900 || state.year > 2024) {
+            errors.year = "Año invalido"
         }
-        if(!state.kilometros){
+        if(!state.kilometres){
             errors.kilometros = "Se requiere kilometros del auto"
         }
-        if(!state.ubicacion){
-            errors.ubicacion = "Se requiere ubicacion"
+        if(!state.location){
+            errors.location = "Se requiere ubicacion"
         }
-        if(!state.precio){
-            errors.precio = "Indicar precio de venta"
+        if(!state.price){
+            errors.price = "Indicar precio de venta"
         }
-        if(!state.imagen){
-            errors.imagen = "Se requiere imagen del auto"
+        if(!state.image){
+            errors.image = "Se requiere imagen del auto"
         }
         return errors;
     }
@@ -83,9 +70,26 @@ function FormCar() {
             setErrors(validate({...state, [e.target.name]: e.target.value}));
         }
 
+        const handleSubmit = (e) => {
+            e.preventDefault()
+            dispatch(postCar(state))
+            setState({
+                name: "",
+                brand: "",
+                model: "",
+                color: "",
+                year: "",
+                kilometres: "",
+                location: "",
+                price: "",
+                descriptionLong: "",
+                descriptionShort: "",
+                image: "",
+            })
+        }
 
     useEffect(() => {
-
+        dispatch(getCars());
     }, [dispatch])
 
     return (
@@ -105,14 +109,14 @@ function FormCar() {
 
                     <div>
                         <label>Marca:</label>
-                        <input type="text" name="marca" value={state.marca} onChange={e => handleChange(e)}/>
-                        {errors.marca && (<p>{errors.marca}</p>)}
+                        <input type="text" name="brand" value={state.brand} onChange={e => handleChange(e)}/>
+                        {errors.brand && (<p>{errors.brand}</p>)}
                     </div>
 
                     <div>
                         <label>Modelo:</label>
-                        <input type="text" name="modelo" value={state.modelo} onChange={e => handleChange(e)}/>
-                        {errors.modelo && (<p>{errors.modelo}</p>)}
+                        <input type="text" name="model" value={state.model} onChange={e => handleChange(e)}/>
+                        {errors.model && (<p>{errors.model}</p>)}
                     </div>
 
                     <div>
@@ -123,37 +127,42 @@ function FormCar() {
 
                     <div>
                         <label>Año:</label>
-                        <input type="text" name="año" value={state.año} onChange={e => handleChange(e)}/>
-                        {errors.año && (<p>{errors.año}</p>)}
+                        <input type="text" name="year" value={state.year} onChange={e => handleChange(e)}/>
+                        {errors.year && (<p>{errors.year}</p>)}
                     </div>
 
                     <div>
                         <label>Kilometros:</label>
-                        <input type="number" name="kilometros" value={state.kilometros} onChange={e => handleChange(e)}/>
-                        {errors.kilometros && (<p>{errors.kilometros}</p>)}
+                        <input type="number" name="kilometres" value={state.kilometres} onChange={e => handleChange(e)}/>
+                        {errors.kilometres && (<p>{errors.kilometres}</p>)}
                     </div>
 
                     <div>
                         <label>Ubicacion:</label>
-                        <input type="text" name="ubicacion" value={state.ubicacion} onChange={e => handleChange(e)}/>
-                        {errors.ubicacion && (<p>{errors.ubicacion}</p>)}
+                        <input type="text" name="location" value={state.location} onChange={e => handleChange(e)}/>
+                        {errors.location && (<p>{errors.location}</p>)}
                     </div>
 
                     <div>
                         <label>Precio:</label>
-                        <input type="number" name="precio" value={state.precio} onChange={e => handleChange(e)}/>
-                        {errors.precio && (<p>{errors.precio}</p>)}
+                        <input type="number" name="price" value={state.price} onChange={e => handleChange(e)}/>
+                        {errors.price && (<p>{errors.price}</p>)}
                     </div>
 
                     <div>
                         <label>Imagen:</label>
-                        <input type="text" name="image" value={state.imagen} onChange={e => handleChange(e)}/>
-                        {errors.imagen && (<p>{errors.imagen}</p>)}
+                        <input type="text" name="image" value={state.image} onChange={e => handleChange(e)}/>
+                        {errors.image && (<p>{errors.image}</p>)}
                     </div>
 
                     <div>
                         <label>Descripcion:</label>
-                        <input type="text" name="descripcionLarga" value={state.descripcionLarga} onChange={e => handleChange(e)}/>
+                        <input type="text" name="descriptionLong" value={state.descriptionLong} onChange={e => handleChange(e)}/>
+                    </div>
+
+                    <div>
+                        <label>Descripcion:</label>
+                        <input type="text" name="descriptionShort" value={state.descriptionShort} onChange={e => handleChange(e)}/>
                     </div>
 
                     <button type='submit'>Publicar</button>

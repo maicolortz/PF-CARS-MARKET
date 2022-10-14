@@ -20,7 +20,7 @@ function App() {
           <Route path='/createuser' element={<FormRegister/>} />
           <Route path='/createcar' element={<FormCar/>} />
           <Route path='/edit-car/:id' element={<EditCard/>} />
-          <Route path='/car/:id' element={<CardDetail/>} />
+          <Route path='/cars/:id' element={<CardDetail/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
