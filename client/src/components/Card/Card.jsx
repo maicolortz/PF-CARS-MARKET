@@ -1,23 +1,27 @@
-import React from 'react'
-import {Link} from 'react-dom'
-import uno from './imagenes/prueba.jpg'
+import React from 'react';
+import { Link } from 'react-router-dom';
+//import uno from './imagenes/prueba.jpg';
+import './Card.css';
 
-function Card(/*parametros que me voy a traer desde el home */) {
+function Card({ id, image, descriptionShort, price, kilometres, transmition, year }) {
   return (
     <>
-    <Link /*ruta detail */>
-        <div>
-            <img src={uno} alt="Mazda MX5"/>
-            <h3>Descripcion corta del auto</h3>
-            <h2>Precio del auto</h2>
-                <div>
-                    <h4>Kilometraje con dibujo</h4> 
-                    <h4>Transmicion del auto</h4>
-                </div>
+      <Link to={`/home/card/${id}`}>
+        <div className='container-card'>
+          <div className='contenedor-igm-card'>
+            <img src={image} alt="Mazda MX5"  className='Imagen-card'/>
+          </div>
+          <div className='Nombre-card'>{descriptionShort}</div>
+          <div className='Precio-car'>Precio: {price}$</div>
+          <div className='container-card2'>
+            <div>Kilometros: {kilometres}</div>
+            <div>Trasmision: {transmition}</div>
+            <div>Año: {year}</div>
+          </div>
         </div>
-    </Link>    
+      </Link>
     </>
   )
 }
 
-export default Card
+export default Card;

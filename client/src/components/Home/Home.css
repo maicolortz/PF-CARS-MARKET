@@ -1,6 +1,7 @@
-.contenedor{
+.contenedor {
     margin: 0;
 }
+
 .contenedor-Home {
     padding-top: 80px;
     border-color: black;
@@ -43,19 +44,18 @@
     border-width: 2px;
     margin: 10px;
     width: 73%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .contenedor-Cards {
-    border-color: black;
-    border-width: 2px;
-    margin: 10px;
-    min-height: 400px;
-    text-align: center;
-    line-height: 500px;
-    font-size: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
 }
 
-.contenedor-Paginado{
+.contenedor-Paginado {
     border-color: black;
     border-width: 2px;
     margin: 10px;
