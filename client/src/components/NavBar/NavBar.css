@@ -2,14 +2,15 @@
     display: flex;
     background-color: grey;
     justify-content: space-between;
-    height: 60px;
+    height: 80px;
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
     border-color: black;
     border-width: 2px;
-    margin: 10px;
     min-width: 100%;
+    position: fixed;
+    background-color: rgba(17, 44, 117, 0.948)
 }
 
 .btn-NavBar {
@@ -18,4 +19,8 @@
     border-width: 2px;
     width: 85px;
     border-radius: 5px;
+}
+
+.logo{
+    border-radius: 10px;
 }

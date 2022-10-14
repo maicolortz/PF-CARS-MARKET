@@ -1,4 +1,8 @@
+.contenedor{
+    margin: 0;
+}
 .contenedor-Home {
+    padding-top: 80px;
     border-color: black;
     border-width: 2px;
     display: flex;
