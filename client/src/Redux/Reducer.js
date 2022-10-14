@@ -36,25 +36,10 @@ const initialState = {
         };
        
       case "ORDER_FOR_PRICE":
-        let /* ordenWeight=state.car
-             let index=ordenWeight.findIndex(e=>e.id===232)
-             ordenWeight[index].weight.imperial='18'
-             state.car=ordenWeight; */
-          ordenPrice =
-            action.payload == "min"
-              ? state.car.sort((a, b) =>
-                  a.weight.metric.localeCompare(b.price, undefined, {
-                    numeric: true,
-                  })
-                )
-              : state.car.sort((a, b) =>
-                  b.weight.metric.localeCompare(a.price, undefined, {
-                    numeric: true,
-                  })
-                );
+       
         return {
           ...state,
-          car: ordenPrice,
+          car: action.payload
         };
       case "ORDER_FOR_NAME":
         const ordeneds =
