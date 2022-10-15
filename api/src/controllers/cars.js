@@ -77,7 +77,7 @@ const getCarForCondition=async(req,res)=>{
           const infototal = await Car.findAll({ where: { condition: condition } });
           infototal.length
           ? res.status(200).send(infototal)
-          : res.status(404).send("not has been founded");
+          : res.status(200).send([]);
         }else {
           res.send("la condicion deber ser nuevo o usado")
         }

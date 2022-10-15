@@ -4,15 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Home.css';
 import Card from "../Card/Card.jsx";
 import { getCars } from '../../Redux/Actions';
+import Filters from "../filtros/Filters.jsx";
 
 export default function Home() {
 
     const dispatch = useDispatch();
-    const allCars = useSelector((state) => state.allCars);
 
+    const car = useSelector((state) => state.car);
+   
     useEffect(() => {
         dispatch(getCars());
-    }, [dispatch]);
+    }, []);
 
     return (
         <div className="contenedor">
@@ -21,10 +23,12 @@ export default function Home() {
             </div>
             <div className="contenedor-Home">
                 <div className="contenedor-Home2">
-                    <div className="contenedor-Filtros"></div>
+                    <div className="contenedor-Filtros">
+                <Filters/>
+                    </div>
                     <div className="contenedor-Home3">
                         <div className="contenedor-Cards">
-                            {allCars?.map((el) => {
+                            {car && car?.map((el) => {
                                 return (
                                     <Card id={el.id} image={el.image} descriptionShort={el.descriptionShort} price={el.price} kilometres={el.kilometres} transmition={el.transmition} year={el.year}/>
                                 )
