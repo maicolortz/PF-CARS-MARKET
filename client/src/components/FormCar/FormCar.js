@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postCar, getCars } from "../../Redux/Actions";
+import { Link } from 'react-router-dom';
 import './FormCar.css';
 
 
@@ -94,79 +95,81 @@ function FormCar() {
 
     return (
 
-        <div>
-            <div>
+        <div className='main-group'>
+            <div className='tittle'>
                 <h1>Publica tu auto</h1>
             </div>
 
-            <div>
+            <div className='group'>
                 <form onSubmit={e => handleSubmit(e)}>
                     <div>
-                        <label>Titulo:</label>
-                        <input type="text" name="name" value={state.name} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Titulo:</label>
+                        <input className='input-form' type="text" name="name" value={state.name} onChange={e => handleChange(e)}/>
                         {errors.name && (<p>{errors.name}</p>)}
                     </div>
 
                     <div>
-                        <label>Marca:</label>
-                        <input type="text" name="brand" value={state.brand} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Marca:</label>
+                        <input className='input-form' type="text" name="brand" value={state.brand} onChange={e => handleChange(e)}/>
                         {errors.brand && (<p>{errors.brand}</p>)}
                     </div>
 
                     <div>
-                        <label>Modelo:</label>
-                        <input type="text" name="model" value={state.model} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Modelo:</label>
+                        <input className='input-form' type="text" name="model" value={state.model} onChange={e => handleChange(e)}/>
                         {errors.model && (<p>{errors.model}</p>)}
                     </div>
 
                     <div>
-                        <label>Color:</label>
-                        <input type="text" name="color" value={state.color} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Color:</label>
+                        <input className='input-form' type="text" name="color" value={state.color} onChange={e => handleChange(e)}/>
                         {errors.color && (<p>{errors.color}</p>)}
                     </div>
 
                     <div>
-                        <label>Año:</label>
-                        <input type="text" name="year" value={state.year} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Año:</label>
+                        <input className='input-form' type="text" name="year" value={state.year} onChange={e => handleChange(e)}/>
                         {errors.year && (<p>{errors.year}</p>)}
                     </div>
 
                     <div>
-                        <label>Kilometros:</label>
-                        <input type="number" name="kilometres" value={state.kilometres} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Kilometros:</label>
+                        <input className='input-form' type="number" name="kilometres" value={state.kilometres} onChange={e => handleChange(e)}/>
                         {errors.kilometres && (<p>{errors.kilometres}</p>)}
                     </div>
 
                     <div>
-                        <label>Ubicacion:</label>
-                        <input type="text" name="location" value={state.location} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Ubicacion:</label>
+                        <input className='input-form' type="text" name="location" value={state.location} onChange={e => handleChange(e)}/>
                         {errors.location && (<p>{errors.location}</p>)}
                     </div>
 
                     <div>
-                        <label>Precio:</label>
-                        <input type="number" name="price" value={state.price} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Precio:</label>
+                        <input className='input-form' type="number" name="price" value={state.price} onChange={e => handleChange(e)}/>
                         {errors.price && (<p>{errors.price}</p>)}
                     </div>
 
                     <div>
-                        <label>Imagen:</label>
-                        <input type="text" name="image" value={state.image} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Imagen:</label>
+                        <input className='input-form' type="text" name="image" value={state.image} onChange={e => handleChange(e)}/>
                         {errors.image && (<p>{errors.image}</p>)}
                     </div>
 
                     <div>
-                        <label>Descripcion:</label>
-                        <input type="text" name="descriptionLong" value={state.descriptionLong} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Descripcion:</label>
+                        <input className='input-form' type="text" name="descriptionLong" value={state.descriptionLong} onChange={e => handleChange(e)}/>
                     </div>
 
                     <div>
-                        <label>Descripcion:</label>
-                        <input type="text" name="descriptionShort" value={state.descriptionShort} onChange={e => handleChange(e)}/>
+                        <label className='label-form'>Descripcion:</label>
+                        <input className='input-form' type="text" name="descriptionShort" value={state.descriptionShort} onChange={e => handleChange(e)}/>
                     </div>
 
-                    <button type='submit'>Publicar</button>
-
+                    <button className='button-form' type='submit'>Publicar</button>
+                    <Link to='/'>
+                    <button className='button-form'>Volver</button>
+                    </Link>
                 </form>
             </div>
         </div>
