@@ -13,7 +13,7 @@ export function getCars() {
 export function getCarForName(name) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`/cars?name=${name}`);
+      const { data } = await axios.get(`http://localhost:3001/cars/search/?name=${name}`);
       return dispatch({
         type: "GET_CAR_FOR_NAME",
         payload: data,
@@ -23,7 +23,19 @@ export function getCarForName(name) {
     }
   };
 }
-
+export function getCarForCondition(condition) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/cars/condition/?condition=${condition}`);
+      return dispatch({
+        type: "GET_CAR_FOR_CONDITION",
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
+}
 
 export function getUsers() {
   return async function (dispatch) {
@@ -71,9 +83,13 @@ export function postUser(user) {
     };
   }
 export function OrderForPrice(payload) {
-  return {
-    type: "ORDER_FOR_PRICE",
-    payload,
+  return async function (dispatch) {
+    const { data } = await axios.get(`/cars/sortprice?modo=${payload}`);
+    return dispatch({
+      type: "ORDER_FOR_PRICE",
+      payload: data,
+      
+    });
   };
 }
 export function OrderForName(payload) {

@@ -12,7 +12,9 @@ const initialState = {
           ...state,
           allCars: action.payload,
           car: action.payload
+
         };
+       
       case "GET_USER":
         return {
           ...state,
@@ -29,33 +31,19 @@ const initialState = {
           carDetail:action.payload,
         };
       case "GET_CAR_FOR_NAME":
-        let car=[];
-        car=action.payload==null?car:action.payload
         return {
           ...state,
-          car: car
+          car: filtrarcars(action.payload,state.car),
         };
-       
+        case "GET_CAR_FOR_CONDITION":
+          return {
+            ...state,
+            car: filtrarcars(action.payload,state.car)
+          };
       case "ORDER_FOR_PRICE":
-        let /* ordenWeight=state.car
-             let index=ordenWeight.findIndex(e=>e.id===232)
-             ordenWeight[index].weight.imperial='18'
-             state.car=ordenWeight; */
-          ordenPrice =
-            action.payload == "min"
-              ? state.car.sort((a, b) =>
-                  a.weight.metric.localeCompare(b.price, undefined, {
-                    numeric: true,
-                  })
-                )
-              : state.car.sort((a, b) =>
-                  b.weight.metric.localeCompare(a.price, undefined, {
-                    numeric: true,
-                  })
-                );
         return {
           ...state,
-          car: ordenPrice,
+          car: filtrarcars(action.payload,state.car),
         };
       case "ORDER_FOR_NAME":
         const ordeneds =
@@ -75,3 +63,16 @@ const initialState = {
         return state;
     }
   };
+  function filtrarcars(carsfiltered, carsactual){
+    let car=carsactual
+    let carprice=carsfiltered
+    let carros=[]
+    for (let i = 0; i < carprice.length; i++) {
+      for (let j = 0; j < car.length; j++) {
+          if (carprice[i].id==car[j].id) {
+            carros.push(carprice[i])
+          } 
+      } 
+    } 
+    return carros; 
+  }

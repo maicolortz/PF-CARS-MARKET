@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Home.css';
 import Card from "../Card/Card.jsx";
 import { getCars } from '../../Redux/Actions';
+import Filters from "../filtros/Filters.jsx";
 
 export default function Home() {
 
     const dispatch = useDispatch();
+
     const cars = useSelector((state) => state.car);
 
     //PAGINADO
@@ -27,10 +29,10 @@ export default function Home() {
     const numberPaginate = (n) => {
         setNumber(n);
     }
-
+   
     useEffect(() => {
         dispatch(getCars());
-    }, [dispatch]);
+    }, []);
 
     return (
         <div className="contenedor">
@@ -39,15 +41,19 @@ export default function Home() {
             </div>
             <div className="contenedor-Home">
                 <div className="contenedor-Home2">
-                    <div className="contenedor-Filtros"></div>
+                    <div className="contenedor-Filtros">
+                <Filters/>
+                    </div>
                     <div className="contenedor-Home3">
-                        <div class="grid grid-cols-3 gap-10">
-                            {currentCarsPerPage?.map((el) => {
+                        <div className="contenedor-Cards">
+                            {car && car?.map((el) => {
                                 return (
                                         <Card id={el.id} image={el.image} descriptionShort={el.descriptionShort} price={el.price} kilometres={el.kilometres} transmition={el.transmition} year={el.year} />
                                 )
                             })}
                         </div>
+                        <div class="grid grid-cols-3 gap-10">
+                            {currentCarsPerPage?.map((el) => {
                         <div class="mx-6 my-6">
                             <Paginado allCars={cars.length} carsPerPage={carsPerPage} paginate={paginate} page={currentPage} number={number} numberPaginate={numberPaginate} />
                         </div>

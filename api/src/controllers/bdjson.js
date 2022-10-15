@@ -29,7 +29,7 @@ const car =[
         descriptionLong:"Excelente estado. Todos los servicios en concesionario oficial.Versión tope de gama. Traccion integral. Motor 2 litros de 231 CV. Aceptamos permutas.",
         image:"https://http2.mlstatic.com/D_NQ_NP_862199-MLA51107673007_082022-O.webp",
         price:36300,
-        condition:"Usado",
+        condition:"Nuevo",
         transmition:"Automatico",
     },
     {
@@ -109,7 +109,7 @@ const car =[
         descriptionLong:"Volkswagen Suran 1.6 Trendline Año 2010 - Liv Motors MUY BUEN ESTADO!!USADOS CON GARANTIA!!!GRABADO DE AUTO PARTES - AL DÍA y CON DOCUMENTACIÓN LISTA PARA TRANSFERIR",
         image:"https://http2.mlstatic.com/D_NQ_NP_740468-MLA51918607155_102022-O.webp",
         price:"197000",
-        condition:"Usado",
+        condition:"Nuevo",
         transmition:"Sincronico",
     },
     {
