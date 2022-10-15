@@ -99,11 +99,20 @@ export function OrderForName(payload) {
   };
 }
 
-export function filterForModel(model) {
+export function filterForModel(min,max) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/cars/?model=${model}`);
+    const { data } = await axios.get(`http://localhost:3001/cars/range?min=${min}&max=${max}`);
     return dispatch({
       type: "FILTER_FOR_MODEL",
+      payload: data,
+    });
+  };
+}
+export function filterForBreed({min,max}) {
+  return async function (dispatch) {
+    const { data } = await axios.get(`http://localhost:3001/cars/range?min=${min}&max=${max}`);
+    return dispatch({
+      type: "FILTER_FOR_BREED",
       payload: data,
     });
   };
