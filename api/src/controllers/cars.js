@@ -167,7 +167,7 @@ const getAutoById = async (id) => {
       oil: searchAuto.oil,
       gate: searchAuto.gate,
       kilometres: searchAuto.kilometres,
-      descripcionLong: searchAuto.descripcionLong,
+      descriptionLong: searchAuto.descriptionLong,
       image: searchAuto.image,
       location: searchAuto.location,
       price: searchAuto.price,

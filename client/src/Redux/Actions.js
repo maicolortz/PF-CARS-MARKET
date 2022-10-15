@@ -45,7 +45,7 @@ export function getUser(id) {
   }
 export function getCardDetail(id) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/cars/${id}`);
+    const { data } = await axios.get(`http://localhost:3001/cars/${id}`);
     return dispatch({
       type: "GET_CAR_DETAIL",
       payload: data,
@@ -53,12 +53,17 @@ export function getCardDetail(id) {
   };
 }
 
-export function postCar(car) {
-  return async function () {
-    const d = await axios.post("/cars", car);
-    return d;
-  };
+export function postCar(data) {
+  return async function(dispatch){
+    try {
+      const carCreado = await axios.post("http://localhost:3001/cars", data)
+      return dispatch({type: "POST_CAR", payload: carCreado.data})
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
+
 export function postUser(user) {
     return async function () {
       const d = await axios.post("/cars", user);
