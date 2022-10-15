@@ -1,7 +1,7 @@
 const { Car, User } = require("../db");
 const axios = require("axios");
 const car = require("./bdjson");
-const { Sequelize } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 
 async function updateCar() {
   try {
@@ -138,21 +138,25 @@ const createCar = async (req, res) => {
     res.send(error.message);
   }
 };
-const getRangeModel=async (req,res)=>{
-	const{min,max}=req.query
-	try{
-	const range =await Car.findAll({
-		where:{
-			model:{
-			[Op.between]:[min,max]
-			}
-		}
-	})
-	res.json(range)
-	}catch(error){
-	res.status(400).json(error)
-	}
+
+
+const getRangeModel = async(req,res)=>{
+  const{min,max} = req.query;
+  try {
+   const range  = await Car.findAll({
+      where:{
+          year:{
+              [Op.between]:[min,max]
+          }
+      }
+   })
+   
+   res.json(range) 
+  } catch (error) {
+      res.status(400).json(error)
+  }
 }
+
 const getAutoById = async (id) => {
   try {
     let searchAuto = await Car.findByPk(id);
