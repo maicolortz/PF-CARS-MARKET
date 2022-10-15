@@ -1,37 +1,42 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { getCardDetail } from "../../Redux/Actions";
+import { useParams } from 'react-router-dom';
 import './CardDetail.css';
 
 
-function CardDetail(props) {
+function CardDetail() {
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const carDetail = useSelector(state => state.detail);
+  let { id } = useParams();
 
-    const id = props.match.params.id;
+  const carsDetail = useSelector(state => state.carDetail);
 
-    useEffect(() => {
+  //const id = props.match.params.id;
 
-    }, [dispatch, id])
+  useEffect(() => {
+    dispatch(getCardDetail(id))
+  }, [dispatch, id])
 
 
   return (
+
     <div>
-        <div>
-            <img src={carDetail.imagen} alt="image not found"/>
-            <p>Name: {carDetail.name}</p>
-            <p>Marca: {carDetail.marca}</p>
-            <p>Modelo: {carDetail.modelo}</p>
-            <p>Color: {carDetail.color}</p>
-            <p>Año: {carDetail.año}</p>
-            <p>Kilometros: {carDetail.kilometros}</p>
-            <p>Ubicacion: {carDetail.ubicacion}</p>
-            <p>Precio {carDetail.precio}</p>
-            <p>Descripcion: {carDetail.descripcionLarga}</p>
-        </div>
+      {carsDetail && (<div>
+        <img src={carsDetail.image} alt="img not found" />
+        <p>Name: {carsDetail.name}</p>
+        <p>Marca: {carsDetail.brand}</p>
+        <p>Modelo: {carsDetail.model}</p>
+        <p>Color: {carsDetail.color}</p>
+        <p>Año: {carsDetail.year}</p>
+        <p>Kilometros: {carsDetail.kilometres}</p>
+        <p>Ubicacion: {carsDetail.location}</p>
+        <p>Precio {carsDetail.price}</p>
+        <p>Descripcion: {carsDetail.descriptionLong}</p>
+      </div>
+      )}
     </div>
   )
 }
