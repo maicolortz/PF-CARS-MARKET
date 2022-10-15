@@ -5,6 +5,7 @@ import {
   getCars,
   OrderForPrice,
   getCarForCondition,
+  filterForModel,
 } from "../../Redux/Actions.js";
 export const Filters = ({
   getCars,
@@ -12,6 +13,7 @@ export const Filters = ({
   getCarForCondition,
   Cars,
   Car,
+  filterForModel
 }) => {
   let orderPrice = (e) => {
     e.preventDefault();
@@ -27,6 +29,10 @@ export const Filters = ({
     e.preventDefault();
     getCars();
   };
+  let filterForModelmin =e=>{
+    e.preventDefault();
+    filterForModel()
+  }
   useEffect(() => {}, []);
   const [rangomin, setRangomin] = useState(0);
   const [rangomax, setRangomax] = useState(0);
@@ -53,21 +59,23 @@ export const Filters = ({
           <option value="Nuevo"> Nuevo</option>
         </select>
       </div>
-      <label> Condition</label>
-      <div>
-        <select onChange={(e) => filterForCondition(e)}>
-          <option disabled selected defaultValue>
-            Car Condition
-          </option>
-          <option value="Usado">Usado</option>
-          <option value="Nuevo"> Nuevo</option>
-        </select>
-      </div>
+
       <div>
         <h2> Filter for Model</h2>
-        <select onChange={(e) => filterForCondition(e)}>
+        <select onChange={(e) => filterForModelmin(e)}>
           <option disabled selected defaultValue>
-            year modelo
+            year minime
+          </option>
+          {Car &&
+            Car.map((e) => (
+              <option value={e.year} key={e.id}>
+                {e.year}
+              </option>
+            ))}
+        </select>
+        <select onChange={(e) => filterForModel(e)}>
+          <option disabled selected defaultValue>
+            year maxime
           </option>
           {Car &&
             Car.map((e) => (
@@ -77,7 +85,7 @@ export const Filters = ({
             ))}
         </select>
       </div>
-      <label>Year Minime</label>
+      
       <br />
       <input
         onChange={(e) => setRangomin(e.target.value)}
@@ -135,6 +143,7 @@ function mapDispatchToProps(dispatch) {
     OrderForPrice: (e) => dispatch(OrderForPrice(e)),
     getCarForCondition: (e) => dispatch(getCarForCondition(e)),
     getCars: () => dispatch(getCars()),
+    filterForModel:e=>dispatch(filterForModel(e))
   };
 }
 

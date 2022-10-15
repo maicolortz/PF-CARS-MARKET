@@ -45,20 +45,17 @@ const initialState = {
           ...state,
           car: filtrarcars(action.payload,state.car),
         };
-      case "ORDER_FOR_NAME":
-        const ordeneds =
-          action.payload == "asc"
-            ? state.car.sort((a, b) => a.name.localeCompare(b.name))
-            : state.car.sort((a, b) => b.name.localeCompare(a.name));
-        return {
-          ...state,
-          car: ordeneds,
-        };
       case "FILTER_FOR_MODEL":
         return {
           ...state,
-          car:action.payload
+          car:filtrarcars(action.payload,state.car),
         };
+        case "FILTER_FOR_BREED":
+        return {
+          ...state,
+          car:filtrarcars(action.payload,state.car),
+        };
+        
       default:
         return state;
     }

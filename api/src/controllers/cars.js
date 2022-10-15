@@ -139,7 +139,7 @@ const createCar = async (req, res) => {
   }
 };
 
-
+//http://localhost:3001/cars/range?min=2008&max=2010
 const getRangeModel = async(req,res)=>{
   const{min,max} = req.query;
   try {
