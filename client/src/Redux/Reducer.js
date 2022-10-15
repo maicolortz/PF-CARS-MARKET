@@ -26,7 +26,7 @@ const initialState = {
       case "GET_CAR_DETAIL":
         return {
           ...state,
-          cardDetail: action.payload,
+          carDetail: action.payload,
         };
       case "GET_CAR_FOR_NAME":
         let car=[];
