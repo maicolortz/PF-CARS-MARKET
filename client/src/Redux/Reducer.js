@@ -11,6 +11,7 @@ const initialState = {
         return {
           ...state,
           allCars: action.payload,
+          car: action.payload
         };
       case "GET_USER":
         return {

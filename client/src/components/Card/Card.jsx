@@ -6,7 +6,7 @@ import './Card.css';
 function Card({ id, image, descriptionShort, price, kilometres, transmition, year }) {
   return (
     <>
-      <Link to={`/home/card/${id}`}>
+      <Link to={`/cars/${id}`}>
         <div className='container-card'>
           <div className='contenedor-igm-card'>
             <img src={image} alt="Mazda MX5"  className='Imagen-card'/>
@@ -14,7 +14,7 @@ function Card({ id, image, descriptionShort, price, kilometres, transmition, yea
           <div className='Nombre-card'>{descriptionShort}</div>
           <div className='Precio-car'>Precio: {price}$</div>
           <div className='container-card2'>
-            <div>Kilometros: {kilometres}</div>
+            <div>Kilometros: {kilometres}Km</div>
             <div>Trasmision: {transmition}</div>
             <div>Año: {year}</div>
           </div>
