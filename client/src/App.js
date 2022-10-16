@@ -6,7 +6,7 @@ import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Home from './components/Home/Home.jsx'
 import FormRegister from './components/FormRegister.js'
 import FormCar from './components/FormCar/FormCar.js'; 
-import CardDetail from './components/CardDetail/CardDetail.js'
+import CardDetail from './components/CardDetail/CardDetail.jsx'
 import Login from './components/Login.js'
 import PageNotFound from './components/PageNotFound.js'
 import EditCard from './components/EditCard.js'
