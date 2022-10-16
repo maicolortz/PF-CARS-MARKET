@@ -10,12 +10,14 @@ import CardDetail from './components/CardDetail/CardDetail.js'
 import Login from './components/Login.js'
 import PageNotFound from './components/PageNotFound.js'
 import EditCard from './components/EditCard.js'
+import LandingPage from './components/LandingPage/LandingPage';
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>  
-          <Route path='/' element={<Home/>}/>
+          <Route path='/' exact element = {<LandingPage/>}/>
+          <Route path='/home' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/createuser' element={<FormRegister/>} />
           <Route path='/createcar' element={<FormCar/>} />
