@@ -23,10 +23,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING, 
       allowNull:false,
       required: true,
-      get(){
+      /* get(){
         const lower = this.getDataValue('brand');
         return lower ? lower.toLowerCase() : null;
-      }
+      } */
     },
     model: {
       type: DataTypes.STRING,
