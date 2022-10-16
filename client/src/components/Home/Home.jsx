@@ -14,7 +14,7 @@ export default function Home() {
   //PAGINADO
   const [number, setNumber] = useState(1); //Numeros para los 3 paginados
   const [currentPage, setCurrentPage] = useState(1); //[1]Numero de paginado
-  const [carsPerPage, setCarsPerPage] = useState(3); //[3]Cantidad de cars por paginas
+  const [carsPerPage, setCarsPerPage] = useState(6); //[3]Cantidad de cars por paginas
   const indexLastCar = currentPage * carsPerPage; //[3]Indice del ultimo car por pagina
   const indexFirstCar = indexLastCar - carsPerPage; //[0]Indice del primer car por pagina
   const currentCarsPerPage = cars.slice(indexFirstCar, indexLastCar); //[0,1,2] Arreglo con los cars por pagina
