@@ -4,8 +4,6 @@
 
 .contenedor-Home {
     padding-top: 80px;
-    border-color: black;
-    border-width: 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,12 +22,11 @@
 }
 
 .contenedor-Home2 {
-    border-color: black;
-    border-width: 2px;
     margin: 10px;
     min-height: 400px;
     width: 98%;
     display: flex;
+    justify-content: center;
 }
 
 .contenedor-Filtros {
@@ -40,13 +37,12 @@
 }
 
 .contenedor-Home3 {
-    border-color: black;
-    border-width: 2px;
     margin: 10px;
-    width: 73%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .contenedor-Cards {

@@ -1,9 +1,9 @@
 import React from "react";
 
 
-export default function Paginado({ allCars, carsPerPage, paginate, page, number, numberPaginate }) {
+export default function Paginado({ allCars, carsPerPage, paginate, page, number, numberPaginate, cars }) {
 
-    
+
     const pageNumber = [];//Numero de paginado por cada 3 cars
     for (let i = 1; i <= Math.ceil(allCars / carsPerPage); i++) {
         pageNumber.push(i);
@@ -16,9 +16,8 @@ export default function Paginado({ allCars, carsPerPage, paginate, page, number,
 
     const previous = () => {
         if (page > 1) paginate(page - 1)
-        if (page < number + 1 && page > 1 ) numberPaginate(number - 1);
+        if (page < number + 1 && page > 1) numberPaginate(number - 1);
     }
-    console.log(page);
 
     return (
         <nav aria-label="Page navigation example">
@@ -35,17 +34,23 @@ export default function Paginado({ allCars, carsPerPage, paginate, page, number,
                         {number}
                     </button>
                 </li>
-                <li>
-                    <button onClick={() => { paginate(number + 1) }} class={page === number + 1 ? "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900 " : "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-900"}>
-                        {number + 1}
-                    </button>
-                </li>
-                <li>
-                    <button onClick={() => { paginate(number + 2) }} class={page === number + 2 ? "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900 " : "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-900"}>
-                        {number + 2}
-                    </button>
-                </li>
+                {
+                    cars.length >= carsPerPage * 2 && (
+                        <li>
+                            <button onClick={() => { paginate(number + 1) }} class={page === number + 1 ? "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900 " : "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-900"}>
+                                {number + 1}
+                            </button>
+                        </li>
+                    )}
 
+                {
+                    cars.length >= carsPerPage * 3 && (
+                        <li>
+                            <button onClick={() => { paginate(number + 2) }} class={page === number + 2 ? "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900 " : "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-900"}>
+                                {number + 2}
+                            </button>
+                        </li>
+                    )}
                 <li>
                     <button onClick={() => { next() }} class="text-white rounded-r-lg shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none   font-medium text-lg px-4 py-3 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800">
                         <span class="sr-only">Next</span>
