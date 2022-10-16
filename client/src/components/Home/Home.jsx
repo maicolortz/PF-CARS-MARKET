@@ -18,7 +18,9 @@ export default function Home() {
   const indexLastCar = currentPage * carsPerPage; //[3]Indice del ultimo car por pagina
   const indexFirstCar = indexLastCar - carsPerPage; //[0]Indice del primer car por pagina
   const currentCarsPerPage = cars.slice(indexFirstCar, indexLastCar); //[0,1,2] Arreglo con los cars por pagina
-
+const estilos={gradienteazul:"text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+    
+}
   //FUNCIONES DEL PAGINADO
   const paginate = (pageNumber) => {
     //Modifica el numero de paginado
@@ -40,7 +42,7 @@ export default function Home() {
       </div>
       <div className="contenedor-Home">
         <div className="contenedor-Home2">
-          <div className="contenedor-Filtros">
+          <div className={estilos.gradienteazul}>
           <Filters />
           </div>
           <div className="contenedor-Home3">
