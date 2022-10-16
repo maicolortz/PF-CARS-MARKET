@@ -21,7 +21,7 @@ function Card({ id, image, descriptionShort, price, kilometres, transmition, yea
             <div class="flex flex-col p-2 border-t border-gray-300 text-gray-700">
               <div class="flex-1 pb-2 md:text-sm lg:text-lg  inline-flex items-center  font-medium">
                 <img src={icon1} class="mr-4" alt="" />
-                <p>Kilometros: {kilometres}Km</p>
+                <p>Kilometros: {kilometres} Km</p>
               </div>
               <div class="flex-1 pb-2 md:text-sm lg:text-lg  inline-flex items-center  font-medium">
                 <img src={icon2} class="mr-4" alt="" />
