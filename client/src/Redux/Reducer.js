@@ -46,11 +46,12 @@ const initialState = {
           car: filtrarcars(action.payload,state.car),
         };
       case "FILTER_FOR_MODEL":
+        console.log(action.payload)
         return {
           ...state,
           car:filtrarcars(action.payload,state.car),
         };
-        case "FILTER_FOR_BREED":
+        case "FILTER_FOR_BRAND":
         return {
           ...state,
           car:filtrarcars(action.payload,state.car),

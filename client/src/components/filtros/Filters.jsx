@@ -6,6 +6,7 @@ import {
   OrderForPrice,
   getCarForCondition,
   filterForModel,
+  filterForBrand,
 } from "../../Redux/Actions.js";
 export const Filters = ({
   getCars,
@@ -13,8 +14,21 @@ export const Filters = ({
   getCarForCondition,
   Cars,
   Car,
-  filterForModel
+  Model,
+  Brand,
 }) => {
+  const estilos = {
+    select:
+      "block p-2 mb-6 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+    label: "block mb-2 text-base font-medium text-gray-900 dark:text-gray-400",
+    button:
+      "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    contenedorcolor:
+      "text-white  hover:bg-blue-100 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
+    buttonlight:
+      "text-white bg-gradient-to-r from-cyan-500 to-cyan-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2",
+  };
+  //console.log(estilos.select)
   let orderPrice = (e) => {
     e.preventDefault();
     OrderForPrice(e.target.value);
@@ -29,101 +43,116 @@ export const Filters = ({
     e.preventDefault();
     getCars();
   };
-  let filterForModelmin =e=>{
+  let filterForModel = (e) => {
     e.preventDefault();
-    filterForModel()
+    console.log(modelmin);
+    console.log(modelmax);
+    Model([modelmin, modelmax]);
+  };
+  let filterForBrand = (e) => {
+    e.preventDefault();
+    Brand(e.target.value);
+  };
+  function filterRepetidos(base) {
+    const datos = Car.map((e) => e[base]);
+    const unicos = [...new Set(datos)];
+    return unicos;
   }
   useEffect(() => {}, []);
   const [rangomin, setRangomin] = useState(0);
   const [rangomax, setRangomax] = useState(0);
+  const [modelmin, setModelmin] = useState(0);
+  const [modelmax, setModelmax] = useState(0);
   return (
     <>
-      <label> Sort For Price</label>
-      <div>
-        <select onChange={(e) => orderPrice(e)}>
-          <option disabled selected defaultValue>
-            order Price
-          </option>
-          <option value="priceAsc">Minime Price</option>
-          <option value="priceDesc">Maxime Price</option>
-        </select>
-      </div>
-
-      <label> Condition</label>
-      <div>
-        <select onChange={(e) => filterForCondition(e)}>
-          <option disabled selected defaultValue>
-            Car Condition
-          </option>
-          <option value="Usado">Usado</option>
-          <option value="Nuevo"> Nuevo</option>
-        </select>
-      </div>
-
-      <div>
-        <h2> Filter for Model</h2>
-        <select onChange={(e) => filterForModelmin(e)}>
-          <option disabled selected defaultValue>
-            year minime
-          </option>
-          {Car &&
-            Car.map((e) => (
-              <option value={e.year} key={e.id}>
-                {e.year}
-              </option>
-            ))}
-        </select>
-        <select onChange={(e) => filterForModel(e)}>
-          <option disabled selected defaultValue>
-            year maxime
-          </option>
-          {Car &&
-            Car.map((e) => (
-              <option value={e.year} key={e.id}>
-                {e.year}
-              </option>
-            ))}
-        </select>
-      </div>
-      
-      <br />
-      <input
-        onChange={(e) => setRangomin(e.target.value)}
-        min={2000}
-        type={"number"}
-        placeholder="write the year"
-      ></input>
-      <div>
+      <div >
+        <label className={estilos.label}> Sort For Price</label>
         <div>
-          <label>Year Minime</label>
-          <br />
-
-          <input
-            onChange={(e) => setRangomin(e.target.value)}
-            min={2000}
-            max={2022}
-            type={"range"}
-            placeholder="write the year"
-          ></input>
-          <label>{rangomin}</label>
+          <select className={estilos.select} onChange={(e) => orderPrice(e)}>
+            <option disabled selected defaultValue>
+              order Price
+            </option>
+            <option value="priceAsc">Minime Price</option>
+            <option value="priceDesc">Maxime Price</option>
+          </select>
         </div>
+
+        <label className={estilos.label}> Condition</label>
         <div>
+          <select
+            className={estilos.select}
+            onChange={(e) => filterForCondition(e)}
+          >
+            <option disabled selected defaultValue>
+              Car Condition
+            </option>
+            <option value="Usado">Usado</option>
+            <option value="Nuevo"> Nuevo</option>
+          </select>
+        </div>
+
+        <div>
+          <h2 className={estilos.label}> Filter for Model</h2>
+          <select
+            className={estilos.select}
+            onChange={(e) => setModelmin(e.target.value)}
+          >
+            <option disabled selected defaultValue>
+              year minime
+            </option>
+            {Car &&
+              filterRepetidos("year").map((e) => (
+                <option value={e} key={e}>
+                  {e}
+                </option>
+              ))}
+          </select>
+          <select
+            className={estilos.select}
+            onChange={(e) => setModelmax(e.target.value)}
+          >
+            <option disabled selected defaultValue>
+              year maxime
+            </option>
+            {Car &&
+              filterRepetidos("year").map((e) => (
+                <option value={e} key={e}>
+                  {e}
+                </option>
+              ))}
+          </select>
+          <button
+            className={estilos.buttonlight}
+            onClick={(e) => filterForModel(e)}
+          >
+            send range model
+          </button>
           <div>
-            <label>Year Maxime</label>
-            <br />
-
-            <input
-              onChange={(e) => setRangomax(e.target.value)}
-              min={2000}
-              max={2022}
-              type={"range"}
-              placeholder="write the year"
-            ></input>
-            <label>{rangomax}</label>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+                Filter For Brand
+              </label>
+            </div>
+            <select
+              className={estilos.select}
+              onChange={(e) => filterForBrand(e)}
+            >
+              <option disabled selected defaultValue>
+                Brand
+              </option>
+              {Car &&
+                filterRepetidos("brand").map((e) => (
+                  <option value={e} key={e}>
+                    {e}
+                  </option>
+                ))}
+            </select>
           </div>
-        </div>
-        <div>
-          <button onClick={(e) => filterclear(e)}>Clear filters</button>
+          <div>
+            <button className={estilos.button} onClick={(e) => filterclear(e)}>
+              Clear filters
+            </button>
+          </div>
         </div>
       </div>
     </>
@@ -143,7 +172,8 @@ function mapDispatchToProps(dispatch) {
     OrderForPrice: (e) => dispatch(OrderForPrice(e)),
     getCarForCondition: (e) => dispatch(getCarForCondition(e)),
     getCars: () => dispatch(getCars()),
-    filterForModel:e=>dispatch(filterForModel(e))
+    Model: (e) => dispatch(filterForModel(e)),
+    Brand: (e) => dispatch(filterForBrand(e)),
   };
 }
 
