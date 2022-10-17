@@ -33,7 +33,7 @@ const initialState = {
       case "GET_CAR_FOR_NAME":
         return {
           ...state,
-          car: filtrarcars(action.payload,state.car),
+          car:filtrarcars(action.payload,state.car)
         };
         case "GET_CAR_FOR_CONDITION":
           return {
@@ -72,5 +72,8 @@ const initialState = {
           } 
       } 
     } 
+    if(carros.length==0){
+      return ["none"];
+    }
     return carros; 
   }

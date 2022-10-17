@@ -42,6 +42,13 @@ export const Filters = ({
     getCarForCondition(e.target.value);
     console.log(e.target.value);
   };
+  useEffect(()=>{
+    setCondition("none");
+    setPrice("none");
+    setBrand("none");
+    setMinYear("none");
+    setMaxYear("none");
+  },[])
   let filterclear = (e) => {
     e.preventDefault();
     setModelmin(0);
