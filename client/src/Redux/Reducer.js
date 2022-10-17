@@ -4,6 +4,7 @@ const initialState = {
     allCars: [],
     allUsers:[],
     carDetail: [],
+    loading: false,
   };
   export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -11,8 +12,8 @@ const initialState = {
         return {
           ...state,
           allCars: action.payload,
-          car: action.payload
-
+          car: action.payload,
+          loading: false,
         };
        
       case "GET_USER":
@@ -29,6 +30,7 @@ const initialState = {
         return {
           ...state,
           carDetail:action.payload,
+          loading: false,
         };
       case "GET_CAR_FOR_NAME":
         return {
@@ -56,7 +58,11 @@ const initialState = {
           ...state,
           car:filtrarcars(action.payload,state.car),
         };
-        
+      case "LOADING":
+        return {
+          ...state,
+          loading: true,
+        }
       default:
         return state;
     }

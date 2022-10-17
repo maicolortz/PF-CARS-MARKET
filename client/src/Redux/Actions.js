@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function getCars() {
   return async function (dispatch) {
-
+    dispatch({ type: "LOADING" })
     let json = await axios.get("http://localhost:3001/cars");
     return dispatch({
       type: "GET_CARS",
@@ -48,6 +48,7 @@ export function getUsers() {
 }
 export function getUser(id) {
     return async function (dispatch) {
+      dispatch({ type: "LOADING" })
       const { data } = await axios.get(`/users/${id}`);
       return dispatch({
         type: "GET_USER",

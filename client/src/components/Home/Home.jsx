@@ -6,10 +6,12 @@ import "./Home.css";
 import Card from "../Card/Card.jsx";
 import { getCars } from "../../Redux/Actions";
 import Filters from "../filtros/Filters.jsx";
+import Loading from "../Loading/Loading.jsx";
 
 export default function Home() {
   const dispatch = useDispatch();
   const cars = useSelector((state) => state.car);
+  const {loading} = useSelector(state => state)
 
   //PAGINADO
   const [number, setNumber] = useState(1); //Numeros para los 3 paginados
@@ -39,6 +41,10 @@ export default function Home() {
   useEffect(() => {
     setCurrentPage(1);
   }, [cars]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="contenedor">

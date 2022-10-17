@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCardDetail } from "../../Redux/Actions";
 import { useParams, Link } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 import './CardDetail.css';
 
 
@@ -12,6 +13,7 @@ function CardDetail() {
 
   let { id } = useParams();
 
+  const {loading} = useSelector(state => state)
   const carsDetail = useSelector(state => state.carDetail);
   const { name, image, brand, model, year, color, oil, gate, kilometres, descriptionLong, price, condition, transmition } = carsDetail;
   const details = [
@@ -32,6 +34,9 @@ function CardDetail() {
     dispatch(getCardDetail(id))
   }, [dispatch, id])
 
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
 
