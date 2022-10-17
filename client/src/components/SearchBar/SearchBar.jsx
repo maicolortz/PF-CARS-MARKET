@@ -43,7 +43,7 @@ export const SearchBar = ({
           class="p-2.5 ml-1 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           <svg
-            class="w-5 h-5"
+            class=" smd:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 "
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

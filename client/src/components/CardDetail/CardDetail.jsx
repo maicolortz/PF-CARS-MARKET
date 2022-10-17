@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCardDetail } from "../../Redux/Actions";
 import { useParams, Link } from 'react-router-dom';
 import './CardDetail.css';
+import img from '../Card/imagenes/Imagen_Default.png'
 
 
 function CardDetail() {
@@ -75,7 +76,7 @@ function CardDetail() {
 
             <div className=" w-full sm:w-96 md:w-8/12 lg:w-6/12 flex flex-col p-3 items-center lg:gap-8 sm:gap-6 gap-4">
               <div className=" w-full lg:w-9/12 bg-gray-100 shadow-md shadow-black">
-                <img src={image} alt="Wooden Chair Previw" />
+                <img src={image?image:img} alt="Wooden Chair Previw" />
               </div>
               <p className=" font-semibold lg:text-3xl text-xl  border-b-2 pb-6 border-gray-200 lg:leading-6 leading-5 mt-6 ">Precio:  {price}$</p>
               <button title="Sabemos que lo quieres comprar" className=" text-white bg-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black rounded-full text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800 font-semibold text-lg leading-4  w-96 py-5 lg:mt-12 mt-6">Comprar este auto...</button>
