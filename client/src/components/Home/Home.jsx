@@ -58,7 +58,8 @@ export default function Home() {
           </div>
           <div className="contenedor-Home3">
             <div class="grid grid-cols-3 gap-0">
-              {currentCarsPerPage?.map((el) => {
+              {cars[0]==="none" || cars[0]==="n"?
+              <strong><h1 className="text-6xl">No se ha encontrado el carro deseado</h1></strong>:currentCarsPerPage?.map((el) => {
                 return (
                   <Card
                     id={el.id}
@@ -73,15 +74,18 @@ export default function Home() {
               })}
             </div>
             <div class="mx-6 my-6">
+            {cars.length>0 && cars[0]!=="none" ?
               <Paginado
-                allCars={cars.length}
-                carsPerPage={carsPerPage}
-                paginate={paginate}
-                page={currentPage}
-                number={number}
-                numberPaginate={numberPaginate}
-                cars={cars}
+              allCars={cars.length}
+              carsPerPage={carsPerPage}
+              paginate={paginate}
+              page={currentPage}
+              number={number}
+              numberPaginate={numberPaginate}
+              cars={cars}
               />
+            :console.log("")}
+            
             </div>
           </div>
         </div>
