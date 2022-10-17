@@ -43,7 +43,7 @@ const getCarForName = async (req, res) => {
     .includes(name.toLowerCase()))
     filtered.length
       ? res.status(200).send(filtered)
-      : res.status(404).send("not has been founded");
+      : res.status(200).send("not has been founded");
   } catch (error) {
     res.send(error.message);
   }
