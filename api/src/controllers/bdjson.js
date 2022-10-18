@@ -15,6 +15,7 @@ const car =[
         price:43900,
         condition:"Usado",
         transmition:"Sincronico",
+        userId:2,
     },
     {
         name:"BMW X1 2.0 Sdrive 25i Xline 231cv",
@@ -31,6 +32,7 @@ const car =[
         price:36300,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:2,
     },
     {
         name:"Chevrolet Corsa 1.4 Classic Gls",
@@ -47,6 +49,8 @@ const car =[
         price:8203.50,
         condition:"Usado",
         transmition:"Sincronico",
+        userId:2,
+
     },
     {
         name:"Chevrolet Cruze II 1.4 Sedan Ltz",
@@ -63,6 +67,8 @@ const car =[
         price:25373,
         condition:"Usado",
         transmition:"Sincronico",
+        userId:1,
+
     },
     {
         name:"Renault Kangoo 1.6 Furgon Ph3 Confort 5as Lc",
@@ -79,6 +85,8 @@ const car =[
         price:220000,
         condition:"Usado",
         transmition:"Sincronico",
+        userId:1,
+
     },
     {
         name:"Citroën C4 Lounge 1.6 Thp 165 At6 Feel",
@@ -95,6 +103,8 @@ const car =[
         price:20921,
         condition:"Usado",
         transmition:"Sincronico",
+        userId:1,
+
     },
     {
         name:"Volkswagen Suran 1.6 I Trendline 90b",
@@ -111,6 +121,8 @@ const car =[
         price:197000,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:5,
+
     },
     {
         name:"Peugeot 208 1.6 Gt Thp",
@@ -127,6 +139,8 @@ const car =[
         price:17900,
         condition:"Usado",
         transmition:"Sincronico",
+        userId:6,
+
     },
     {
         name:"Audi A3 Sportback 2.0 T Fsi Stronic 200cv",
@@ -143,6 +157,8 @@ const car =[
         price:16000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:7,
+
     },
     {
         name:"Jeep Renegade 1.8 Longitude At6",
@@ -159,6 +175,8 @@ const car =[
         price:39427,
         condition:"Usado",
         transmition:"Automatico",
+        userId:5,
+
     },
     {
         name:"Fiat Pulse 1.3 Drive Gse Cvt",
@@ -175,6 +193,7 @@ const car =[
         price:26073.14,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:4,
     },
 
     {
@@ -192,6 +211,8 @@ const car =[
         price:33845,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:5,
+
     },
     {
         name:"Toyota Hilux 2.4 Cd Dx 150cv 4x4",
@@ -208,6 +229,8 @@ const car =[
         price:62957,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:5,
+
     },
     {
         name:"Chevrolet S10 2.8 Cd 4x4 Z71",
@@ -224,6 +247,8 @@ const car =[
         price:60768.69,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:7,
+
     },
     {
         name:"Volkswagen Amarok 3.0 V6 Cd Highline",
@@ -240,6 +265,8 @@ const car =[
         price:80763.11,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:6,
+
     },
     {
         name:"Volkswagen Taos 1.4 250 Tsi Hero",
@@ -256,6 +283,8 @@ const car =[
         price:66645.46,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:4,
+
     },
     {
         name:"Citroën C4 Cactus 1.6 Vti 115 Feel",
@@ -272,6 +301,8 @@ const car =[
         price:22800,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:4,
+
     },
     {
         name:"Citroën Berlingo 1.6 Vti 115 Business",
@@ -288,6 +319,8 @@ const car =[
         price:24100,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:1,
+
     },
     {
         name:"Renault ALASKAN 2.3 Bit 16v Intens Mt 4x4",
@@ -304,6 +337,8 @@ const car =[
         price:57300,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:1,
+
     },
     {
         name:"Renault Kangoo Ii Express Confort 5a 1.6 Sce",
@@ -320,6 +355,8 @@ const car =[
         price:29675,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:1,
+
     },
 
     {
@@ -337,6 +374,8 @@ const car =[
         price:26297.61,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:1,
+
     }, 
     {
         name:"Renault Logan Ph2 Zen 1.6 2022",
@@ -352,6 +391,8 @@ const car =[
         price:23070.30,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:1,
+
     },
     {
         name:"Honda HR-V 1.8 Ex-l 2wd Cvt",
@@ -368,6 +409,7 @@ const car =[
         price:36000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:5,
     },    
     {
         name:"Honda CR-V 2.4 4x2 Active At Lx",
@@ -384,6 +426,7 @@ const car =[
         price:12000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:6,
     },    
     {
         name:"Toyota Corolla 1.8 Xei Cvt 140cv",
@@ -400,6 +443,8 @@ const car =[
         price:30000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:7,
+
     },    
     {
         name:"Toyota Hilux 2.8 Cd Srx 177cv 4x4 At",
@@ -416,6 +461,8 @@ const car =[
         price:78900,
         condition:"Usado",
         transmition:"Automatico",
+        userId:3,
+
     },    
     {
         name:"Toyota Hilux 2.8 Cd Srv 177cv 4x2",
@@ -432,6 +479,8 @@ const car =[
         price:29675,
         condition:"Nuevo",
         transmition:"Sincronico",
+        userId:5,
+
     },    
     {
         name:"Toyota Hilux 2.8 Cd Srv 4x4 At 2021",
@@ -448,6 +497,8 @@ const car =[
         price:47000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:5,
+
     },    
     
     {
@@ -465,6 +516,8 @@ const car =[
         price:58000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:4,
+
     },    
     {
         name:"Toyota SW4 2.8 Srx 177cv 4x4 7as At",
@@ -481,6 +534,8 @@ const car =[
         price:37000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:6,
+
     },    
     {
         name:"Toyota Etios 1.5 Xls At",
@@ -497,6 +552,8 @@ const car =[
         price:22000,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:4,
+
     },  
     {
 
@@ -514,6 +571,8 @@ const car =[
         price:69900,
         condition:"Usado",
         transmition:"Automatico",
+        userId:5,
+
     },
     {
 
@@ -531,6 +590,8 @@ const car =[
         price:29675,
         condition:"Usado",
         transmition:"Automatico",
+        userId:5,
+
     },
     {
 
@@ -548,6 +609,8 @@ const car =[
         price:120763,
         condition:"Usado",
         transmition:"Automatico",
+        userId:3,
+
     },
     {
 
@@ -565,6 +628,8 @@ const car =[
         price:15900,
         condition:"Usado",
         transmition:"Automatico",
+        userId:6,
+
     },
     {
 
@@ -582,6 +647,8 @@ const car =[
         price:59800,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:5,
+
     },
     {
 
@@ -599,6 +666,8 @@ const car =[
         price:40800,
         condition:"Usado",
         transmition:"Automatico",
+        userId:7,
+
     },
     {
 
@@ -616,6 +685,8 @@ const car =[
         price:49900,
         condition:"Nuevo",
         transmition:"Automatico",
+        userId:3,
+
     },
     {
 
@@ -633,6 +704,8 @@ const car =[
         price:31900,
         condition:"Usado",
         transmition:"Automatico",
+        userId:4,
+
     },
     {
 
@@ -650,6 +723,8 @@ const car =[
         price:36500,
         condition:"Usado",
         transmition:"Automatico",
+        userId:1,
+
     },
     {
 
@@ -667,6 +742,8 @@ const car =[
         price:33500,
         condition:"Usado",
         transmition:"Automatico",
+        userId:3,
+
     },
     {
 
@@ -684,6 +761,8 @@ const car =[
         price:16500,
         condition:"Usado",
         transmition:"Automatico",
+        userId:1,
+
     },
     {
 
@@ -701,6 +780,8 @@ const car =[
         price:33200,
         condition:"Usado",
         transmition:"Automatico",
+        userId:7,
+
     },
     {
 
@@ -718,6 +799,7 @@ const car =[
         price:29675,
         condition:"Usado",
         transmition:"Automatico",
+        userId:1,
     },
     {
 
@@ -735,10 +817,130 @@ const car =[
         price:36000,
         condition:"Usado",
         transmition:"Automatico",
+        userId:7,
     },
-
-
+    {
+        name:"Toyota Hilux 2.8 Cd Srx 177cv 4x4",
+        brand:"Toyota",
+        model:"Hilux",
+        year:2008,
+        color:"gris",
+        oil:"diesel",
+        gate:4,
+        kilometres:20000,
+        descriptionShort:"Toyota Hilux 2.8 Cd Srx 177cv 4x4",
+        descriptionLong:"MOTOR 2.8 TURBODIESEL 204CV, 4X2, 4X4 Y 4X4 REDUCIDA CON ACCIONAMIENTO ELECTRÓNICO, FAROS DELANTEROS BI-LED, FAROS TRASEROS DE LED, LUCES DIURNAS DE LED, PROTECTOR DE CÁRTER HEAVY DUTY, SISTEMA DE INGRESO INTELIGENTE, SISTEMA DE INGRESO INTELIGENTE, CONECTIVIDAD ANDROID AUTO Y APPLE CARPLAY, SISTEMA DE AUDIO PREMIUM JBL CON 8 PARLANTES Y SUBWOOFER, ECO Y POWER MODE, ETC.",
+        image:"https://http2.mlstatic.com/D_NQ_NP_869695-MLA51918662241_102022-O.webp",
+        price:43900,
+        condition:"Usado",
+        transmition:"Sincronico",
+        userId:1,
+    },
+    {
+        name:"BMW X1 2.0 Sdrive 25i Xline 231cv",
+        brand:"BMW",
+        model:"X1",
+        year:2017,
+        color:"negro",
+        oil:"Nafta",
+        gate:5,
+        kilometres:117000,
+        descriptionShort:"BMW X1 2.0 Sdrive 25i Xline 231cv",
+        descriptionLong:"Excelente estado. Todos los servicios en concesionario oficial.Versión tope de gama. Traccion integral. Motor 2 litros de 231 CV. Aceptamos permutas.",
+        image:"https://http2.mlstatic.com/D_NQ_NP_862199-MLA51107673007_082022-O.webp",
+        price:36300,
+        condition:"Nuevo",
+        transmition:"Automatico",
+        userId:2,
+    },
+    {
+        name:"Chevrolet Corsa 1.4 Classic Gls",
+        brand:"Chevrolet",
+        model:"Corsa",
+        year:2009,
+        color:"verde",
+        oil:"nafta",
+        gate:4,
+        kilometres:119000,
+        descriptionShort:"Chevrolet Corsa 1.4 Classic Gls",
+        descriptionLong:"Chevrolet Corsa Classic 1.4 Gls 4ptas Año 2009 - LivMotors MUY BUENAS CONDICIONES MECANICAS!!! USADOS CON GARANTIA!!!",
+        image:"https://http2.mlstatic.com/D_NQ_NP_782419-MLA51920906270_102022-O.webp",
+        price:8203.50,
+        condition:"Usado",
+        transmition:"Sincronico",
+        userId:3,
+    },
 
     ];
 
-    module.exports = car;
+    const user = [
+     { 
+        id:1,    
+        password:"An1frr3rt55y2uut",
+        firstName:"Juan Pablo",
+        lastName:"Perez",
+        mail:"juanpablop02@gmail.com",
+        whatsApp:"5493876455689",
+        address:"Neuquen, Cipolletti, San Martin 32"},
+      
+      { 
+        id:2,
+        password:"Bglkdklm2uut",
+        firstName:"Franco Etcheverri",
+        lastName:"Etcheverri",
+        mail:"frankeche@gmail.com",
+        whatsApp:"54938123545689",
+        address:"Buenos Aires, CABA, Avda de Mayo 532"
+    },
+    {
+        id:3,
+        password:"njbndcbdb",
+        firstName:"Julian ",
+        lastName:"Vazquez",
+        mail:"fvazquez@gmail.com",
+        whatsApp:"549312331689",
+        address:"Tucuman, San Miguel de Tucuman, Avda Mate de Luna 532"
+    },
+
+    {   
+        id:4,
+        password:"hcdhiuiucsdlñ",
+        firstName:"Enzo ",
+        lastName:"Francescoli",
+        mail:"efran@gmail.com",
+        whatsApp:"549123231689",
+        address:"Buenos Aires, CABA, Macacha Guemes 15"
+    },
+    {   
+        id:5,
+        password:"jijoiojipko",
+        firstName:"Carlos",
+        lastName:"Menem",
+        mail:"cmenem@gmail.com",
+        whatsApp:"54932356456",
+        address:"La Rioja, San Martin 115"
+    },
+
+    {   
+        id:6,
+        password:"kako",
+        firstName:"Enrique",
+        lastName:"Galvan",
+        mail:"enrigalvan12@gmail.com",
+        whatsApp:"54932356456",
+        address:"Cordoba, La Falda, Rivadavia 3002"
+    },
+
+    {   
+        id:7,
+        password:"jiaiojojhju",
+        firstName:"Roberto",
+        lastName:"Gonzalez",
+        mail:"robergonza@gmail.com",
+        whatsApp:"54932l4566",
+        address:"Salta, Cafayate, Martin Güemes 47 "
+    },
+
+    ]
+
+    module.exports = {car, user};
