@@ -1,27 +1,15 @@
 const { Car, User } = require("../db");
 const axios = require("axios");
-const car = require("./bdjson");
+const {car, user} = require("./bdjson");
 const { Sequelize, Op } = require("sequelize");
 
 async function updateCar() {
   try {
-    //    var countries = (await axios("https://restcountries.com/v3/all")).data
-    //         .map(e =>({
-    //         id: e.cca3,
-    //         name: e.name.common,
-    //         flag: e.flags[1],
-    //         continent: e.region,
-    //         capital: e.capital? e.capital[0] : "Don't have capital",
-    //         subregion: e.subregion,
-    //         area: e.area,
-    //         population: e.population
-    //         }))
-
-    // const dbCountries = await Countries.findAll();
-    // if(dbCountries.length) return null
-
+    await User.bulkCreate(user);
+    console.log("User loaded correctly");
     await Car.bulkCreate(car);
     console.log("Car loaded correctly");
+
   } catch (error) {
     console.log(error);
   }
@@ -29,7 +17,7 @@ async function updateCar() {
 
 const getAllCars = async (req, res) => {
   try {
-    const cars = await Car.findAll();
+    const cars = await Car.findAll({include:User});
     res.status(200).json(cars);
   } catch (error) {
     res.status(error.status).send(error.message);

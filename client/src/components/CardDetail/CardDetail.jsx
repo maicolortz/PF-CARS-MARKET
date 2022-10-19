@@ -1,10 +1,13 @@
-import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getCardDetail} from "../../Redux/Actions";
-import { useParams, Link } from "react-router-dom";
-import Loading from "../Loading/Loading";
-import "./CardDetail.css";
+
+import React from 'react'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCardDetail } from "../../Redux/Actions";
+import { useParams, Link } from 'react-router-dom';
+import Loading from '../Loading/Loading';
+import './CardDetail.css';
+import img from '../Card/imagenes/Imagen_Default.png'
+
 function CardDetail() {
   const dispatch = useDispatch();
   let { id } = useParams();
@@ -105,7 +108,7 @@ function CardDetail() {
 
             <div className=" w-full sm:w-96 md:w-8/12 lg:w-6/12 flex flex-col p-3 items-center lg:gap-8 sm:gap-6 gap-4">
               <div className=" w-full lg:w-9/12 bg-gray-100 shadow-md shadow-black">
-                <img src={image} alt="Wooden Chair Previw" />
+                <img src={image?image:img} alt="Wooden Chair Previw" />
               </div>
               <p className=" font-semibold lg:text-3xl text-xl  border-b-2 pb-6 border-gray-200 lg:leading-6 leading-5 mt-6 ">
                 Precio: {price}$

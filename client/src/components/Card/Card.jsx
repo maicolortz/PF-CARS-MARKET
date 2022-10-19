@@ -1,7 +1,8 @@
 import React from 'react';
 import icon1 from './imagenes/la-carretera.png';
 import icon2 from './imagenes/mecanico.png';
-import icon3 from './imagenes/calendario.png'
+import icon3 from './imagenes/calendario.png';
+import img from './imagenes/Imagen_Default.png';
 import { Link } from 'react-router-dom';
 import './Card.css';
 
@@ -10,7 +11,7 @@ function Card({ id, image, descriptionShort, price, kilometres, transmition, yea
     <>
       <div class="px-5 py-8 ">
         <div class="md:w-40 h-full lg:w-52 xl:w-64 2xl:w-80  bg-white  shadow-2xl rounded-lg">
-          <img class=" rounded-tl-lg rounded-tr-lg md:h-40 w-96 xl:h-60 2xl:h-64" src={image} alt='Img not found' />
+          <img class=" rounded-tl-lg rounded-tr-lg md:h-40 w-96 xl:h-60 2xl:h-64" src={image ? image : img} alt='Img not found' />
           <div class="px-5 py-4 space-y-2">
             <div class="h-16 mb-1 md:mb-2  ">
               <h3 class="md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-semibold">{descriptionShort}</h3>
@@ -48,22 +49,3 @@ function Card({ id, image, descriptionShort, price, kilometres, transmition, yea
 }
 
 export default Card;
-
-
-/*
-
-<Link to={`/cars/${id}`}>
-        <div className='container-card'>
-          <div className='contenedor-igm-card'>
-            <img src={image} alt="Mazda MX5"  className='Imagen-card'/>
-          </div>
-          <div className='Nombre-card'>{descriptionShort}</div>
-          <div className='Precio-car'>Precio: {price}$</div>
-          <div className='container-card2'>
-            <div>Kilometros: {kilometres}Km</div>
-            <div>Trasmision: {transmition}</div>
-            <div>Año: {year}</div>
-          </div>
-        </div>
-      
- */ 
