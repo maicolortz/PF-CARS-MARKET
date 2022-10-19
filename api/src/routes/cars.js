@@ -11,7 +11,8 @@ const {
   sortprice,
   getRangeModel,
 } = require("../controllers/cars");
-
+//importa mercadopago
+const mercadopago = require("mercadopago");
 const router = Router();
 
 router.get("/", getAllCars);
@@ -21,7 +22,6 @@ router.get("/search/", getCarForName);
 router.get("/condition/", getCarForCondition);
 router.get("/sortprice",sortprice)
 router.get("/range",getRangeModel)
-
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -37,6 +37,7 @@ router.get("/:id", async (req, res) => {
     res.status(404).send(error);
   }
 });
-//router.post("/", addCars)
+
+
 
 module.exports = router;

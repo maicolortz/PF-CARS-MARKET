@@ -5,6 +5,7 @@ const initialState = {
     allUsers:[],
     carDetail: [],
     loading: false,
+    user_trans:[]
   };
   export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -63,6 +64,11 @@ const initialState = {
           ...state,
           loading: true,
         }
+        case "USER_TRANSATION":
+          return{
+            ...state,
+            user_trans:action.payload
+          }
       default:
         return state;
     }
