@@ -8,9 +8,9 @@ const {
 
 const router = Router();
 
-router.get("/", getAllUsers);
+router.get("/getusers", getAllUsers);
 
-router.post("/", createUser);
+router.post("/createuser", createUser);
 router.get("/:id", getUserById);
 
 //router.post("/", addCars)

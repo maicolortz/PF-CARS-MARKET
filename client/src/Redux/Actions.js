@@ -3,7 +3,7 @@ import axios from "axios";
 export function getCars() {
   return async function (dispatch) {
     dispatch({ type: "LOADING" })
-    let json = await axios.get("http://localhost:3001/cars");
+    let json = await axios.get("/cars");
     return dispatch({
       type: "GET_CARS",
       payload: json.data,
@@ -13,7 +13,7 @@ export function getCars() {
 export function getCarForName(name) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/cars/search/?name=${name}`);
+      const { data } = await axios.get(`/cars/search/?name=${name}`);
       return dispatch({
         type: "GET_CAR_FOR_NAME",
         payload: data,
@@ -26,7 +26,7 @@ export function getCarForName(name) {
 export function getCarForCondition(condition) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/cars/condition/?condition=${condition}`);
+      const { data } = await axios.get(`/cars/condition/?condition=${condition}`);
       return dispatch({
         type: "GET_CAR_FOR_CONDITION",
         payload: data,
@@ -58,7 +58,7 @@ export function getUser(id) {
   }
 export function getCardDetail(id) {
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/cars/${id}`);
+    const { data } = await axios.get(`/cars/${id}`);
     return dispatch({
       type: "GET_CAR_DETAIL",
       payload: data,
@@ -69,7 +69,7 @@ export function getCardDetail(id) {
 export function postCar(data) {
   return async function(dispatch){
     try {
-      const carCreado = await axios.post("http://localhost:3001/cars", data)
+      const carCreado = await axios.post("/cars", data)
       return dispatch({type: "POST_CAR", payload: carCreado.data})
     } catch (error) {
       console.log(error)
@@ -102,7 +102,7 @@ export function OrderForName(payload) {
 
 export function filterForModel(min) {
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/cars/range?min=${min[0]}&max=${min[1]}`);
+    const { data } = await axios.get(`/cars/range?min=${min[0]}&max=${min[1]}`);
     return dispatch({
       type: "FILTER_FOR_MODEL",
       payload: data,
@@ -111,7 +111,7 @@ export function filterForModel(min) {
 }
 export function filterForBrand(brand) {
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/cars/brand/?name=${brand}`);
+    const { data } = await axios.get(`/cars/brand/?name=${brand}`);
     return dispatch({
       type: "FILTER_FOR_BRAND",
       payload: data,
@@ -120,7 +120,7 @@ export function filterForBrand(brand) {
 }
 export function getuser_transation() {
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/payment`);
+    const { data } = await axios.get(`/payment`);
     return dispatch({
       type: "USER_TRANSATION",
       payload: data,
