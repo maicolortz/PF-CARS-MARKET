@@ -18,6 +18,7 @@ function App() {
         <Routes>  
           <Route path='/' exact element = {<LandingPage/>}/>
           <Route path='/home' element={<Home/>}/>
+          <Route path='/home/success' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/createuser' element={<FormRegister/>} />
           <Route path='/createcar' element={<FormCar/>} />

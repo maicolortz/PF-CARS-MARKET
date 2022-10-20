@@ -3,7 +3,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
-
+const axios =require("axios")
 require('./db.js');
 
 const server = express();
@@ -21,7 +21,9 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
-
+axios.defaults.headers.common = {
+  'Authorization': 'Bearer ' + process.env.ACCESS_TOKEN
+};
 server.use('/', routes);
 
 // Error catching endware.
