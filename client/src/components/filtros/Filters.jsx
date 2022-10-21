@@ -20,7 +20,7 @@ export const Filters = ({
   const estilos = {
     select:
       "block p-2 mb-6 w-full mr-1 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-    label: "block mb-2 text-base font-medium text-white dark:text-white",
+    label: "block mb-2 text-lg font-medium text-white dark:text-white",
     button:
       "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800",
     contenedorcolor:
@@ -106,7 +106,8 @@ export const Filters = ({
   const [price, setPrice] = useState(0);
   return (
     <>
-      <div id="contenedor">
+      <div id="contenedor" class=" w-48" >
+        <div class="fixed pt-5">
         <label className={estilos.label}> ORDENAR POR PRECIO </label>
         <div>
           <select
@@ -122,7 +123,7 @@ export const Filters = ({
           </select>
         </div>
 
-        <label className={estilos.label}> CONDICION</label>
+        <label className={estilos.label}> CONDICIÓN</label>
         <div>
           <select
             id="selectcondition"
@@ -131,7 +132,7 @@ export const Filters = ({
             onChange={(e) => filterForCondition(e)}
           >
             <option value="none" disabled selected defaultValue>
-              Condicion
+              Condición
             </option>
             <option value="Nuevo">Nuevo</option>
             <option value="Usado">Usado</option>
@@ -212,6 +213,7 @@ export const Filters = ({
               Limpiar los filtros
             </button>
           </div>
+        </div>
         </div>
       </div>
     </>

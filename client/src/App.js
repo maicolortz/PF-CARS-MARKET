@@ -5,7 +5,7 @@ import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Home from './components/Home/Home.jsx'
 import FormRegister from './components/FormRegister.js'
-import FormCar from './components/FormCar/FormCar.js'; 
+import FormCar from './components/FormCar/FormCar.jsx'; 
 import CardDetail from './components/CardDetail/CardDetail.jsx'
 import Login from './components/Login.js'
 import PageNotFound from './components/PageNotFound.js'
@@ -18,6 +18,7 @@ function App() {
         <Routes>  
           <Route path='/' exact element = {<LandingPage/>}/>
           <Route path='/home' element={<Home/>}/>
+          <Route path='/home/success' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/createuser' element={<FormRegister/>} />
           <Route path='/createcar' element={<FormCar/>} />

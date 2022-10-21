@@ -1,13 +1,14 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { React, useState, useEffect} from 'react'
+import { useDispatch } from 'react-redux';
 import { postCar, getCars } from "../../Redux/Actions";
 import { Link, useNavigate } from 'react-router-dom';
 import './FormCar.css';
 import img from '../Card/imagenes/Imagen_Default.png';
 import Swal from 'sweetalert2'
+import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
 import {Image} from 'cloudinary-react';
+
 
 //ESTILOS TAILWIND
 const estilos = {
@@ -181,10 +182,10 @@ function FormCar() {
         if (!input.trasmition) {
             errors.trasmition = "Se requiere la trasmisión"
         }
-        if (!input.descriptionShort ) {
+        if (!input.descriptionShort) {
             errors.descriptionShort = "Se requiere una descripción"
         }
-        if(!input.descriptionLong){
+        if (!input.descriptionLong) {
             errors.descriptionLong = "Se requiere una descripción"
         }
         return errors;
@@ -195,9 +196,10 @@ function FormCar() {
 
         <div >
             <div>
+                <NavBar />
             </div>
             <form id="login" onSubmit={handleSubmit}>
-                <div className="bg-white pt-40 dark:bg-white">
+                <div className="bg-white pt-24 dark:bg-white">
                     <div className="container mx-auto bg-white mt-10 rounded px-4">
                         <div className="xl:w-ful border-b border-gray-300 py-5">
                             <div className="flex justify-center w-11/12 mx-auto xl:w-full xl:mx-0 items-center">
@@ -349,7 +351,7 @@ function FormCar() {
                             <div className='lg:mr-20 w-2/4 pt-8 md:items-center sm:items-center'>
                                 <div className="container mx-auto">
                                     <div className='flex justify-center'>
-                                        <div className='border-slate-500 border-4 rounded-2xl w-2/4 flex justify-center'>
+                                        <div className='border-blue-900 border-4 rounded-2xl w-2/4 flex justify-center'>
                                             <img src={state.image ? state.image : img} alt="img not found" className='w-auto rounded-2xl' />
                                             {/* <Image cloudName='da1vbkmdr' publicId={`https://res.cloudinary.com/da1vbkmdr/image/upload/v1666266332/${state.public_id}`}/> */}
                                         </div>
@@ -459,7 +461,7 @@ function FormCar() {
                         <div className="container flex justify-center gap-5 mb-20">
                             <button type='submit' onClick={(e) => handleSubmit(e)} className={estilos.boton_enviar_informacion}>Enviar información</button>
                             <Link to='/home'>
-                                <button className={estilos.boton_volver_inicio}>Volver al inicio</button>
+                                <button className={estilos.boton_volver_inicio}>Regresar</button>
                             </Link>
                         </div>
                     </div>

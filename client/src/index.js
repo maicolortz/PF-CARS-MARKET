@@ -9,7 +9,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
-
+///aca se estable el localhost que va tener
 axios.defaults.baseURL=process.env.REACT_APP_API || "http://localhost:3001"
 
 root.render(
