@@ -69,6 +69,10 @@ const initialState = {
             ...state,
             user_trans:action.payload
           }
+        case "POST_CAR":
+          return {
+            ...state,
+          }
       default:
         return state;
     }

@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postCar, getCars } from "../../Redux/Actions";
 import { Link, useNavigate } from 'react-router-dom';
 import './FormCar.css';
 import img from '../Card/imagenes/Imagen_Default.png';
 import Swal from 'sweetalert2'
+import axios from 'axios';
+import {Image} from 'cloudinary-react';
 
 //ESTILOS TAILWIND
 const estilos = {
@@ -22,6 +24,7 @@ const transmition = ["Automatico", "Sincronico"];
 const condition = ["Nuevo", "Usado"];
 
 function FormCar() {
+
 
     const dispatch = useDispatch();
     const history = useNavigate();
@@ -47,12 +50,14 @@ function FormCar() {
         descriptionShort: "",
         image: "",
     })
+    
 
     //LISTA DESPLEGABLE
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false);
     const [show3, setShow3] = useState(false);
     const [show4, setShow4] = useState(false);
+    const [imageSelected, setImageSelected] = useState("")
 
     //MANEJO DE EVENTOS
     const handleChange = (e) => {
@@ -77,10 +82,23 @@ function FormCar() {
         setShow4(false);
         setState({ ...state, condition: e.target.value });
     }
+    const handleImage = (e) => {
+        setImageSelected({...state, [e.target.name]: e.target.files[0]})
+    }
 
+    
     //MANEJO AL ENVIAR EL FORMULARIO
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+        const formData = new FormData()
+        formData.append('file', imageSelected.image)
+        formData.append('upload_preset', "iduftmjv")
+        try{
+        const response = await axios.post("https://api.cloudinary.com/v1_1/da1vbkmdr/image/upload", formData)
+        state.image = response.data.secure_url
+        setState(response.data)
+        // console.log(response)
 
         if (state.name && state.brand && state.model && state.year && state.kilometres && state.descriptionShort && state.price && state.descriptionLong) {
             Swal.fire({
@@ -89,6 +107,7 @@ function FormCar() {
                 icon: 'success',
                 confirmButtonColor: "#1d4ed8"
             });
+            
             dispatch(postCar(state));
             setState({
                 name: "",
@@ -107,7 +126,8 @@ function FormCar() {
                 descriptionShort: "",
                 image: "",
             });
-            history('/home');
+            // console.log(state.image)
+           history('/home');
         } else {
 
             Swal.fire({
@@ -117,8 +137,10 @@ function FormCar() {
                 confirmButtonColor: "#1d4ed8"
             });
         }
+        }catch(err){
+        console.log(err)
     }
-
+    }
     //MANEJO DE VALIDACIONES
     const [errors, setErrors] = useState({});
 
@@ -167,7 +189,7 @@ function FormCar() {
         }
         return errors;
     }
-    console.log(state);
+    
 
     return (
 
@@ -329,13 +351,15 @@ function FormCar() {
                                     <div className='flex justify-center'>
                                         <div className='border-slate-500 border-4 rounded-2xl w-2/4 flex justify-center'>
                                             <img src={state.image ? state.image : img} alt="img not found" className='w-auto rounded-2xl' />
+                                            {/* <Image cloudName='da1vbkmdr' publicId={`https://res.cloudinary.com/da1vbkmdr/image/upload/v1666266332/${state.public_id}`}/> */}
                                         </div>
                                     </div>
                                     <div className={estilos.contenedor_input_y_titulo}>
                                         <label htmlFor="image" className={estilos.titulos}>
                                             Imagen:
                                         </label>
-                                        <input type="url" id="image" name="image" className={estilos.input} onChange={(e) => handleChange(e)} placeholder="Dirección URL de la imagen..." />
+                                        <input type="file" id="image" name="image" className={estilos.input} onChange={(e) => handleImage(e)} placeholder="Dirección URL de la imagen..." />
+                                        {/* <button onClick={uploadImage}>upload</button> */}
                                     </div>
 
                                     <label className={estilos.titulos}>
@@ -446,80 +470,3 @@ function FormCar() {
 }
 
 export default FormCar;
-
-/*
-
-<div className='group'>
-                <form onSubmit={e => handleSubmit(e)}>
-                    <div>
-                        <label className='label-form'>Titulo:</label>
-                        <input className='input-form' type="text" name="name" value={state.name} onChange={e => handleChange(e)}/>
-                        {errors.name && (<p>{errors.name}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Marca:</label>
-                        <input className='input-form' type="text" name="brand" value={state.brand} onChange={e => handleChange(e)}/>
-                        {errors.brand && (<p>{errors.brand}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Modelo:</label>
-                        <input className='input-form' type="text" name="model" value={state.model} onChange={e => handleChange(e)}/>
-                        {errors.model && (<p>{errors.model}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Color:</label>
-                        <input className='input-form' type="text" name="color" value={state.color} onChange={e => handleChange(e)}/>
-                        {errors.color && (<p>{errors.color}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Año:</label>
-                        <input className='input-form' type="text" name="year" value={state.year} onChange={e => handleChange(e)}/>
-                        {errors.year && (<p>{errors.year}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Kilometros:</label>
-                        <input className='input-form' type="text" name="kilometres" value={state.kilometres} onChange={e => handleChange(e)}/>
-                        {errors.kilometres && (<p>{errors.kilometres}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Ubicacion:</label>
-                        <input className='input-form' type="text" name="location" value={state.location} onChange={e => handleChange(e)}/>
-                        {errors.location && (<p>{errors.location}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Precio:</label>
-                        <input className='input-form' type="number" name="price" value={state.price} onChange={e => handleChange(e)}/>
-                        {errors.price && (<p>{errors.price}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Imagen:</label>
-                        <input className='input-form' type="text" name="image" value={state.image} onChange={e => handleChange(e)}/>
-                        {errors.image && (<p>{errors.image}</p>)}
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Descripcion:</label>
-                        <input className='input-form' type="text" name="descriptionLong" value={state.descriptionLong} onChange={e => handleChange(e)}/>
-                    </div>
-
-                    <div>
-                        <label className='label-form'>Descripcion:</label>
-                        <input className='input-form' type="text" name="descriptionShort" value={state.descriptionShort} onChange={e => handleChange(e)}/>
-                    </div>
-
-                    <button className='button-form' type='submit'>Publicar</button>
-                    <Link to='/'>
-                    <button className='button-form'>Volver</button>
-                    </Link>
-                </form>
-            </div>
-
-*/
