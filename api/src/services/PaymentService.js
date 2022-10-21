@@ -9,22 +9,21 @@ class PaymentService {
         
       };
     } */
-    let user_id_transation = await axios.get("http://localhost:3001/cars");
+    let user_id_transation = await axios.get("http://localhost:3001/transactions");
     let user_id= user_id_transation.data
-    console.log(await user_id[user_id.length-1].id);
-    console.log(user_id.length-1)
     const body = {
       payer_email: "test_user_41780143@testuser.com",
       items: [
         {
           title: "Membresia Premium  CARS MARKET",
-          description: "Membresia Premium CARS MARKET",
+          description: "Membresia Premium "+user_id? user_id[user_id.length-1].name:"",
           picture_url:
             "https://es.digitaltrends.com/wp-content/uploads/2022/07/mejores-deportivos.jpeg?p=1",
           category_id: "MEMBRESIA",
-          id: user_id[user_id.length-1].id,
+          id:user_id? user_id[user_id.length-1].userId:"nada",
           quantity: 1,
           unit_price: 1000,
+          
         },
       ],
       auto_return: "approved",
