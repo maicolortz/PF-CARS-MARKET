@@ -27,7 +27,7 @@ const {Op} = require('sequelize')
       res.status(200).json(transactions);
       
     } catch (error) {
-      res.status(error.status).send(error.message);
+      console.error(error)
     }
   };
 
