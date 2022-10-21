@@ -1,13 +1,14 @@
 import "./SearchBar.css";
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
-    getCars,
-    OrderForPrice,
-    getCarForCondition,
-    getCarForName,
+  getCars,
+  OrderForPrice,
+  getCarForCondition,
+  getCarForName,
 } from "../../Redux/Actions.js";
+
 export const SearchBar = ({
   getCarForName,
   OrderForPrice,
@@ -15,30 +16,39 @@ export const SearchBar = ({
   Cars,
   Car,
 }) => {
-    const [busqueda, setbusqueda] = useState("");
-    
-    let getbusqueda = (e) => {
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  const location = useLocation();
+  const [busqueda, setbusqueda] = useState("");
+
+  const handleInput = (e) => {
     e.preventDefault();
-    getCarForName(busqueda);
-    console.log(busqueda)
+    setbusqueda(e.target.value);
+
+  }
+  const getbusqueda = () => {
+    if (location.pathname === "/createcar") {
+      history('/home');
+    }
+    dispatch(getCarForName(busqueda))
+    setbusqueda("");
+
     // setSort(e.target.value);
   };
 
-  useEffect(() => {
-
-  }, []);
+  console.log(busqueda);
 
   return (
     <>
       <div className="contenedor-SearchBar">
         <input
-          onChange={(e) => setbusqueda(e.target.value)}
+          onChange={(e) => handleInput(e)}
           type="text"
           placeholder="¿Que auto buscaba...?"
           className="input-SearchBar"
         />
         <button
-        onClick={(e)=>getbusqueda(e)}
+          onClick={() => getbusqueda()}
           type="submit"
           class="p-2.5 ml-1 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
