@@ -36,7 +36,7 @@ const initialState = {
       case "GET_CAR_FOR_NAME":
         return {
           ...state,
-          car:filtrarcars(action.payload,state.car)
+          car: action.payload,
         };
         case "GET_CAR_FOR_CONDITION":
           return {
