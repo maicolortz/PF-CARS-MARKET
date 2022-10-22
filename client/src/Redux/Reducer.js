@@ -6,7 +6,8 @@ const initialState = {
     carDetail: [],
     DataUser: [],
     loading: false,
-    user_trans:[]
+    transactions:[],
+    payment_link:[],
   };
   export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -65,10 +66,15 @@ const initialState = {
           ...state,
           loading: true,
         }
-        case "USER_TRANSATION":
+        case "GET_TRANSACTIONS":
           return{
             ...state,
-            user_trans:action.payload
+            transactions:action.payload
+          }
+        case "GET_PAYMENT_LINK":
+          return{
+            ...state,
+            payment_link:action.payload
           }
           case "INFO_USER":
             return{

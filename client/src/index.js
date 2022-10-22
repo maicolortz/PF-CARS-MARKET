@@ -4,7 +4,7 @@ import App from "./App";
 import { createRoot } from 'react-dom/client';
 import { Provider } from "react-redux";
 import axios from "axios";
-import store from "./Redux/Store";
+import store from "./Redux/Store.js";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const container = document.getElementById('root');

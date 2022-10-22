@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
             defaultValue:0,
         },
         
-        paymentMethod:{
+        email:{
             type: DataTypes.STRING,
         // Tarjeta Credito, Tarjeta Debito, Deposito, Rapipago...
             defaultValue: 'None',
