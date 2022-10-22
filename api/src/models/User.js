@@ -12,15 +12,15 @@ module.exports = (sequelize) => {
         //   },
           password: { 
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           firstName: { 
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           lastName: { 
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           mail: { 
             type: DataTypes.STRING,
@@ -37,6 +37,10 @@ module.exports = (sequelize) => {
             //allowNull: false,
             defaultValue: false,
           },
+          active: {
+            type:DataTypes.BOOLEAN,
+            defaultValue: true,
+          }
 
     },{timestamps : false});
 }

@@ -4,12 +4,12 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('car', {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-      allowNull: false,
-    },
+    // id: {
+    //   type: DataTypes.UUID,
+    //   defaultValue: DataTypes.UUIDV4,
+    //   primaryKey: true,
+    //   allowNull: false,
+    // },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -73,5 +73,9 @@ module.exports = (sequelize) => {
     transmition: {
       type: DataTypes.ENUM('Automatico','Sincronico'),
     },
+    active: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: true,
+    }
   });
 };

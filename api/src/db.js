@@ -37,11 +37,19 @@ const { Car, User, Transaction, Consult } = sequelize.models;
 User.hasMany(Car);
 Car.belongsTo(User);
 
-User.hasMany(Consult);
-Consult.belongsTo(User);
+// User.hasMany(Consult);
+// Consult.belongsTo(User);
 
 User.hasMany(Transaction);
 Transaction.belongsTo(User);
+
+Consult.belongsToMany(Car, { through: 'consult_car' });
+Car.belongsToMany(Consult, { through: 'consult_car' });
+
+Consult.hasOne(User);
+User.belongsTo(Consult);
+
+
 
 
 module.exports = {

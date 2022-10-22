@@ -4,6 +4,7 @@ const router = Router();
 const carsMain = require("./cars");
 const usersMain = require("./users");
 const payment =require("./payment")
+const consultsMain = require("./consults") 
 
 const axios =require("axios")
 
@@ -13,6 +14,7 @@ router.use("/",payment)
 router.use("/cars",carsMain); 
 router.use("/users",usersMain); 
 router.use("/transactions",transactionsMain); 
+router.use("/consults",consultsMain); 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
