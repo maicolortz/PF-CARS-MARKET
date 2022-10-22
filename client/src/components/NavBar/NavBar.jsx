@@ -5,6 +5,12 @@ import Logo from './Logo CarMarket.png'
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import usuario from '../Card/imagenes/usuario.png'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { infoUser, getUsers, postUser } from "../../Redux/Actions";
+import FormRegister from "../FormRegister";
+import Swal from 'sweetalert2';
+import Premium from "../Premium/Premium";
 
 
 const estilos = {
@@ -16,30 +22,70 @@ const estilos = {
 
 export default function NavBar() {
 
-    const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+    const dispatch = useDispatch();
+
+    const [show, setShow] = useState(false);
+    const usuario = useSelector((state) => state.allUsers);
+    const DataUser = useSelector((state) => state.DataUser)
+    const { loginWithPopup, isAuthenticated, logout } = useAuth0();
     const { user } = useAuth0();
     const history = useNavigate();
-    const [show, setShow] = useState(false);
+
+    useEffect(() => {
+        dispatch(getUsers());
+        if (isAuthenticated) {
+            if (user.email_verified) {
+                dispatch(infoUser({
+                    firstName: user.given_name,
+                    lastName: user.family_name,
+                    mail: user.email,
+                }))
+
+            } else if (!user.email_verified) {
+                Swal.fire({
+                    title: 'Usuario no verificado',
+                    text: 'Por favor verifique su bandeja correo, valide su registro y recargue de nuevo la pagina',
+                    icon: 'error',
+                    confirmButtonColor: "#1d4ed8",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                });
+            }
+
+            if (usuario && DataUser.mail) {
+                const currentUser = usuario.find((el) => el.mail === DataUser.mail);
+                !currentUser && dispatch(postUser(DataUser));
+            }
+
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAuthenticated, isAuthenticated && user.email_verified])
+
 
     return (
         <nav className="contenedor-NavBar">
             <Link to='/'> <img src={Logo} alt="img not found" width='120px' className="logo" class="shadow-md shadow-black rounded-md" /></Link>
             <SearchBar />
             {isAuthenticated ?
+            
                 <div class={show ? "flex flex-col items-center mt-36" : "flex flex-col items-center mt-0.5 h-full"}>
                     {/* <button type="button" onClick={() => logout()} class={estilos.button_ingresar}>Salir</button>
                     <Link to='/createcar'>
                         <button type="button" class={estilos.button_crearPublicacion}>Crear Publicación</button>
                     </Link> */}
-                    <div class="flex ">
+
+                    <div class="flex  justify-items-stretch">
+                    <div className="flex justify-center  px-2 py-2">
+                        <Premium user={user}></Premium>
+                    </div>
                         <div class="text-white md:text-sm lg:text-sm w-auto xl:text-base font-medium ml-2 justify-center flex flex-col ">
-                            <div>{user.name}</div>
-                            <div>{user.email}</div>
+                            <div>{user?user.name:""}</div>
+                            <div>{user?user.email:""}</div>
                         </div>
                         <div class="w-32 ml-2">
                             <div className=" flex md:w-auto h-5/6 " >
                                 <div className="w-11/12 flex justify-center items-center">
-                                    <img src={usuario} alt={usuario} class="h-5/6" />
+                                    <img src={user.picture ? user.picture : usuario} alt={usuario} class="h-5/6" />
                                 </div>
 
                                 <div className="bg-transparent items-center flex rounded-r">
@@ -78,8 +124,8 @@ export default function NavBar() {
 
                 </div> : (
                     <div>
-                        <button type="button" onClick={() => loginWithRedirect()} class={estilos.button_ingresar}>Ingresar</button>
-                        <button onClick={() => loginWithRedirect()} type="button" class={estilos.button_registrarse}>Registrarse</button>
+                        <button type="button" onClick={() => { loginWithPopup() }} class={estilos.button_ingresar}>Ingresar</button>
+                        <button onClick={() => loginWithPopup()} type="button" class={estilos.button_registrarse}>Registrarse</button>
                     </div>
                 )
             }

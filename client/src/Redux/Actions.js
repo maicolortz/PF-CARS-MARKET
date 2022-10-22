@@ -39,7 +39,7 @@ export function getCarForCondition(condition) {
 
 export function getUsers() {
   return async function (dispatch) {
-    const { data } = await axios.get("/users");
+    const { data } = await axios.get("/users/getusers");
     return dispatch({
       type: "GET_USERS",
       payload: data,
@@ -76,10 +76,15 @@ export function postCar(data) {
     }
   }
 }
-
+export function postTransaction(user) {
+  return async function () {
+    const d = await axios.post("/transactions", user);
+    return d;
+  };
+}
 export function postUser(user) {
     return async function () {
-      const d = await axios.post("/cars", user);
+      const d = await axios.post("/users/createuser", user);
       return d;
     };
   }
@@ -118,12 +123,28 @@ export function filterForBrand(brand) {
     });
   };
 }
-export function getuser_transation() {
+export function getTransaction() {
   return async function (dispatch) {
-    const { data } = await axios.get(`/payment`);
+    const { data } = await axios.get(`/transactions`);
     return dispatch({
-      type: "USER_TRANSATION",
+      type: "GET_TRANSACTIONS",
       payload: data,
     });
   };
+}
+export function get_Payment_Link() {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/payment`);
+    return dispatch({
+      type: "GET_PAYMENT_LINK",
+      payload: data,
+    });
+  };
+}
+
+export function infoUser(data){
+  return{
+    type: "INFO_USER",
+    payload: data
+  }
 }
