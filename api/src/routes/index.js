@@ -8,11 +8,13 @@ const payment =require("./payment")
 const axios =require("axios")
 
 axios.defaults.headers.common = {'Authorization': `bearer ${process.env.ACCESS_TOKEN}`}
-const transactionsMain = require("./transactions")
+const transactionsMain = require("./transactions");
+const transactionsMercadoPago = require('./transactionsMercadoPago');
 router.use("/",payment)
 router.use("/cars",carsMain); 
 router.use("/users",usersMain); 
 router.use("/transactions",transactionsMain); 
+router.use("/transactionsMercadoPago",transactionsMercadoPago)
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 

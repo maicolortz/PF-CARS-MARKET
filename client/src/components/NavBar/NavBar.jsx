@@ -5,6 +5,7 @@ import Logo from './Logo CarMarket.png'
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from '@auth0/auth0-react';
 import usuario from '../Card/imagenes/usuario.png'
+import Premium from "../Premium/Premium";
 
 
 const estilos = {
@@ -26,20 +27,25 @@ export default function NavBar() {
             <Link to='/'> <img src={Logo} alt="img not found" width='120px' className="logo" class="shadow-md shadow-black rounded-md" /></Link>
             <SearchBar />
             {isAuthenticated ?
+            
                 <div class={show ? "flex flex-col items-center mt-36" : "flex flex-col items-center mt-0.5 h-full"}>
                     {/* <button type="button" onClick={() => logout()} class={estilos.button_ingresar}>Salir</button>
                     <Link to='/createcar'>
                         <button type="button" class={estilos.button_crearPublicacion}>Crear Publicación</button>
                     </Link> */}
-                    <div class="flex ">
+
+                    <div class="flex  justify-items-stretch">
+                    <div className="flex justify-center  px-2 py-2">
+                        <Premium user={user}></Premium>
+                    </div>
                         <div class="text-white md:text-sm lg:text-sm w-auto xl:text-base font-medium ml-2 justify-center flex flex-col ">
-                            <div>{user.name}</div>
-                            <div>{user.email}</div>
+                            <div>{user?user.name:""}</div>
+                            <div>{user?user.email:""}</div>
                         </div>
                         <div class="w-32 ml-2">
                             <div className=" flex md:w-auto h-5/6 " >
                                 <div className="w-11/12 flex justify-center items-center">
-                                    <img src={usuario} alt={usuario} class="h-5/6" />
+                                    <img src={user.picture?user.picture:usuario} alt={usuario} class="h-5/6" />
                                 </div>
 
                                 <div className="bg-transparent items-center flex rounded-r">
