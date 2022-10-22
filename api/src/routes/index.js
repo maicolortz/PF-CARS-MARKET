@@ -3,7 +3,8 @@ const { Router } = require('express');
 const router = Router();
 const carsMain = require("./cars");
 const usersMain = require("./users");
-const payment =require("./payment")
+const payment =require("./payment");
+const favoritiesMain = require("./favorities")
 
 const axios =require("axios")
 
@@ -15,6 +16,9 @@ router.use("/cars",carsMain);
 router.use("/users",usersMain); 
 router.use("/transactions",transactionsMain); 
 router.use("/transactionsMercadoPago",transactionsMercadoPago)
+
+router.use("/favorities",favoritiesMain); 
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
