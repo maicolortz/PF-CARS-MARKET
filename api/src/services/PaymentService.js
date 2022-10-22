@@ -39,7 +39,7 @@ class PaymentService {
       },
       ///cambiar por heroku
       notification_url:
-        "https://8a93-45-71-181-138.ngrok.io/notificacion?source_news=webhooks",
+        "https://2eeb-45-71-181-138.ngrok.io/notificacion?source_news=webhooks",
     };
 
     const payment = await axios.post(url, body, {
