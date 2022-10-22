@@ -60,13 +60,12 @@ router.post("/notificacion", async function (req, res, next) {
   //me guarda las consultas de mercadopago en transactions
   //axios.post("http://localhost:3001/transactions", d);
   //let transation = await axios.post("http://localhost:3001/transactions",datos);
-  console.log(req.query["data.id"])
+  console.log(req.query["data.id"]);
   res.sendStatus(200);
 });
 const getInfototal = async (id) => {
-
   const dataid = await getInfoMP(id);
-  console.log(dataid)
+  console.log(dataid);
   let d = {
     nroTransaction: id,
     type: "Compra",
@@ -80,9 +79,6 @@ const getInfototal = async (id) => {
 
   axios.post("http://localhost:3001/transactions", d);
 };
-const funct =async()=>{
-  
-}
 const getInfoMP = async (id) => {
   const apiExterna = await axios.get(
     "http://localhost:3001//transMercado/" + id
@@ -96,22 +92,22 @@ router.get("/transMercadoUltimo", async (req, res) => {
 }); ///transMercado/50733196450
 router.get("/transMercado/:id", async (req, res) => {
   const data = await getInfoAPI(req.params.id);
-const datos={
-  idMercadopago:req.params.id,
-  email:data.data.additional_info.items[0].id,
-  status:data.data.status
-}
-let d = {
-  nroTransaction: req.params.id,
-  type: "Compra",
-  amount: "75000",
-  email: data.data.additional_info.items[0].id,
-  date: "2022/10/18",
-  userId: "1",
-  idTransaction: "245",
-  statusTransaction: data.data.status,
-};
-axios.post("http://localhost:3001/transactions", d);
+  const datos = {
+    idMercadopago: req.params.id,
+    email: data.data.additional_info.items[0].id,
+    status: data.data.status,
+  };
+  let d = {
+    nroTransaction: req.params.id,
+    type: "Compra",
+    amount: "75000",
+    email: data.data.additional_info.items[0].id,
+    date: "2022/10/18",
+    userId: "1",
+    idTransaction: "245",
+    statusTransaction: data.data.status,
+  };
+  axios.post("http://localhost:3001/transactions", d);
   res.jsonp(datos);
   //data.payer --->informacion no sirve
   //data.status---->estado de pago

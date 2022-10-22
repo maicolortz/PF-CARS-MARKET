@@ -39,6 +39,7 @@ export const Premium = ({
     };
     postTransaction(data);
     get_Payment_Link();
+    listadepremiums()
   }, []);
   const getListaID = async () => {
     const data = await axios.get(
@@ -54,12 +55,21 @@ export const Premium = ({
     return apiExterna;
   };
 
-  const listadepremiums = async (e) => {
+  const listadepremiums = async () => {
     const { data } = await getListaID();
-    if (data) {
+    if (data.length) {
       const d = data.map((e) => e.nroTransaction);
       const dato = await getdataporid(d[d.length - 1]);
-      console.log(dato)
+      console.log(dato.data.status)
+      console.log("---------------")
+      console.log(user.email)
+      console.log("---------------")
+        console.log(dato.data.email)
+      console.log("---------------")
+      console.log(dato.data.status)
+      if (user.email==dato.data.email && dato.data.status=="approved") {
+        setPremium(true);
+      }
     }
   };
   //const datos=d.map(async e=> await getdataporid(e))
@@ -88,6 +98,7 @@ export const Premium = ({
         className={premium === false ? estilos.noPremium : estilos.Premium}
       >
         {premium === false ? "¿Quieres Ser Premium?" : "Premium"}
+        {console.log(premium)}
       </button>
       <button onClick={(e) => listadepremiums(e)}>mostrar lista</button>
     </div>
