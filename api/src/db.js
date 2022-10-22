@@ -37,14 +37,24 @@ const { Car, User, Transaction, Consult, TransactionsMercadoPago } = sequelize.m
 User.hasMany(Car);
 Car.belongsTo(User);
 
-User.hasMany(Consult);
-Consult.belongsTo(User);
-
 User.hasMany(Transaction);
 Transaction.belongsTo(User);
 
+Consult.belongsToMany(Car, { through: 'consult_car' });
+Car.belongsToMany(Consult, { through: 'consult_car' });
+
+Consult.hasOne(User);
+User.belongsTo(Consult);
+
 User.hasMany(TransactionsMercadoPago);
 TransactionsMercadoPago.belongsTo(User)
+
+
+Favority.belongsToMany(Car, { through: 'favority_car' });
+Car.belongsToMany(Favority, { through: 'favority_car' });
+
+Favority.hasOne(User);
+User.belongsTo(Favority);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
