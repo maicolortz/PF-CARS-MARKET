@@ -39,7 +39,7 @@ export function getCarForCondition(condition) {
 
 export function getUsers() {
   return async function (dispatch) {
-    const { data } = await axios.get("/users");
+    const { data } = await axios.get("/users/getusers");
     return dispatch({
       type: "GET_USERS",
       payload: data,
@@ -79,7 +79,7 @@ export function postCar(data) {
 
 export function postUser(user) {
     return async function () {
-      const d = await axios.post("/cars", user);
+      const d = await axios.post("/users/createuser", user);
       return d;
     };
   }
@@ -126,4 +126,11 @@ export function getuser_transation() {
       payload: data,
     });
   };
+}
+
+export function infoUser(data){
+  return{
+    type: "INFO_USER",
+    payload: data
+  }
 }

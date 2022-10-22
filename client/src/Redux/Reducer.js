@@ -4,6 +4,7 @@ const initialState = {
     allCars: [],
     allUsers:[],
     carDetail: [],
+    DataUser: [],
     loading: false,
     user_trans:[]
   };
@@ -69,6 +70,11 @@ const initialState = {
             ...state,
             user_trans:action.payload
           }
+          case "INFO_USER":
+            return{
+              ...state,
+              DataUser: action.payload,
+            }
       default:
         return state;
     }
