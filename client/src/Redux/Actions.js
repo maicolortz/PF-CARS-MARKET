@@ -39,7 +39,7 @@ export function getCarForCondition(condition) {
 
 export function getUsers() {
   return async function (dispatch) {
-    const { data } = await axios.get("/users/getusers");
+    const { data } = await axios.get("/users");
     return dispatch({
       type: "GET_USERS",
       payload: data,
