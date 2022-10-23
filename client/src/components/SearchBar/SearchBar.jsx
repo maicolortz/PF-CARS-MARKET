@@ -36,8 +36,6 @@ export const SearchBar = ({
     // setSort(e.target.value);
   };
 
-  console.log(busqueda);
-
   return (
     <>
       <div className="contenedor-SearchBar">

@@ -1,5 +1,5 @@
-import { React, useState, useEffect} from 'react'
-import { useDispatch } from 'react-redux';
+import { React, useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { postCar, getCars } from "../../Redux/Actions";
 import { Link, useNavigate } from 'react-router-dom';
 import './FormCar.css';
@@ -7,7 +7,7 @@ import img from '../Card/imagenes/Imagen_Default.png';
 import Swal from 'sweetalert2'
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
-import {Image} from 'cloudinary-react';
+// import { Image } from 'cloudinary-react';
 
 
 //ESTILOS TAILWIND
@@ -25,7 +25,9 @@ const transmition = ["Automatico", "Sincronico"];
 const condition = ["Nuevo", "Usado"];
 
 function FormCar() {
-
+    const usuario = useSelector((state) => state.allUsers);
+    const DataUser = useSelector((state) => state.DataUser);
+    const currentUser = usuario.find((el) => el.mail === DataUser.mail && el.id);
 
     const dispatch = useDispatch();
     const history = useNavigate();
@@ -35,6 +37,7 @@ function FormCar() {
     }, [dispatch])
 
     const [state, setState] = useState({
+        userId: currentUser.id,
         name: "",
         brand: "",
         model: "",
@@ -51,7 +54,7 @@ function FormCar() {
         descriptionShort: "",
         image: "",
     })
-    
+
 
     //LISTA DESPLEGABLE
     const [show, setShow] = useState(false);
@@ -84,10 +87,10 @@ function FormCar() {
         setState({ ...state, condition: e.target.value });
     }
     const handleImage = (e) => {
-        setImageSelected({...state, [e.target.name]: e.target.files[0]})
+        setImageSelected({ ...state, [e.target.name]: e.target.files[0] })
     }
 
-    
+
     //MANEJO AL ENVIAR EL FORMULARIO
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -95,52 +98,54 @@ function FormCar() {
         const formData = new FormData()
         formData.append('file', imageSelected.image)
         formData.append('upload_preset', "iduftmjv")
-        try{
-        const response = await axios.post("https://api.cloudinary.com/v1_1/da1vbkmdr/image/upload", formData)
-        state.image = response.data.secure_url
-        setState(response.data)
-        // console.log(response)
+        try {
+            const response = await axios.post("https://api.cloudinary.com/v1_1/da1vbkmdr/image/upload", formData)
+            state.image = response.data.secure_url
+            setState(response.data)
+            // console.log(response)
 
-        if (state.name && state.brand && state.model && state.year && state.kilometres && state.descriptionShort && state.price && state.descriptionLong) {
-            Swal.fire({
-                title: 'Formulario enviado',
-                text: 'Se ha registrado su información correctamente.',
-                icon: 'success',
-                confirmButtonColor: "#1d4ed8"
-            });
-            
-            dispatch(postCar(state));
-            setState({
-                name: "",
-                brand: "",
-                model: "",
-                color: "",
-                year: "",
-                oil: "",
-                gate: 2,
-                kilometres: "",
-                location: "",
-                price: "",
-                condition: "",
-                trasmition: "",
-                descriptionLong: "",
-                descriptionShort: "",
-                image: "",
-            });
-            // console.log(state.image)
-           history('/home');
-        } else {
+            if (state.name && state.brand && state.model && state.year && state.kilometres && state.descriptionShort && state.price && state.descriptionLong) {
+                Swal.fire({
+                    title: 'Formulario enviado',
+                    text: 'Se ha registrado su información correctamente.',
+                    icon: 'success',
+                    confirmButtonColor: "#1d4ed8"
+                });
 
-            Swal.fire({
-                title: 'ERROR!!!',
-                text: 'No se han completado los campos requeridos.',
-                icon: 'error',
-                confirmButtonColor: "#1d4ed8"
-            });
+                dispatch(postCar(state));
+                setState({
+                    name: "",
+                    brand: "",
+                    model: "",
+                    color: "",
+                    year: "",
+                    oil: "",
+                    gate: 2,
+                    kilometres: "",
+                    location: "",
+                    price: "",
+                    condition: "",
+                    trasmition: "",
+                    descriptionLong: "",
+                    descriptionShort: "",
+                    image: "",
+                });
+                // console.log(state.image)
+                history('/home');
+            } else {
+
+                Swal.fire({
+                    title: 'ERROR!!!',
+                    text: 'No se han completado los campos requeridos.',
+                    icon: 'error',
+                    confirmButtonColor: "#1d4ed8"
+                }).then(function () {
+                    dispatch(getCars());
+                });
+            }
+        } catch (err) {
+            console.log(err)
         }
-        }catch(err){
-        console.log(err)
-    }
     }
     //MANEJO DE VALIDACIONES
     const [errors, setErrors] = useState({});
@@ -190,7 +195,7 @@ function FormCar() {
         }
         return errors;
     }
-    
+
 
     return (
 

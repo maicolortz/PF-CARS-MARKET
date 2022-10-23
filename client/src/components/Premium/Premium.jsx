@@ -40,6 +40,7 @@ export const Premium = ({
     postTransaction(data);
     get_Payment_Link();
     listadepremiums()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getListaID = async () => {
     const data = await axios.get(
@@ -82,7 +83,7 @@ export const Premium = ({
       window.location = payment_link.init_point;
     });
   };
-  const esPremium = (e) => {};
+  // const esPremium = (e) => {};
 
   const estilos = {
     noPremium:
@@ -98,9 +99,9 @@ export const Premium = ({
         className={premium === false ? estilos.noPremium : estilos.Premium}
       >
         {premium === false ? "¿Quieres Ser Premium?" : "Premium"}
-        {console.log(premium)}
+        
       </button>
-      <button onClick={(e) => listadepremiums(e)}>mostrar lista</button>
+      {/* <button onClick={(e) => listadepremiums(e)}>mostrar lista</button> */}
     </div>
   );
 };
