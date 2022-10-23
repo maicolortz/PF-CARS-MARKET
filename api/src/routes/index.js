@@ -7,7 +7,6 @@ const payment =require("./payment")
 
 
 const consultsMain = require("./consults") 
-const favoritiesMain = require("./favorities")
 
 const axios =require("axios")
 
@@ -20,7 +19,7 @@ router.use("/users",usersMain);
 router.use("/transactions",transactionsMain); 
 router.use("/consults",consultsMain); 
 router.use("/transactionsMercadoPago",transactionsMercadoPago)
-router.use("/favorities",favoritiesMain); 
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
