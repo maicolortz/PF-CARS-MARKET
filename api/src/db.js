@@ -50,11 +50,11 @@ User.hasMany(TransactionsMercadoPago);
 TransactionsMercadoPago.belongsTo(User)
 
 
-Favority.belongsToMany(Car, { through: 'favority_car' });
+/* Favority.belongsToMany(Car, { through: 'favority_car' });
 Car.belongsToMany(Favority, { through: 'favority_car' });
 
 Favority.hasOne(User);
-User.belongsTo(Favority);
+User.belongsTo(Favority); */
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
