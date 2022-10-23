@@ -3,7 +3,7 @@ const axios = require("axios");
 const {car, user} = require("./bdjson");
 const { Sequelize, Op } = require("sequelize");
 
-async function updateCar() {
+/* async function updateCar() {
   try {
     await User.bulkCreate(user);
     console.log("User loaded correctly");
@@ -13,7 +13,8 @@ async function updateCar() {
   } catch (error) {
     console.log(error);
   }
-}
+} */
+
 
 const getAllCars = async (req, res) => {
   try {
@@ -102,6 +103,7 @@ const createCar = async (req, res) => {
       price,
       condition,
       transmition,
+      userId,
     } = req.body;
 
     const car = await Car.create({
@@ -120,6 +122,7 @@ const createCar = async (req, res) => {
       price,
       condition,
       transmition,
+      userId
     });
     res.send("created");
   } catch (error) {
@@ -174,7 +177,7 @@ const getAutoById = async (id) => {
 };
 
 module.exports = {
-  updateCar,
+  //updateCar,
   getAllCars,
   getAutoById,
   createCar,

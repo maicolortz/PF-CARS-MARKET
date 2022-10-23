@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const {updateCar} = require("./src/controllers/cars")
+const {updateCar} = require("./src/controllers/users")
 const { conn } = require('./src/db.js');
 
 // Syncing all the models at once.
