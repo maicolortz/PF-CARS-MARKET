@@ -2,6 +2,7 @@ const { Car, User } = require("../db");
 const axios = require("axios");
 //const user = require("./userJson");
 const { Sequelize } = require("sequelize");
+const {car, user} = require("./bdjson");
 const {Op} = require('sequelize')
 
 // async function updateUser() {
@@ -13,7 +14,17 @@ const {Op} = require('sequelize')
 //       console.log(error);
 //     }
 //   };
+async function updateCar() {
+  try {
+    await User.bulkCreate(user);
+    console.log("User loaded correctly");
+    await Car.bulkCreate(car);
+    console.log("Car loaded correctly");
 
+  } catch (error) {
+    console.log(error);
+  }
+}
   const getAllUsers = async (req, res) => {
     try {
       const users = await User.findAll({
@@ -72,6 +83,6 @@ const {Op} = require('sequelize')
   module.exports = {
     getAllUsers,
     createUser,
-    getUserById
-
+    getUserById,
+    updateCar
   };
