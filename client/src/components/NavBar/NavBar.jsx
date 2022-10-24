@@ -24,37 +24,50 @@ const estilos = {
 };
 
 export default function NavBar() {
-  const dispatch = useDispatch();
 
-  const [show, setShow] = useState(false);
-  const [buttonImg, setbuttonImg] = useState(false);
-  const usuario = useSelector((state) => state.allUsers);
-  const DataUser = useSelector((state) => state.DataUser);
-  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
-  const { user } = useAuth0();
-  const history = useNavigate();
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getUsers());
-    if (isAuthenticated) {
-      if (user.email_verified) {
-        dispatch(
-          infoUser({
-            firstName: user.given_name,
-            lastName: user.family_name,
-            mail: user.email,
-          })
-        );
-      } else if (!user.email_verified) {
-        Swal.fire({
-          title: "Usuario no verificado",
-          text: "Por favor verifique su bandeja correo, valide su registro y recargue de nuevo la pagina",
-          icon: "error",
-          confirmButtonColor: "#1d4ed8",
-          showCancelButton: false,
-          showConfirmButton: false,
-        });
-      }
+    const [show, setShow] = useState(false);
+    const [buttonImg, setbuttonImg] = useState(false);
+    const usuario = useSelector((state) => state.allUsers);
+    const DataUser = useSelector((state) => state.DataUser);
+    const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
+    const history = useNavigate();
+
+    useEffect(() => {
+        dispatch(getUsers());
+        if (isAuthenticated) {
+            if (user.email_verified) {
+                dispatch(infoUser({
+                    firstName: user.given_name,
+                    lastName: user.family_name,
+                    mail: user.email,
+                }))
+
+            } else if (!user.email_verified) {
+                Swal.fire({
+                    title: 'Usuario no verificado',
+                    text: 'Por favor verifique su bandeja correo, valide su registro y recargue de nuevo la pagina',
+                    icon: 'error',
+                    confirmButtonColor: "#1d4ed8",
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                });
+            }
+
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAuthenticated, isAuthenticated && user.email_verified])
+
+    const registerUser = () => {
+        const currentUser = usuario.find((el) => el.mail === DataUser.mail);
+        if (!currentUser && !buttonImg) {
+            dispatch(postUser(DataUser));
+            dispatch(getUsers());
+            setbuttonImg(true)
+        }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, isAuthenticated && user.email_verified]);
