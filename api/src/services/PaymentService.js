@@ -9,7 +9,7 @@ class PaymentService {
         
       };
     } */
-    let transation = await axios.get("http://localhost:3001/transactions");
+    let transation = await axios.get(process.env.linkdeback+"/transactions");
     let user= transation.data
     const body = {
       payer:[{
@@ -33,11 +33,11 @@ class PaymentService {
       back_urls: {
         failure: "/failure",
         pending: "/pending",
-        success: "http://localhost:3000/home",
+        success: process.env.linkfront+"/home",
       },
       ///cambiar por heroku
       notification_url:
-        "https://cecb-45-71-181-141.ngrok.io/notificacion?source_news=webhooks",
+        process.env.linkautenticado+"/notificacion?source_news=webhooks",
     };
 
     const payment = await axios.post(url, body, {

@@ -46,7 +46,7 @@ router.post("/notificacion", async function (req, res, next) {
   let d = {
     nroTransaction: req.query["data.id"],
   };
-  axios.post("http://localhost:3001/transactionsMercadoPago", d);
+  axios.post(process.env.linkdeback+"/transactionsMercadoPago", d);
   /*  let d = {
     nroTransaction: req.query["data.id"],
     type: "Compra",
@@ -77,14 +77,14 @@ const getInfototal = async (id) => {
     statusTransaction: "",
   };
 
-  axios.post("http://localhost:3001/transactions", d);
+  axios.post(process.env.linkdeback+ "/transactions", d);
 };
 const funct =async()=>{
   
 }
 const getInfoMP = async (id) => {
   const apiExterna = await axios.get(
-    "http://localhost:3001//transMercado/" + id
+    process.env.linkdeback+"/transMercado/" + id
   );
   return apiExterna;
 };
@@ -110,7 +110,7 @@ let d = {
   idTransaction: "245",
   statusTransaction: data.data.status,
 };
-axios.post("http://localhost:3001/transactions", d);
+axios.post(process.env.linkdeback+"/transactions", d);
   res.jsonp(datos);
   //data.payer --->informacion no sirve
   //data.status---->estado de pago
