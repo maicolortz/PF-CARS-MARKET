@@ -28,7 +28,6 @@ const premiumUser = async (req, res) => {
   try {
     const found = await User.findOne({ where: { mail: req.params.email } });
     const otro = await User.findByPk(found.id, { include: Car });
-    console.log(otro);
     otro.cars.map((e) => e.update({ premium: true }));
     await found.save();
     res.json(otro.cars);
