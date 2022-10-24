@@ -84,7 +84,7 @@ export function postTransaction(user) {
 }
 export function postUser(user) {
     return async function () {
-      const d = await axios.post("/users/createuser", user);
+      const d = await axios.post("/users", user);
       return d;
     };
   }
