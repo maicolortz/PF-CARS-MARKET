@@ -15,7 +15,6 @@ export const SearchBar = ({
   getCarForCondition,
   Cars,
   Car,
-  setNumber
 }) => {
   const dispatch = useDispatch();
   const history = useNavigate();
@@ -32,7 +31,6 @@ export const SearchBar = ({
       history('/home');
     }
     dispatch(getCarForName(busqueda))
-    setNumber(1)
     setbusqueda("");
 
     // setSort(e.target.value);
