@@ -61,17 +61,6 @@ export default function NavBar() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, isAuthenticated && user.email_verified])
 
-    const registerUser = () => {
-        const currentUser = usuario.find((el) => el.mail === DataUser.mail);
-        if (!currentUser && !buttonImg) {
-            dispatch(postUser(DataUser));
-            dispatch(getUsers());
-            setbuttonImg(true)
-        }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, isAuthenticated && user.email_verified]);
-
   const registerUser = () => {
     const currentUser = usuario.find((el) => el.mail === DataUser.mail);
     if (!currentUser && !buttonImg) {
