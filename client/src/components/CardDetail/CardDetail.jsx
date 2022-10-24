@@ -120,7 +120,11 @@ function CardDetail() {
                   </p>
                   <button onClick={() => RedirectRegister()}
                     title="Añadir a Favoritos"
-                    class="md:text-6xl text-gray-300  hover:text-red-500 duration-300">
+                    class={
+                      heart
+                        ? "sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl text-red-500  duration-300"
+                        : "sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl text-gray-300  hover:text-red-500 duration-300"
+                    }>
                     &hearts;
                   </button>
                 </div>
