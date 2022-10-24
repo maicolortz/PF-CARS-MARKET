@@ -73,5 +73,10 @@ module.exports = (sequelize) => {
     transmition: {
       type: DataTypes.ENUM('Automatico','Sincronico'),
     },
+    premium: { // Que debería hacer con esto
+      type: DataTypes.BOOLEAN,
+      //allowNull: false,
+      defaultValue: false,
+    },
   });
 };

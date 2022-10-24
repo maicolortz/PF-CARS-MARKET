@@ -27,7 +27,7 @@ const getAllCars = async (req, res) => {
 const getCarForName = async (req, res) => {
   try {
     const {name}=req.query;
-      const infototal = await Car.findAll();
+      const infototal = await Car.findAll({include:User});
     const filtered=infototal.filter(e=>e.name.toLowerCase()
     .includes(name.toLowerCase()))
     filtered.length
@@ -63,7 +63,7 @@ const getCarForCondition=async(req,res)=>{
         const {condition}=req.query;
         if(condition.toLowerCase()==="nuevo" ||condition.toLowerCase()==="usado" ){
 
-          const infototal = await Car.findAll({ where: { condition: condition } });
+          const infototal = await Car.findAll({ where: { condition: condition } },{include:User});
           infototal.length
           ? res.status(200).send(infototal)
           : res.status(200).send([]);
@@ -77,7 +77,7 @@ const getCarForCondition=async(req,res)=>{
 const getCarForBrand = async (req, res) => {
   try {
     const { name } = req.query;
-    const infototal = await Car.findAll({ where: { brand: name } });
+    const infototal = await Car.findAll({ where: { brand: name } },{include:User});
     infototal.length
       ? res.status(200).send(infototal)
       : res.status(404).send("not has been founded");
@@ -123,7 +123,7 @@ const createCar = async (req, res) => {
       condition,
       transmition,
       userId
-    });
+    },{include:User});
     res.send("created");
   } catch (error) {
     res.send(error.message);
