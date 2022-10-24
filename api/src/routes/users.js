@@ -3,6 +3,7 @@ const {
   getAllUsers,
   createUser,
   getUserById,
+  premiumUser
  
 } = require("../controllers/users");
 
@@ -12,6 +13,7 @@ router.get("/", getAllUsers);
 
 router.post("/", createUser);
 router.get("/:id", getUserById);
+router.put("/premium/:email",premiumUser)
 
 //router.post("/", addCars)
 
