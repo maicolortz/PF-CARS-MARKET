@@ -44,14 +44,14 @@ export const Premium = ({
   }, []);
   const getListaID = async () => {
     const data = await axios.get(
-      "http://localhost:3001/transactionsMercadoPago"
+      "/transactionsMercadoPago"
     );
     return data;
   };
 
   const getdataporid = async (id) => {
     const apiExterna = await axios.get(
-      "http://localhost:3001/transMercado/" + id
+      "/transMercado/" + id
     );
     return apiExterna;
   };
@@ -70,6 +70,12 @@ export const Premium = ({
       console.log(dato.data.status)
       if (user.email==dato.data.email && dato.data.status=="approved") {
         setPremium(true);
+        await axios.put(
+          "/users/premium/" + user.email
+          
+        );
+        ///enviar el id de la publicacion 
+        ///premium activado
       }
     }
   };

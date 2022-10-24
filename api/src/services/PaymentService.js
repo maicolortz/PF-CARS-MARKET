@@ -27,8 +27,6 @@ class PaymentService {
           id:user? user[user.length-1].email:"nada",
           quantity: 1,
           unit_price: 1000,
-          
-          
         },
       ],
       auto_return: "approved",
@@ -39,7 +37,7 @@ class PaymentService {
       },
       ///cambiar por heroku
       notification_url:
-        "https://fb32-45-71-181-138.ngrok.io/notificacion?source_news=webhooks",
+        "https://cecb-45-71-181-141.ngrok.io/notificacion?source_news=webhooks",
     };
 
     const payment = await axios.post(url, body, {

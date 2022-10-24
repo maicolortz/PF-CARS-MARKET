@@ -41,7 +41,7 @@ export default function Home() {
   useEffect(() => {
     setCurrentPage(1);
   }, [cars]);
-
+  
   if (loading) {
     return <Loading />;
   }
@@ -69,6 +69,7 @@ export default function Home() {
                     kilometres={el.kilometres}
                     transmition={el.transmition}
                     year={el.year}
+                    prem={el.premium}
                   />
                 );
               })}
