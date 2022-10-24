@@ -35,7 +35,7 @@ export default function Paginado({ allCars, carsPerPage, paginate, page, number,
                     </button>
                 </li>
                 {
-                    cars.length >= carsPerPage * 2 && (
+                    (cars.length > carsPerPage || cars.length >= carsPerPage * 2) && (
                         <li>
                             <button onClick={() => { paginate(number + 1) }} class={page === number + 1 ? "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900 " : "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-900"}>
                                 {number + 1}
@@ -44,7 +44,7 @@ export default function Paginado({ allCars, carsPerPage, paginate, page, number,
                     )}
 
                 {
-                    cars.length >= carsPerPage * 3 && (
+                    (cars.length > carsPerPage * 2 || cars.length >= carsPerPage * 3) && (
                         <li>
                             <button onClick={() => { paginate(number + 2) }} class={page === number + 2 ? "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-blue-900 " : "text-white shadow-md shadow-black bg-blue-900 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-900"}>
                                 {number + 2}

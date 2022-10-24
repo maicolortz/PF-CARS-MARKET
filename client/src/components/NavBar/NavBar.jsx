@@ -50,6 +50,8 @@ export default function NavBar() {
                     confirmButtonColor: "#1d4ed8",
                     showCancelButton: false,
                     showConfirmButton: false,
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
                 });
             }
 
