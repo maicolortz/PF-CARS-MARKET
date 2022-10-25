@@ -9,7 +9,7 @@ class PaymentService {
         
       };
     } */
-    let transation = await axios.get(process.env.linkdeback+"/transactions");
+    let transation = await axios.get(process.env.LINKDEBACK+"/transactions");
     let user= transation.data
     const body = {
       payer:[{
@@ -37,7 +37,7 @@ class PaymentService {
       },
       ///cambiar por heroku
       notification_url:
-        process.env.linkautenticado+"/notificacion?source_news=webhooks",
+        process.env.LINKAUTENTICADO+"/notificacion?source_news=webhooks",
     };
 
     const payment = await axios.post(url, body, {

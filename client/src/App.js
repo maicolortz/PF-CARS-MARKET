@@ -11,19 +11,21 @@ import Login from './components/Login.js'
 import PageNotFound from './components/PageNotFound.js'
 import EditCard from './components/EditCard.js'
 import LandingPage from './components/LandingPage/LandingPage';
+import Dashboard from './components/Dashboard';
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>  
+        <Routes> 
           <Route path='/' exact element = {<LandingPage/>}/>
           <Route path='/home' element={<Home/>}/>
           <Route path='/home/success' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/createuser' element={<FormRegister/>} />
+          <Route path='/createuser' element={<FormRegister/>}/>
           <Route path='/createcar' element={<FormCar/>} />
-          <Route path='/edit-car/:id' element={<EditCard/>} />
+          <Route path='/edit-car/:id' element={<EditCard/>}/>
           <Route path='/cars/:id' element={<CardDetail/>} />
+          <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
