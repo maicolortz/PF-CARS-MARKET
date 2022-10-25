@@ -4,14 +4,40 @@ import Paginado from "../Paginado/Paginado.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import "./Home.css";
 import Card from "../Card/Card.jsx";
-import { getCars } from "../../Redux/Actions";
+import { getCars, getUsers } from "../../Redux/Actions";
+import { useNavigate } from "react-router-dom";
 import Filters from "../filtros/Filters.jsx";
 import Loading from "../Loading/Loading.jsx";
+import { useAuth0 } from '@auth0/auth0-react';
+import Swal from "sweetalert2";
 
 export default function Home() {
   const dispatch = useDispatch();
   const cars = useSelector((state) => state.car);
-  const {loading} = useSelector(state => state)
+  const { loading } = useSelector(state => state);
+
+  //AUTENTICACION (AUTH0)
+  const { user, isAuthenticated, } = useAuth0();
+  const usuarios = useSelector(state => state.allUsers);
+  const history = useNavigate();
+
+  const userEmail = user && user.email;
+  const buscados = usuarios && usuarios.find(u => u.mail === userEmail);
+
+  if (isAuthenticated && buscados === undefined) {
+    Swal.fire({
+      title: 'Completa el registro',
+      text: 'Llene los siguientes campos para completar el registro',
+      icon: 'warning',
+      confirmButtonColor: "#1d4ed8",
+      showCancelButton: false,
+      showConfirmButton: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    }).then(function () {
+      history("/createuser");
+    })
+  }
 
   //PAGINADO
   const [number, setNumber] = useState(1); //Numeros para los 3 paginados
@@ -35,13 +61,17 @@ export default function Home() {
   };
 
   useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
+
+  useEffect(() => {
     dispatch(getCars());
   }, [dispatch]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [cars]);
-  
+
   if (loading) {
     return <Loading />;
   }
@@ -58,35 +88,35 @@ export default function Home() {
           </div>
           <div className="contenedor-Home3">
             <div class="grid grid-cols-3 gap-0">
-              {cars[0]==="none" || cars[0]==="n"?
-              <strong><h1 className="text-6xl">No se ha encontrado el carro deseado</h1></strong>:currentCarsPerPage?.map((el) => {
-                return (
-                  <Card
-                    id={el.id}
-                    image={el.image}
-                    descriptionShort={el.descriptionShort}
-                    price={el.price}
-                    kilometres={el.kilometres}
-                    transmition={el.transmition}
-                    year={el.year}
-                    prem={el.premium}
-                  />
-                );
-              })}
+              {cars[0] === "none" || cars[0] === "n" ?
+                <strong><h1 className="text-6xl">No se ha encontrado el carro deseado</h1></strong> : currentCarsPerPage?.map((el) => {
+                  return (
+                    <Card
+                      id={el.id}
+                      image={el.image}
+                      descriptionShort={el.descriptionShort}
+                      price={el.price}
+                      kilometres={el.kilometres}
+                      transmition={el.transmition}
+                      year={el.year}
+                      prem={el.premium}
+                    />
+                  );
+                })}
             </div>
             <div class="mx-6 my-6">
-            {cars.length>0 && cars[0]!=="none" ?
-              <Paginado
-              allCars={cars.length}
-              carsPerPage={carsPerPage}
-              paginate={paginate}
-              page={currentPage}
-              number={number}
-              numberPaginate={numberPaginate}
-              cars={cars}
-              />
-            :console.log("")}
-            
+              {cars.length > 0 && cars[0] !== "none" ?
+                <Paginado
+                  allCars={cars.length}
+                  carsPerPage={carsPerPage}
+                  paginate={paginate}
+                  page={currentPage}
+                  number={number}
+                  numberPaginate={numberPaginate}
+                  cars={cars}
+                />
+                : console.log("")}
+
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Home from './components/Home/Home.jsx'
-import FormRegister from './components/FormRegister.js'
+import FormRegister from './components/FormRegister/FormRegister.jsx'
 import FormCar from './components/FormCar/FormCar.jsx'; 
 import CardDetail from './components/CardDetail/CardDetail.jsx'
 import Login from './components/Login.js'
