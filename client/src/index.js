@@ -14,7 +14,7 @@ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"
 
 root.render(
   <React.StrictMode>
-    <Auth0Provider domain="dev-3mir3tv3.us.auth0.com" clientId="qGYeRPxH7lGg0fjoO49JrPrdbZgVyeTb" redirectUri={window.location.origin + window.location.pathname} >
+    <Auth0Provider domain="dev-3mir3tv3.us.auth0.com" clientId="qGYeRPxH7lGg0fjoO49JrPrdbZgVyeTb" redirectUri={window.location.origin + "/createuser"} >
       <Provider store={store}>
         <App />
       </Provider>

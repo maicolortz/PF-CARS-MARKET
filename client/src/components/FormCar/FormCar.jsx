@@ -1,12 +1,13 @@
 import { React, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { postCar, getCars } from "../../Redux/Actions";
+import { postCar, getCars, getUsers } from "../../Redux/Actions";
 import { Link, useNavigate } from 'react-router-dom';
 import './FormCar.css';
 import img from '../Card/imagenes/Imagen_Default.png';
 import Swal from 'sweetalert2'
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 // import { Image } from 'cloudinary-react';
 
 
@@ -26,18 +27,20 @@ const condition = ["Nuevo", "Usado"];
 
 function FormCar() {
     const usuario = useSelector((state) => state.allUsers);
-    const DataUser = useSelector((state) => state.DataUser);
-    const currentUser = usuario.find((el) => el.mail === DataUser.mail && el.id);
+    const { user } = useAuth0();
+    const currentUser = usuario.find((el) => el.mail === user?.email && el.id);
 
     const dispatch = useDispatch();
     const history = useNavigate();
 
     useEffect(() => {
         dispatch(getCars());
-    }, [dispatch])
+        dispatch(getUsers())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const [state, setState] = useState({
-        userId: currentUser.id,
+        userId: user?.id || currentUser?.id,
         name: "",
         brand: "",
         model: "",
