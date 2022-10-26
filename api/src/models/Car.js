@@ -78,5 +78,16 @@ module.exports = (sequelize) => {
       //allowNull: false,
       defaultValue: false,
     },
+    active: { 
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      // usado para borrado lógico
+      // debería crearse en true y cuando se ejecute 
+      // logicaldeletionCar del back cambie de estado a false, 
+      // condición para mostrarse en el front --> active===true
+      // Para el pausado de la publicación por el usuario
+    
+    },
+
   });
 };

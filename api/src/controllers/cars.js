@@ -16,14 +16,31 @@ const { Sequelize, Op } = require("sequelize");
 } */
 
 
+// const getAllCars = async (req, res) => {
+//   try {
+//     const cars = await Car.findAll({include:User});
+//     res.status(200).json(cars);
+//   } catch (error) {
+//     res.status(error.status).send(error.message);
+//   }
+// };
+
 const getAllCars = async (req, res) => {
   try {
     const cars = await Car.findAll({include:User});
-    res.status(200).json(cars);
+
+    const autosP = cars.filter(a => a.user.premium === true);
+    const autosN = cars.filter(a => a.user.premium === false)
+
+    const autos = autosP.concat(autosN)
+
+
+    res.status(200).json(autos);
   } catch (error) {
     res.status(error.status).send(error.message);
   }
 };
+
 const getCarForName = async (req, res) => {
   try {
     const {name}=req.query;
@@ -75,6 +92,7 @@ const getCarForCondition=async(req,res)=>{
       }
 }
 const getCarForBrand = async (req, res) => {
+  
   try {
     const { name } = req.query;
     const infototal = await Car.findAll({ where: { brand: name } },{include:User});
@@ -176,6 +194,70 @@ const getAutoById = async (id) => {
   }
 };
 
+
+// const phisicaldeletionCar = async (req, res) => {
+  
+//   const { id } = req.params
+//   try {
+//     const destroyCar = await Car.destroy({ where: { id: id } })
+//     res.sendStatus(200)
+//   } catch (e) {
+//     next(e)
+//   }
+// }
+
+const phisicaldeletionCar = async (req,res)=>{
+  const{id}=req.params;
+  try{
+  await Car.destroy({
+      where:{
+        id,
+      },
+  })
+  res.send("eliminado")
+  }catch(err){
+  res.json(err.message)
+  }
+}
+
+const updateCar = async (req, res) => {
+const {id}= req.params;
+const found = await Car.findByPk(id)
+try{
+  for (const property in req.body) {
+            if (property !== undefined) {
+                found[property] = req.body[property];
+            };
+          };
+  await found.save();
+  res.send("Actualizado");
+}
+catch (error) {
+  return error;
+    };
+};
+
+// const logicaldeletionCar = async (req, res) => {
+//   const {id}= req.params;
+//   try{
+//     const found = await Car.findByPk(id)
+//     // for (const property in req.body) {
+//     //           if (property !== undefined) {
+//     //               found[property] = req.body[property];
+//     //           };
+//     //         };
+//     found.active = false       
+//     await found.save();
+//     res.send(found);
+//   }
+//   catch (error) {
+//     return error;
+//       };
+// }
+
+
+
+
 module.exports = {
   //updateCar,
   getAllCars,
@@ -185,5 +267,8 @@ module.exports = {
   getCarForBrand,
   getCarForCondition,
   sortprice,
-  getRangeModel
+  getRangeModel,
+  updateCar,
+  phisicaldeletionCar
+  // logicaldeletionCar
 };
