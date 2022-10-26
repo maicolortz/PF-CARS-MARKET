@@ -1,4 +1,4 @@
-const { Car, User } = require("../db");
+const { Car, User, Consult } = require("../db");
 const axios = require("axios");
 const {car, user} = require("./bdjson");
 const { Sequelize, Op } = require("sequelize");
@@ -166,7 +166,7 @@ const getRangeModel = async(req,res)=>{
   }
 }
 const getAutoById = async (req, res) => {
-  const found = await Car.findByPk(req.params.id, { include: User });
+  const found = await Car.findByPk(req.params.id, { include: [User, Consult] });
   console.log(found);
   if (!found) {
     return res.status(404).send("Error: user not found");
