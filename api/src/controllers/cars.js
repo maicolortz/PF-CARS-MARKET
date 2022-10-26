@@ -147,8 +147,17 @@ const getRangeModel = async(req,res)=>{
       res.status(400).json(error)
   }
 }
+const getAutoById = async (req, res) => {
+  const found = await Car.findByPk(req.params.id, { include: User });
+  console.log(found);
+  if (!found) {
+    return res.status(404).send("Error: user not found");
+  }
 
-const getAutoById = async (id) => {
+  return res.json(found);
+};
+
+/* const getAutoById = async (id) => {
   try {
     let searchAuto = await Car.findByPk(id);
 
@@ -168,6 +177,7 @@ const getAutoById = async (id) => {
       price: searchAuto.price,
       condition: searchAuto.condition,
       transmition: searchAuto.transmition,
+      userId:searchAuto.UserId
     };
     console.log(searchById);
     return searchById;
@@ -175,7 +185,7 @@ const getAutoById = async (id) => {
     return error;
   }
 };
-
+ */
 module.exports = {
   //updateCar,
   getAllCars,
