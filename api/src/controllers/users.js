@@ -48,6 +48,22 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+const getEmails = async (req, res) => {
+  try {
+    const users = await User.findAll({
+      //include: Car,
+      //where: {userId:{[Op.not]:null}},
+      attributes:['mail'],
+      //where: { mail: { [Op.iLike]: '%'+mail+'%'} },
+    });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(error.status).send(error.message);
+  }
+};
+
+
+
 const createUser = async (req, res) => {
   //    try {
   const { password, firstName, lastName, mail, whatsApp, address } = req.body;
@@ -83,4 +99,5 @@ module.exports = {
   getUserById,
   updateCar,
   premiumUser,
+  getEmails,
 };

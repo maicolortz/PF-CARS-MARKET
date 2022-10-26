@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const {
-  getCars,
-  addCars,
+  // getCars,
+  // addCars,
   getAllCars,
   getAutoById,
   createCar,
@@ -10,6 +10,9 @@ const {
   getCarForCondition,
   sortprice,
   getRangeModel,
+  updateCar,
+  phisicaldeletionCar,
+//  logicaldeletionCar,
 } = require("../controllers/cars");
 //importa mercadopago
 const mercadopago = require("mercadopago");
@@ -38,6 +41,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//router.put("/:id", logicaldeletionCar);
 
+router.delete("/:id", phisicaldeletionCar);
+
+router.put("/:id", updateCar);
 
 module.exports = router;
