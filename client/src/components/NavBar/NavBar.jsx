@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import imgDefault from "../Card/imagenes/usuario.png";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../Redux/Actions";
 import Premium from "../Premium/Premium";
 
@@ -23,6 +23,7 @@ const estilos = {
 
 export default function NavBar() {
 
+  const carId = useSelector((state) => state.carDetail);
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -46,7 +47,7 @@ export default function NavBar() {
           class="shadow-md shadow-black rounded-md"
         />
       </Link>
-      {window.location.pathname !== "/createuser" &&
+      {(window.location.pathname !== "/createuser" && window.location.pathname !== `/cars/${carId.id}` && window.location.pathname !== "/createcar") &&
         <SearchBar />
       }
       {isAuthenticated ? (

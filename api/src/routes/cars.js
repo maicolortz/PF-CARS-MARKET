@@ -25,7 +25,7 @@ router.get("/search/", getCarForName);
 router.get("/condition/", getCarForCondition);
 router.get("/sortprice",sortprice)
 router.get("/range",getRangeModel)
-router.get("/:id", async (req, res) => {
+router.get("/:id",getAutoById)/* , async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -39,7 +39,7 @@ router.get("/:id", async (req, res) => {
   } catch (error) {
     res.status(404).send(error);
   }
-});
+}); */
 
 //router.put("/:id", logicaldeletionCar);
 
