@@ -166,7 +166,9 @@ const getRangeModel = async(req,res)=>{
   }
 }
 const getAutoById = async (req, res) => {
+
   const found = await Car.findByPk(req.params.id, { include: [User, Consult] });
+
   console.log(found);
   if (!found) {
     return res.status(404).send("Error: user not found");
@@ -175,46 +177,6 @@ const getAutoById = async (req, res) => {
   return res.json(found);
 };
 
-// const getAutoById = async (id) => {
-//   try {
-//     let searchAuto = await Car.findByPk(id);
-
-//     let searchById = {
-//       id: searchAuto.id,
-//       name: searchAuto.name,
-//       brand: searchAuto.brand,
-//       model: searchAuto.model,
-//       year: searchAuto.year,
-//       color: searchAuto.color,
-//       oil: searchAuto.oil,
-//       gate: searchAuto.gate,
-//       kilometres: searchAuto.kilometres,
-//       descriptionLong: searchAuto.descriptionLong,
-//       image: searchAuto.image,
-//       location: searchAuto.location,
-//       price: searchAuto.price,
-//       condition: searchAuto.condition,
-//       transmition: searchAuto.transmition,
-//       userId:searchAuto.UserId
-//     };
-//     console.log(searchById);
-//     return searchById;
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-
-// const phisicaldeletionCar = async (req, res) => {
-  
-//   const { id } = req.params
-//   try {
-//     const destroyCar = await Car.destroy({ where: { id: id } })
-//     res.sendStatus(200)
-//   } catch (e) {
-//     next(e)
-//   }
-// }
 
 const phisicaldeletionCar = async (req,res)=>{
   const{id}=req.params;
@@ -227,8 +189,8 @@ const phisicaldeletionCar = async (req,res)=>{
   res.send("eliminado")
   }catch(err){
   res.json(err.message)
-  }
-}
+  return res.json(found);
+};
 
 const updateCar = async (req, res) => {
 const {id}= req.params;
@@ -246,25 +208,6 @@ catch (error) {
   return error;
     };
 };
-
-// const logicaldeletionCar = async (req, res) => {
-//   const {id}= req.params;
-//   try{
-//     const found = await Car.findByPk(id)
-//     // for (const property in req.body) {
-//     //           if (property !== undefined) {
-//     //               found[property] = req.body[property];
-//     //           };
-//     //         };
-//     found.active = false       
-//     await found.save();
-//     res.send(found);
-//   }
-//   catch (error) {
-//     return error;
-//       };
-// }
-
 
 
 
