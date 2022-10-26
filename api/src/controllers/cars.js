@@ -175,35 +175,34 @@ const getAutoById = async (req, res) => {
   return res.json(found);
 };
 
-/* const getAutoById = async (id) => {
-  try {
-    let searchAuto = await Car.findByPk(id);
+// const getAutoById = async (id) => {
+//   try {
+//     let searchAuto = await Car.findByPk(id);
 
-    let searchById = {
-      id: searchAuto.id,
-      name: searchAuto.name,
-      brand: searchAuto.brand,
-      model: searchAuto.model,
-      year: searchAuto.year,
-      color: searchAuto.color,
-      oil: searchAuto.oil,
-      gate: searchAuto.gate,
-      kilometres: searchAuto.kilometres,
-      descriptionLong: searchAuto.descriptionLong,
-      image: searchAuto.image,
-      location: searchAuto.location,
-      price: searchAuto.price,
-      condition: searchAuto.condition,
-      transmition: searchAuto.transmition,
-      userId:searchAuto.UserId
-    };
-    console.log(searchById);
-    return searchById;
-  } catch (error) {
-    return error;
-  }
-};
-<<<<<<< HEAD
+//     let searchById = {
+//       id: searchAuto.id,
+//       name: searchAuto.name,
+//       brand: searchAuto.brand,
+//       model: searchAuto.model,
+//       year: searchAuto.year,
+//       color: searchAuto.color,
+//       oil: searchAuto.oil,
+//       gate: searchAuto.gate,
+//       kilometres: searchAuto.kilometres,
+//       descriptionLong: searchAuto.descriptionLong,
+//       image: searchAuto.image,
+//       location: searchAuto.location,
+//       price: searchAuto.price,
+//       condition: searchAuto.condition,
+//       transmition: searchAuto.transmition,
+//       userId:searchAuto.UserId
+//     };
+//     console.log(searchById);
+//     return searchById;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 
 // const phisicaldeletionCar = async (req, res) => {
@@ -269,9 +268,6 @@ catch (error) {
 
 
 
-=======
- */
->>>>>>> c5f1076ac5dd5c1bcfd437fa1056c0aed9f31774
 module.exports = {
   //updateCar,
   getAllCars,
