@@ -156,7 +156,6 @@ function FormRegister() {
         }
     }
 
-    console.log(dataPerfil);
     return (
 
         <div class="">
