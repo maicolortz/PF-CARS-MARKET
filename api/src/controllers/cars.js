@@ -191,6 +191,7 @@ const phisicaldeletionCar = async (req,res)=>{
   res.json(err.message)
   return res.json(found);
 };
+}
 
 const updateCar = async (req, res) => {
 const {id}= req.params;
