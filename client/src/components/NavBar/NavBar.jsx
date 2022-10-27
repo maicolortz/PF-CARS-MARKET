@@ -69,6 +69,9 @@ export default function NavBar() {
       setbuttonImg(true);
     }
   };
+  const enviarDashboard=()=>{
+    history("/dashboard")
+  }
 
   return (
     <nav className="contenedor-NavBar">
@@ -164,6 +167,7 @@ export default function NavBar() {
                     name="Perfil"
                     value="Otro"
                     className="font-medium w-full h-8"
+                  onClick={() => enviarDashboard()}
                   >
                     Perfil
                   </button>

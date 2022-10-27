@@ -16,7 +16,7 @@ function Card({
   kilometres,
   transmition,
   year,
-  prem
+  prem,
 }) {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 
@@ -54,12 +54,13 @@ function Card({
   const estilos = {
     Premium:
       "text-white bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-2 py-1.5 text-center mr-2 mb-2",
-      normal:"md:w-40 h-full  bg-white  lg:w-52 xl:w-64 2xl:w-80  shadow-2xl rounded-lg"
+    normal:
+      "md:w-40 h-full  bg-white  lg:w-52 xl:w-64 2xl:w-80  shadow-2xl rounded-lg",
   };
   return (
     <>
       <div className="px-5 py-2">
-        <div className={prem?estilos.Premium:estilos.normal}>
+        <div className={prem ? estilos.Premium : estilos.normal}>
           <img
             class=" rounded-tl-lg rounded-tr-lg md:h-40 w-96 xl:h-60 2xl:h-64"
             src={image ? image : img}
