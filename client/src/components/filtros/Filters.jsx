@@ -53,7 +53,6 @@ export const Filters = ({
   let filterclear = (e) => {
     e.preventDefault();
     setModelmin(0);
-    let elemento = document.getElementById("contenedor");
     let select = document.getElementById("selectcondition");
     select.option = "none";
     getCars();
@@ -97,7 +96,6 @@ export const Filters = ({
   }
   useEffect(() => {}, []);
   const [brand, setBrand] = useState("");
-  const [rangomax, setRangomax] = useState(0);
   const [modelmin, setModelmin] = useState(0);
   const [modelmax, setModelmax] = useState(0);
   const [minYear, setMinYear] = useState(0);

@@ -9,10 +9,10 @@ import FormCar from './components/FormCar/FormCar.jsx';
 import CardDetail from './components/CardDetail/CardDetail.jsx'
 import Login from './components/Login.js'
 import PageNotFound from './components/PageNotFound.js'
-import EditCard from './components/EditCard.js'
 import LandingPage from './components/LandingPage/LandingPage';
-import Dashboard from './components/Dashboard';
 import ConctactForm from './components/contactForm/contactForm';
+import Dashboard from './components/Dashboard/Dashboard.jsx';
+import FormUpdateCar from './components/Dashboard/FormUpdateCar';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/createuser' element={<FormRegister/>}/>
           <Route path='/createcar' element={<FormCar/>} />
-          <Route path='/edit-car/:id' element={<EditCard/>}/>
+          <Route path='/carEdit' element={<FormUpdateCar/>}/>
           <Route path='/cars/:id' element={<CardDetail/>} />
           <Route path='/Contact' element={<ConctactForm/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
