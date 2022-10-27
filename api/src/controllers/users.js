@@ -93,6 +93,18 @@ const getUserById = async (req, res) => {
   return res.json(found);
 };
 
+
+const getInfoUserByEmail = async (req,res)=>{
+  const{email} = req.body;
+
+  try {
+    const algo = await User.findOne({where:{mail:email}})
+    res.json(algo)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -100,4 +112,5 @@ module.exports = {
   updateCar,
   premiumUser,
   getEmails,
+  getInfoUserByEmail
 };

@@ -4,13 +4,15 @@ const {
   createUser,
   getUserById,
   premiumUser,
-  getEmails
+  getEmails,
+  getInfoUserByEmail
  
 } = require("../controllers/users");
 
 const router = Router();
 
 router.get("/", getAllUsers);
+router.get('/infoUser',getInfoUserByEmail)
 router.get("/emails", getEmails);
 router.post("/", createUser);
 router.get("/:id", getUserById);
