@@ -4,7 +4,7 @@ import { postCar, getCars, getUsers } from "../../Redux/Actions";
 import { Link, useNavigate } from 'react-router-dom';
 import './FormCar.css';
 import img from '../Card/imagenes/Imagen_Default.png';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';

@@ -47,15 +47,15 @@ export function getUsers() {
   };
 }
 export function getUser(id) {
-    return async function (dispatch) {
-      dispatch({ type: "LOADING" })
-      const { data } = await axios.get(`/users/${id}`);
-      return dispatch({
-        type: "GET_USER",
-        payload: data,
-      });
-    };
-  }
+  return async function (dispatch) {
+    dispatch({ type: "LOADING" })
+    const { data } = await axios.get(`/users/${id}`);
+    return dispatch({
+      type: "GET_USER",
+      payload: data,
+    });
+  };
+}
 export function getCardDetail(id) {
   return async function (dispatch) {
     const { data } = await axios.get(`/cars/${id}`);
@@ -67,10 +67,10 @@ export function getCardDetail(id) {
 }
 
 export function postCar(data) {
-  return async function(dispatch){
+  return async function (dispatch) {
     try {
       const carCreado = await axios.post("/cars", data)
-      return dispatch({type: "POST_CAR", payload: carCreado.data})
+      return dispatch({ type: "POST_CAR", payload: carCreado.data })
     } catch (error) {
       console.log(error)
     }
@@ -83,18 +83,18 @@ export function postTransaction(user) {
   };
 }
 export function postUser(user) {
-    return async function () {
-      const d = await axios.post("/users", user);
-      return d;
-    };
-  }
+  return async function () {
+    const d = await axios.post("/users", user);
+    return d;
+  };
+}
 export function OrderForPrice(payload) {
   return async function (dispatch) {
     const { data } = await axios.get(`/cars/sortprice?modo=${payload}`);
     return dispatch({
       type: "ORDER_FOR_PRICE",
       payload: data,
-      
+
     });
   };
 }
@@ -142,9 +142,21 @@ export function get_Payment_Link() {
   };
 }
 
-export function infoUser(data){
-  return{
+export function infoUser(data) {
+  return {
     type: "INFO_USER",
     payload: data
+  }
+}
+
+export function sendEmailSeller(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
