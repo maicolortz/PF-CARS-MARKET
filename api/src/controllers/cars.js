@@ -1,4 +1,4 @@
-const { Car, User } = require("../db");
+const { Car, User, Consult } = require("../db");
 const axios = require("axios");
 const {car, user} = require("./bdjson");
 const { Sequelize, Op } = require("sequelize");
@@ -16,14 +16,31 @@ const { Sequelize, Op } = require("sequelize");
 } */
 
 
+// const getAllCars = async (req, res) => {
+//   try {
+//     const cars = await Car.findAll({include:User});
+//     res.status(200).json(cars);
+//   } catch (error) {
+//     res.status(error.status).send(error.message);
+//   }
+// };
+
 const getAllCars = async (req, res) => {
   try {
     const cars = await Car.findAll({include:User});
-    res.status(200).json(cars);
+
+    const autosP = cars.filter(a => a.user.premium === true);
+    const autosN = cars.filter(a => a.user.premium === false)
+
+    const autos = autosP.concat(autosN)
+
+
+    res.status(200).json(autos);
   } catch (error) {
     res.status(error.status).send(error.message);
   }
 };
+
 const getCarForName = async (req, res) => {
   try {
     const {name}=req.query;
@@ -75,6 +92,7 @@ const getCarForCondition=async(req,res)=>{
       }
 }
 const getCarForBrand = async (req, res) => {
+  
   try {
     const { name } = req.query;
     const infototal = await Car.findAll({ where: { brand: name } },{include:User});
@@ -148,7 +166,9 @@ const getRangeModel = async(req,res)=>{
   }
 }
 const getAutoById = async (req, res) => {
-  const found = await Car.findByPk(req.params.id, { include: User });
+
+  const found = await Car.findByPk(req.params.id, { include: [User, Consult] });
+
   console.log(found);
   if (!found) {
     return res.status(404).send("Error: user not found");
@@ -157,35 +177,41 @@ const getAutoById = async (req, res) => {
   return res.json(found);
 };
 
-/* const getAutoById = async (id) => {
-  try {
-    let searchAuto = await Car.findByPk(id);
 
-    let searchById = {
-      id: searchAuto.id,
-      name: searchAuto.name,
-      brand: searchAuto.brand,
-      model: searchAuto.model,
-      year: searchAuto.year,
-      color: searchAuto.color,
-      oil: searchAuto.oil,
-      gate: searchAuto.gate,
-      kilometres: searchAuto.kilometres,
-      descriptionLong: searchAuto.descriptionLong,
-      image: searchAuto.image,
-      location: searchAuto.location,
-      price: searchAuto.price,
-      condition: searchAuto.condition,
-      transmition: searchAuto.transmition,
-      userId:searchAuto.UserId
-    };
-    console.log(searchById);
-    return searchById;
-  } catch (error) {
-    return error;
-  }
+const phisicaldeletionCar = async (req,res)=>{
+  const{id}=req.params;
+  try{
+  await Car.destroy({
+      where:{
+        id,
+      },
+  })
+  res.send("eliminado")
+  }catch(err){
+  res.json(err.message)
+  return res.json(found);
 };
- */
+}
+
+const updateCar = async (req, res) => {
+const {id}= req.params;
+const found = await Car.findByPk(id)
+try{
+  for (const property in req.body) {
+            if (property !== undefined) {
+                found[property] = req.body[property];
+            };
+          };
+  await found.save();
+  res.send("Actualizado");
+}
+catch (error) {
+  return error;
+    };
+};
+
+
+
 module.exports = {
   //updateCar,
   getAllCars,
@@ -195,5 +221,8 @@ module.exports = {
   getCarForBrand,
   getCarForCondition,
   sortprice,
-  getRangeModel
+  getRangeModel,
+  updateCar,
+  phisicaldeletionCar
+  // logicaldeletionCar
 };
