@@ -81,6 +81,11 @@ const initialState = {
               ...state,
               DataUser: action.payload,
             }
+            case "INFO_USER_EMAIL":
+            return{
+              ...state,
+              DataUser: action.payload,
+            }
       default:
         return state;
     }

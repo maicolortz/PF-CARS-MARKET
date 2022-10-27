@@ -141,7 +141,12 @@ export function get_Payment_Link() {
     });
   };
 }
-
+export function get_user_email(email){
+  return{
+    type: "INFO_USER_EMAIL",
+    payload: email
+  }
+}
 export function infoUser(data){
   return{
     type: "INFO_USER",

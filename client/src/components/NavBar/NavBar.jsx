@@ -7,8 +7,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import imgDefault from "../Card/imagenes/usuario.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../Redux/Actions";
+import { getUsers,infoUser } from "../../Redux/Actions";
 import Premium from "../Premium/Premium";
+import axios from "axios";
 
 const estilos = {
   button_inicio:
@@ -22,7 +23,6 @@ const estilos = {
 };
 
 export default function NavBar() {
-
   const carId = useSelector((state) => state.carDetail);
   const dispatch = useDispatch();
 
@@ -30,14 +30,16 @@ export default function NavBar() {
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const history = useNavigate();
 
-  const enviarDashboard=()=>{
-    history("/dashboard")
-  }
+  const enviarDashboard = async() => {
+    history("/dashboard");
+    const datos= await axios.get("")
+
+    dispatch(infoUser(user.email))
+  };
 
   useEffect(() => {
     dispatch(getUsers());
-  }, [dispatch])
-
+  }, [dispatch]);
 
   return (
     <nav className="contenedor-NavBar">
@@ -52,9 +54,9 @@ export default function NavBar() {
           class="shadow-md shadow-black rounded-md"
         />
       </Link>
-      {(window.location.pathname !== "/createuser" && window.location.pathname !== `/cars/${carId.id}` && window.location.pathname !== "/createcar") &&
-        <SearchBar />
-      }
+      {window.location.pathname !== "/createuser" &&
+        window.location.pathname !== `/cars/${carId.id}` &&
+        window.location.pathname !== "/createcar" && <SearchBar />}
       {isAuthenticated ? (
         <div
           class={
@@ -65,9 +67,9 @@ export default function NavBar() {
         >
           <div class="flex">
             <div className="flex items-center  px-2 py-2">
-              {window.location.pathname !== "/createuser" &&
+              {window.location.pathname !== "/createuser" && (
                 <Premium user={user}></Premium>
-              }
+              )}
             </div>
             <div className="flex">
               <div class="text-white md:text-sm lg:text-sm w-auto xl:text-base font-medium ml-2 justify-center flex flex-col ">
@@ -136,10 +138,10 @@ export default function NavBar() {
                     name="Perfil"
                     value="Otro"
                     className="font-medium w-full h-8"
-
-                  onClick={() => enviarDashboard()}
-
-                    disabled={window.location.pathname === "/createuser" && "true"}
+                    onClick={() => enviarDashboard()}
+                    disabled={
+                      window.location.pathname === "/createuser" && "true"
+                    }
                   >
                     Perfil
                   </button>
@@ -150,7 +152,9 @@ export default function NavBar() {
                     onClick={() => history("/createcar")}
                     value="Otro"
                     className="font-medium w-full h-8"
-                    disabled={window.location.pathname === "/createuser" && "true"}
+                    disabled={
+                      window.location.pathname === "/createuser" && "true"
+                    }
                   >
                     Publicar tu auto
                   </button>

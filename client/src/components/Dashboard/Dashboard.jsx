@@ -23,7 +23,7 @@ export const Dashboard = ({ user }) => {
     input: "p-2 rounded ",
     contenedorInput: "flex flex-col border-4 w-96",
   };
-
+  
   const [caso, setCaso] = useState("");
   const [editar, setEditar] = useState("");
   const editarCar=e=>{
@@ -78,7 +78,7 @@ export const Dashboard = ({ user }) => {
       </section>
       <section className="  flex-col w-screen  bg-gradient-to-r from-sky-400 via-blue-500 via-blue-400 via-sky-700 to-sky-400  bg-gradient-to-tr  ">
         <div class=" sticky top-0 border-b-4 bg-gradient-to-r from-sky-800  to-sky-400 p-3 text-white text-right    p-5 text-xl ">
-          {user.firstName + " " + user.lastName}
+          {user}
         </div>
         <section>
           <div>{opcion(caso)}</div>
