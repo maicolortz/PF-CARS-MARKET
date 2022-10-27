@@ -30,9 +30,14 @@ export default function NavBar() {
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const history = useNavigate();
 
+  const enviarDashboard=()=>{
+    history("/dashboard")
+  }
+
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch])
+
 
   return (
     <nav className="contenedor-NavBar">
@@ -131,6 +136,9 @@ export default function NavBar() {
                     name="Perfil"
                     value="Otro"
                     className="font-medium w-full h-8"
+
+                  onClick={() => enviarDashboard()}
+
                     disabled={window.location.pathname === "/createuser" && "true"}
                   >
                     Perfil

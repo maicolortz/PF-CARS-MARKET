@@ -26,6 +26,7 @@ export const Premium = ({
     return data.init_point;
   } */
   useEffect(() => {
+    
     getTransaction();
     const data = {
       nroTransaction: user.email,
