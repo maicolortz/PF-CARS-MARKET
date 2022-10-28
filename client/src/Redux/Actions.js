@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function getCars() {
   return async function (dispatch) {
-    dispatch({ type: "LOADING" })
+    dispatch({ type: "LOADING" });
     let json = await axios.get("/cars");
     return dispatch({
       type: "GET_CARS",
@@ -26,7 +26,9 @@ export function getCarForName(name) {
 export function getCarForCondition(condition) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`/cars/condition/?condition=${condition}`);
+      const { data } = await axios.get(
+        `/cars/condition/?condition=${condition}`
+      );
       return dispatch({
         type: "GET_CAR_FOR_CONDITION",
         payload: data,
@@ -48,6 +50,7 @@ export function getUsers() {
 }
 export function getUser(id) {
   return async function (dispatch) {
+
     dispatch({ type: "LOADING" })
     const { data } = await axios.get(`/users/${id}`);
     return dispatch({
@@ -69,12 +72,23 @@ export function getCardDetail(id) {
 export function postCar(data) {
   return async function (dispatch) {
     try {
+
       const carCreado = await axios.post("/cars", data)
       return dispatch({ type: "POST_CAR", payload: carCreado.data })
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+}
+export function updateCar(data,id) {
+  return async function (dispatch) {
+    try {
+      const carCreado = await axios.put("/cars/"+id, data);
+      return dispatch({ type: "UPDATE_CAR", payload: carCreado.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 export function postTransaction(user) {
   return async function () {
@@ -94,7 +108,6 @@ export function OrderForPrice(payload) {
     return dispatch({
       type: "ORDER_FOR_PRICE",
       payload: data,
-
     });
   };
 }
@@ -141,6 +154,17 @@ export function get_Payment_Link() {
     });
   };
 }
+export function infoUseremail(email) {
+  return async function (dispatch) {
+    const { data } = await axios.get(`/users/infoUser2/`+email);
+
+    return dispatch({
+      type: "INFO_USER_EMAIL",
+      payload: data,
+    });
+  };
+}
+
 
 export function infoUser(data) {
   return {
@@ -156,7 +180,8 @@ export function sendEmailSeller(data) {
       console.log(email);
       return email;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
+
 }

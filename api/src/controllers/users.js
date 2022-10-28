@@ -104,6 +104,18 @@ const getInfoUserByEmail = async (req,res)=>{
     res.status(400).json(error)
   }
 }
+const getInfoUserByEmail2 = async (req,res)=>{
+  const{email} = req.params;
+
+  try {
+    const algo = await User.findOne({where:{mail:email}})
+    const otro = await User.findByPk(algo.id, { include: Car });
+    res.json(otro)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
 
 module.exports = {
   getAllUsers,
@@ -112,5 +124,7 @@ module.exports = {
   updateCar,
   premiumUser,
   getEmails,
-  getInfoUserByEmail
+  getInfoUserByEmail,
+  getInfoUserByEmail2
+
 };

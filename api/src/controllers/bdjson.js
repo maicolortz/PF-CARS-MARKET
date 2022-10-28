@@ -1011,7 +1011,7 @@ const user = [
     password: "kako",
     firstName: "maicol ortiz",
     lastName: "Hernandez",
-    mail: "maicolortiz2882@gmail.com",
+    mail: "maicolortiz28971@gmail.com",
     whatsApp: "54932356456",
     address: "Florencia, Caqueta-colombia",
     premium:true

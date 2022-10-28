@@ -103,6 +103,7 @@ function CardDetail() {
   return (
     <div>
       <NavBar />
+
       {console.log(user)}
       <div class="pt-10">
         {carsDetail && (
