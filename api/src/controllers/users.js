@@ -84,7 +84,7 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const found = await User.findByPk(req.params.id, { include: Car });
+  const found = await User.findByPk(req.params.id, { include: [Car, Consult, {model:Favourite, include:[Car]}] });
   console.log(found);
   if (!found) {
     return res.status(404).send("Error: user not found");
@@ -116,6 +116,23 @@ const getInfoUserByEmail2 = async (req,res)=>{
   }
 }
 
+const updateUser = async (req, res) => {
+  const {id}= req.params;
+  const found = await User.findByPk(id)
+  try{
+    for (const property in req.body) {
+              if (property !== undefined) {
+                  found[property] = req.body[property];
+              };
+            };
+    await found.save();
+    res.send("Actualizado");
+  }
+  catch (error) {
+    return error;
+      };
+  };
+
 
 module.exports = {
   getAllUsers,
@@ -125,6 +142,7 @@ module.exports = {
   premiumUser,
   getEmails,
   getInfoUserByEmail,
-  getInfoUserByEmail2
+  getInfoUserByEmail2,
+  updateUser
 
 };
