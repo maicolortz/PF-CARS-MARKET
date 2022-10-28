@@ -3,7 +3,7 @@ import { React, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCardDetail } from "../../Redux/Actions";
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './CardDetail.css';
 import img from '../Card/imagenes/Imagen_Default.png';
@@ -17,7 +17,9 @@ const estilos = {
   button_regresar_inicio: "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black rounded-full text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800 font-semibold text-lg leading-4  w-auto py-4 px-4 lg:mt-12 mt-6"
 }
 function CardDetail() {
+
   const dispatch = useDispatch();
+  const history = useNavigate();
   let { id } = useParams();
 
   const { loading } = useSelector((state) => state);
@@ -53,7 +55,8 @@ function CardDetail() {
 
   useEffect(() => {
     dispatch(getCardDetail(id));
-  }, [dispatch, id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
 
   const { loginWithRedirect, isAuthenticated } = useAuth0();
@@ -100,7 +103,6 @@ function CardDetail() {
   return (
     <div>
       <NavBar />
-  {console.log(user )}
       <div class="pt-10">
         {carsDetail && (
           <div className="2xl:container 2xl:mx-auto lg:py-8 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
@@ -164,8 +166,12 @@ function CardDetail() {
                 <p className=" font-semibold lg:text-3xl text-xl  border-b-2 pb-6 border-gray-200 lg:leading-6 leading-5 mt-6 ">
                   Precio: {price}$
                 </p>
-                <button title="Sabemos que lo quieres comprar"
-                  className={estilos.button_contactar_vendedor}>¿ Contactar al vendedor ?</button>
+                {isAuthenticated &&
+                  <button title="Sabemos que lo quieres comprar"
+                    className={estilos.button_contactar_vendedor}
+                    onClick={() => history("/Contact")}
+                  >Contacta al vendedor</button>
+                }
               </div>
             </div>
           </div>

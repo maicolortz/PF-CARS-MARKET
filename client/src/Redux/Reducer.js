@@ -5,6 +5,7 @@ const initialState = {
     allUsers:[],
     carDetail: [],
     DataUser: [],
+    D_user:[],
     loading: false,
     transactions:[],
     payment_link:[],
@@ -84,7 +85,7 @@ const initialState = {
             case "INFO_USER_EMAIL":
             return{
               ...state,
-              DataUser: action.payload,
+              D_user: action.payload,
             }
       default:
         return state;

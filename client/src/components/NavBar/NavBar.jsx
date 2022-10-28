@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import imgDefault from "../Card/imagenes/usuario.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers,infoUser } from "../../Redux/Actions";
+import { getUsers,infoUseremail } from "../../Redux/Actions";
 import Premium from "../Premium/Premium";
 import axios from "axios";
 
@@ -31,10 +31,8 @@ export default function NavBar() {
   const history = useNavigate();
 
   const enviarDashboard = async() => {
+    dispatch(infoUseremail(user.email))
     history("/dashboard");
-    const datos= await axios.get("")
-
-    dispatch(infoUser(user.email))
   };
 
   useEffect(() => {
