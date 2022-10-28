@@ -43,11 +43,11 @@ Transaction.belongsTo(User);
 Consult.belongsToMany(Car, { through: 'consult_car' });
 Car.belongsToMany(Consult, { through: 'consult_car' });
 
-Consult.hasOne(User);
-User.belongsTo(Consult);
+Consult.belongsToMany(User, { through: 'consult_user' });
+User.belongsToMany(Consult, { through: 'consult_user' });
 
 User.hasMany(TransactionsMercadoPago);
-TransactionsMercadoPago.belongsTo(User)
+TransactionsMercadoPago.belongsTo(User);
 
 
 /* Favority.belongsToMany(Car, { through: 'favority_car' });
