@@ -185,3 +185,23 @@ export function sendEmailSeller(data) {
   };
 
 }
+
+export function postConsults(data) {
+  return async function(dispatch){
+    try {
+      const consultCreado = await axios.post("/consults", data)
+      return dispatch({type: "POST_CONSULTS", payload: consultCreado.data})
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+export function getConsults() {
+  return async function (dispatch) {
+    let json = await axios.get("/consults");
+    return dispatch({
+      type: "GET_CONSULTS",
+      payload: json.data,
+    });
+  };
+}
