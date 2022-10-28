@@ -116,6 +116,24 @@ const getInfoUserByEmail2 = async (req,res)=>{
   }
 }
 
+const updateUser = async (req, res) => {
+  const {id}= req.params;
+  const found = await User.findByPk(id)
+  try{
+    for (const property in req.body) {
+              if (property !== undefined) {
+                  found[property] = req.body[property];
+              };
+            };
+    await found.save();
+    res.send("Actualizado");
+  }
+  catch (error) {
+    return error;
+      };
+  };
+
+
 
 module.exports = {
   getAllUsers,
@@ -125,6 +143,7 @@ module.exports = {
   premiumUser,
   getEmails,
   getInfoUserByEmail,
-  getInfoUserByEmail2
+  getInfoUserByEmail2,
+  updateUser
 
 };
