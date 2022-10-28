@@ -6,7 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { sendEmailSeller } from '../../Redux/Actions.js';
 import Loading from '../Loading/Loading.jsx';
 import Swal from 'sweetalert2'
-
+import {useLocalStorage} from './useLocalStorage'
 
 const estilos = {
     input: "border-4 border-gray-300 pl-3 py-3  shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
@@ -43,7 +43,7 @@ function ConctactForm() {
     }, [])
 
     //ESTADO LOCAL DE LOS DATOS A ENVIAR EN EL CORREO
-    const [state, setState] = useState({
+    const [state, setState] = useLocalStorage('form',{
         firstName: "",
         lastName: "",
         emailbuyer: "",
@@ -51,6 +51,7 @@ function ConctactForm() {
         emailSeller: "",
         phone: ""
     })
+    // console.log(state)
 
     //MANEJO DE EVENTOS
     const handleChange = (e) => {
@@ -141,14 +142,14 @@ function ConctactForm() {
                             <div className={estilos.contenedor_input_y_titulo}>
                                 <div className='flex flex-col'>
                                     <label for="firstName" class={estilos.titulos}>Nombre:</label>
-                                    <input type="text" id="firstName" name="firstName" onChange={(e) => handleChange(e)} class={estilos.input} placeholder="Ingresa tu nombre ..." />
+                                    <input type="text" id="firstName" name="firstName" onChange={(e) => handleChange(e)} class={estilos.input} placeholder="Ingresa tu nombre ..." value={state.firstName}/>
                                 </div>
                                 {errors.firstName && (<p class="text-red-500 text-lg mt-2">{errors.firstName}</p>)}
                             </div>
                             <div className={estilos.contenedor_input_y_titulo}>
                                 <div className='flex flex-col'>
                                     <label for="lastName" class={estilos.titulos}>Apellido:</label>
-                                    <input type="text" id="lastName" name="lastName" class={estilos.input} onChange={(e) => handleChange(e)} placeholder="Ingresa tu apellido ..." />
+                                    <input type="text" id="lastName" name="lastName" class={estilos.input} onChange={(e) => handleChange(e)} placeholder="Ingresa tu apellido ..."  value={state.lastName} />
                                 </div>
                                 {errors.lastName && (<p class="text-red-500 text-lg mt-2">{errors.lastName}</p>)}
                             </div>
@@ -161,7 +162,7 @@ function ConctactForm() {
                             <div className={estilos.contenedor_input_y_titulo}>
                                 <div className='flex flex-col'>
                                     <label for="phone" class={estilos.titulos}>Telefono:</label>
-                                    <input type="text" id="phone" name="phone" class={estilos.input} onChange={(e) => handleChange(e)} placeholder="Ingresa tu numero de teléfono ..." />
+                                    <input type="text" id="phone" name="phone" class={estilos.input} onChange={(e) => handleChange(e)} placeholder="Ingresa tu numero de teléfono ..."  value={state.phone}/>
                                 </div>
                                 {errors.phone && (<p class="text-red-500 text-lg mt-2">{errors.phone}</p>)}
                             </div>
@@ -170,7 +171,7 @@ function ConctactForm() {
                             <label htmlFor="message" className={estilos.titulos}>
                                 Mensaje al vendedor:
                             </label>
-                            <textarea id="message" name="message" onChange={(e) => handleChange(e)} className="bg-transparent border-4 border-gray-300 pl-3 py-3 rounded focus:outline-none focus:border-blue-500 placeholder-gray-500 text-lg text-gray-700" placeholder="Escribe tu(s) pregunata(s) ..." rows={5} defaultValue={""} />
+                            <textarea id="message" name="message" onChange={(e) => handleChange(e)} className="bg-transparent border-4 border-gray-300 pl-3 py-3 rounded focus:outline-none focus:border-blue-500 placeholder-gray-500 text-lg text-gray-700" placeholder="Escribe tu(s) pregunata(s) ..." rows={5} defaultValue={""}  value={state.message} />
                             <p className="w-full text-right text-xs pt-1 text-black ">Limite de caracteres: 200</p>
                             {errors.message && (<p class="text-red-500 text-lg ">{errors.message}</p>)}
                             <div className="container flex justify-center gap-5 mb-20">
