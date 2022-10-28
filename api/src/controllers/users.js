@@ -116,6 +116,7 @@ const getInfoUserByEmail2 = async (req,res)=>{
   }
 }
 
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -125,4 +126,5 @@ module.exports = {
   getEmails,
   getInfoUserByEmail,
   getInfoUserByEmail2
+
 };

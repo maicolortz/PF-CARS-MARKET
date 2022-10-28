@@ -50,7 +50,8 @@ export function getUsers() {
 }
 export function getUser(id) {
   return async function (dispatch) {
-    dispatch({ type: "LOADING" });
+
+    dispatch({ type: "LOADING" })
     const { data } = await axios.get(`/users/${id}`);
     return dispatch({
       type: "GET_USER",
@@ -71,8 +72,9 @@ export function getCardDetail(id) {
 export function postCar(data) {
   return async function (dispatch) {
     try {
-      const carCreado = await axios.post("/cars", data);
-      return dispatch({ type: "POST_CAR", payload: carCreado.data });
+
+      const carCreado = await axios.post("/cars", data)
+      return dispatch({ type: "POST_CAR", payload: carCreado.data })
     } catch (error) {
       console.log(error);
     }
@@ -163,6 +165,7 @@ export function infoUseremail(email) {
   };
 }
 
+
 export function infoUser(data) {
   return {
     type: "INFO_USER",
@@ -180,4 +183,5 @@ export function sendEmailSeller(data) {
       console.log(error);
     }
   };
+
 }
