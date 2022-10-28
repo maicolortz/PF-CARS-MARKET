@@ -80,7 +80,7 @@ export function postCar(data) {
     }
   };
 }
-export function updateCar(data,id) {
+export function updateCar(id,data) {
   return async function (dispatch) {
     try {
       const carCreado = await axios.put("/cars/"+id, data);

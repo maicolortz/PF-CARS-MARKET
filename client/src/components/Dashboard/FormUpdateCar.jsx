@@ -63,6 +63,8 @@ function FormUpdateCar({ car }) {
     descriptionLong: car.descriptionLong,
     descriptionShort: car.descriptionShort,
     image: car.image,
+    userId:car.userId,
+    id:car.id
   });
 
   //LISTA DESPLEGABLE
@@ -102,9 +104,26 @@ function FormUpdateCar({ car }) {
   //MANEJO AL ENVIAR EL FORMULARIO
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(car.id)
     try {
-      dispatch(updateCar(car.id, state));
+      dispatch(updateCar(state.id, {
+        name:state.name,
+    brand:state.brand,
+    model: state.model,
+    color: state.color,
+    year: state.year,
+    oil: state.oil,
+    gate: state.gate,
+    kilometres: state.kilometres,
+    location: state.location,
+    price: state.price,
+    condition: state.condition,
+    trasmition: state.transmition,
+    descriptionLong: state.descriptionLong,
+    descriptionShort: state.descriptionShort,
+    image: state.image,
+    userId:car.userId
+      }));
       if (
         state.name &&
         state.brand &&
@@ -129,9 +148,7 @@ function FormUpdateCar({ car }) {
           text: "No se han completado los campos requeridos.",
           icon: "error",
           confirmButtonColor: "#1d4ed8",
-        }).then(function () {
-          dispatch(getCars());
-        });
+        })
       }
     } catch (err) {
       console.error(err);
