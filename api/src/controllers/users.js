@@ -1,4 +1,4 @@
-const { Car, User } = require("../db");
+const { Car, User, Consult } = require("../db");
 const axios = require("axios");
 //const user = require("./userJson");
 const { Sequelize } = require("sequelize");
@@ -84,7 +84,7 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const found = await User.findByPk(req.params.id, { include: Car });
+  const found = await User.findByPk(req.params.id, { include: [Car, Consult] });
   console.log(found);
   if (!found) {
     return res.status(404).send("Error: user not found");
@@ -104,6 +104,36 @@ const getInfoUserByEmail = async (req,res)=>{
     res.status(400).json(error)
   }
 }
+const getInfoUserByEmail2 = async (req,res)=>{
+  const{email} = req.params;
+
+  try {
+    const algo = await User.findOne({where:{mail:email}})
+    const otro = await User.findByPk(algo.id, { include: Car });
+    res.json(otro)
+  } catch (error) {
+    res.status(400).json(error)
+  }
+}
+
+const updateUser = async (req, res) => {
+  const {id}= req.params;
+  const found = await User.findByPk(id)
+  try{
+    for (const property in req.body) {
+              if (property !== undefined) {
+                  found[property] = req.body[property];
+              };
+            };
+    await found.save();
+    res.send("Actualizado");
+  }
+  catch (error) {
+    return error;
+      };
+  };
+
+
 
 module.exports = {
   getAllUsers,
@@ -112,5 +142,8 @@ module.exports = {
   updateCar,
   premiumUser,
   getEmails,
-  getInfoUserByEmail
+  getInfoUserByEmail,
+  getInfoUserByEmail2,
+  updateUser
+
 };

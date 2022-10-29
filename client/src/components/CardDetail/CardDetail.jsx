@@ -2,7 +2,7 @@
 import { React, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCardDetail } from "../../Redux/Actions";
+import { getCardDetail, postConsults, getConsults } from "../../Redux/Actions";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './CardDetail.css';
@@ -23,6 +23,32 @@ function CardDetail() {
   const history = useNavigate();
   let { id } = useParams();
 
+  const [state, setState] = useState({
+    userId: "",
+    description: "",
+    carId: ""
+  });
+
+  const { user } = useAuth0();
+
+  const users = useSelector((state) => state.allUsers)
+  const consults = useSelector((state) => state.consult)
+ 
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value, });
+  }
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postConsults(state))
+    setState({
+      userId: "",
+      description: "",
+      carId: "",
+    })
+  }
+
+
   const { loading } = useSelector((state) => state);
   const carsDetail = useSelector((state) => state.carDetail);
   const {
@@ -40,7 +66,7 @@ function CardDetail() {
     condition,
     transmition,
     userId,
-    user,
+    //user,
   } = carsDetail;
   const details = [
     { name: "Marca: ", detalle: brand },
@@ -59,6 +85,24 @@ function CardDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+useEffect(() => {
+    dispatch(getConsults())
+  }, [dispatch, id, user]);
+
+  useEffect(() => {
+    if (user) {
+      const buscadoAuth = user.email
+      users.find(el => {
+        if (el.mail === buscadoAuth) {
+          setState({
+            userId: el.id,
+            description: "",
+            carId: id
+          })
+        }
+      })
+    }
+  }, [user, id]);
 
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 
@@ -198,6 +242,27 @@ function CardDetail() {
             </div>
           </div>
         )}
+      </div>
+      <div>
+        <form onSubmit={(e) => handleOnSubmit(e)}>
+        <div>
+            {consults.map(el => {
+              if (el.cars[0].id === id) {
+                return <div>
+                  <div>
+                    {el.users[0].firstName} {el.users[0].lastName}
+                    </div>
+                  <div>
+                    {el.description}
+                  </div>
+                </div>
+              }
+            })}
+          </div>
+          <label>Consulta al vendedor</label>
+          <textarea type="text" name='description' value={state.description} onChange={handleChange} />
+          <button type='submit'>Consultar</button>
+        </form>
       </div>
     </div>
   );

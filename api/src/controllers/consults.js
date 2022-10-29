@@ -63,7 +63,7 @@ const {Op} = require('sequelize')
 
   consultNew.setCars(await Car.findByPk(carId))
 
-  consultNew.setUser(await User.findByPk(userId))
+  consultNew.setUsers(await User.findByPk(userId))
 
   res.json(consultNew);
   }

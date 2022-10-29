@@ -5,9 +5,11 @@ const initialState = {
     allUsers:[],
     carDetail: [],
     DataUser: [],
+    D_user:[],
     loading: false,
     transactions:[],
     payment_link:[],
+    consult: [],
   };
   export default function rootReducer(state = initialState, action) {
     switch (action.type) {
@@ -81,6 +83,24 @@ const initialState = {
               ...state,
               DataUser: action.payload,
             }
+            case "INFO_USER_EMAIL":
+            return{
+              ...state,
+              D_user: action.payload,
+            }
+            case "POST_CAR":
+              return{
+                ...state,
+              }
+            case "GET_CONSULTS":
+              return{
+                ...state,
+                consult: action.payload,
+              }
+              case "POST_CONSULTS":
+                return{
+                  ...state,
+                }
       default:
         return state;
     }
