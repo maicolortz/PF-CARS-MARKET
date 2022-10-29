@@ -91,6 +91,16 @@ export function updateCar(id,data) {
     }
   };
 }
+export function updateUser(id,data) {
+  return async function (dispatch) {
+    try {
+      const userCreado = await axios.put("/users/"+id, data);
+      return dispatch({ type: "UPDATE_USER", payload: userCreado.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 export function postTransaction(user) {
   return async function () {
     const d = await axios.post("/transactions", user);
