@@ -29,6 +29,6 @@ router.get("/range",getRangeModel)
 router.get("/:id",getAutoById)
 router.delete("/:id", phisicaldeletionCar);
 router.put("/:id", updateCar);
-router.put("/:id",updateActive)
+router.put("/:id/active/",updateActive)
 
 module.exports = router;

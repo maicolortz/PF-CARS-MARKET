@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers,infoUseremail } from "../../Redux/Actions";
 import Premium from "../Premium/Premium";
-import axios from "axios";
 
 const estilos = {
   button_inicio:

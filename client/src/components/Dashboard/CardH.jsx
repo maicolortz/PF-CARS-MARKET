@@ -1,42 +1,43 @@
-import React, { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import {  useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import Dashboard from "./Dashboard";
+import {useDispatch} from "react-redux"
+import { infoUseremail, updateActiveCar } from "../../Redux/Actions";
 
-function CardH({ image, estilos, id, descriptionShort, editar, name, car }) {
-  const [edit, setEdit] = useState(false);
+function CardH({ image, estilos, id, descriptionShort, editar, name, car,email }) {
+  const dispatch=useDispatch();
+
   const navigate = useNavigate();
-  const [esconder, setEsconder] = useState("flex");
-  const eliminar = (e) => {
+  
+  const pausar = (e) => {
     e.preventDefault();
+
     Swal.fire({
-      title: "Desea pausar Esta Publicacion?",
+      title: ` 😃 \n ¿ Desea  ${car.active?"pausar":"activar"} la publicacion ?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "pausar",
+      confirmButtonText: `${car.active?"pausar":"activar"}`,
       showConfirmButton: true,
       timer: 20000,
     }).then((resultado) => {
       if (resultado.value) {
-        
-        setEsconder("none");
+        dispatch(infoUseremail(email))
+        dispatch(updateActiveCar(car.id, car.active?false:true))
+        dispatch(infoUseremail(email))
         Swal.fire({
-          title: "Se Pauso La Publicacion",
-          text:" Encuentrala en Publicaciones Pausadas"
-      });
-      } else {
-        // Swal.fire("*NO se elimina la venta*");
+          title: `Se ${car.active?"Pauso":"Activo"} La Publicacion`,
+          text: `Encuentralo en Publicaciones ${car.active?"Pausadas ":""}`,
+        });
       }
     });
   };
   const EditarCarro = (e) => {
     e.preventDefault();
-    editar("updatecar", car);
+    editar("updatecar", car,car.active);
   };
   return (
     <div
-      style={{ display: esconder }}
-      class=" flex flex-row  max-w-4xl  justify-start text-black bg-gradient-to-r from-stone-200  to-stone-300 m-3 rounded-b-lg "
+      class={car.active?estilos.activo:estilos.noactivo}
     >
       <div class=" rounded-lg shadow-lg bg-white max-w-sm ">
         <img class="rounded-b-lg max-h-48" src={image} alt="" />
@@ -56,8 +57,8 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car }) {
           Editar
         </button>
 
-        <button onClick={(e) => eliminar(e)} className={estilos.buttonred}>
-          Pausar
+        <button onClick={(e) => pausar(e)} className={estilos.buttonred}>
+          {car.active?"pausar":"activar"}
         </button>
       </div>
     </div>
