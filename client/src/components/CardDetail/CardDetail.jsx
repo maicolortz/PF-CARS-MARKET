@@ -1,4 +1,3 @@
-
 import { React, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +22,7 @@ function CardDetail() {
   const history = useNavigate();
   let { id } = useParams();
 
+  const [render, setRender] = useState("")
   const [state, setState] = useState({
     userId: "",
     description: "",
@@ -39,15 +39,22 @@ function CardDetail() {
   }
 
   const handleOnSubmit = (e) => {
-    e.preventDefault();
+   // e.preventDefault();
     dispatch(postConsults(state))
-    setState({
-      userId: "",
-      description: "",
-      carId: "",
-    })
+    if (user) {
+      const buscadoAuth = user.email
+      users.find(el => {
+        if (el.mail === buscadoAuth) {
+          setState({
+            userId: el.id,
+            description: "",
+            carId: id
+          })
+        }
+      })
+    }
   }
-
+    
 
   const { loading } = useSelector((state) => state);
   const carsDetail = useSelector((state) => state.carDetail);
@@ -148,7 +155,7 @@ useEffect(() => {
   return (
     <div>
       <NavBar />
-      {console.log(user)}
+      {/* {console.log(user)} */}
       <div class="pt-16">
         {carsDetail && (
           <div className="2xl:container 2xl:mx-auto lg:py-8 lg:px-20 md:py-12 md:px-6 py-9 px-4  ">
