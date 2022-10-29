@@ -222,7 +222,8 @@ const updateActive = async (req,res)=>{
 
     res.json('actualizado')
   } catch (error) {
-    res.send('jose da mala suerte')
+
+    res.status(400).json(error)
   }
 }
 
