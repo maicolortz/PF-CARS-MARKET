@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { postCar, getCars, getUsers } from "../../Redux/Actions";
 import { Link, useNavigate } from 'react-router-dom';
 import './FormCar.css';
-import img from '../Card/imagenes/Imagen_Default.png';
+import imagen from '../Card/imagenes/Imagen_Default.png';
 import Swal from 'sweetalert2';
 import NavBar from '../NavBar/NavBar';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-// import { Image } from 'cloudinary-react';
+
 
 
 //ESTILOS TAILWIND
@@ -64,7 +64,7 @@ function FormCar() {
     const [show2, setShow2] = useState(false);
     const [show3, setShow3] = useState(false);
     const [show4, setShow4] = useState(false);
-    const [imageSelected, setImageSelected] = useState("")
+    const [img, setImg] = useState("");
 
     //MANEJO DE EVENTOS
     const handleChange = (e) => {
@@ -89,23 +89,11 @@ function FormCar() {
         setShow4(false);
         setState({ ...state, condition: e.target.value });
     }
-    const handleImage = (e) => {
-        setImageSelected({ ...state, [e.target.name]: e.target.files[0] })
-    }
-
+    
 
     //MANEJO AL ENVIAR EL FORMULARIO
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        const formData = new FormData()
-        formData.append('file', imageSelected.image)
-        formData.append('upload_preset', "iduftmjv")
-        try {
-            const response = await axios.post("https://api.cloudinary.com/v1_1/da1vbkmdr/image/upload", formData)
-            state.image = response.data.secure_url
-            setState(response.data)
-            // console.log(response)
 
             if (state.name && state.brand && state.model && state.year && state.kilometres && state.descriptionShort && state.price && state.descriptionLong) {
                 Swal.fire({
@@ -133,7 +121,6 @@ function FormCar() {
                     descriptionShort: "",
                     image: "",
                 });
-                // console.log(state.image)
                 history('/home');
             } else {
 
@@ -146,10 +133,19 @@ function FormCar() {
                     dispatch(getCars());
                 });
             }
-        } catch (err) {
-            console.log(err)
-        }
+         }
+
+    async function uploadImage(file) {
+        const formData = new FormData();
+        formData.append("file", file[0]);
+        formData.append("upload_preset", "iduftmjv");
+        const imgUrl = await axios
+            .post("https://api.cloudinary.com/v1_1/da1vbkmdr/image/upload", formData)
+            .then((response) => response.data.secure_url);
+        setImg(imgUrl);
+        state.image = imgUrl
     }
+
     //MANEJO DE VALIDACIONES
     const [errors, setErrors] = useState({});
 
@@ -360,16 +356,14 @@ function FormCar() {
                                 <div className="container mx-auto">
                                     <div className='flex justify-center'>
                                         <div className='border-blue-900 border-4 rounded-2xl w-2/4 flex justify-center'>
-                                            <img src={state.image ? state.image : img} alt="img not found" className='w-auto rounded-2xl' />
-                                            {/* <Image cloudName='da1vbkmdr' publicId={`https://res.cloudinary.com/da1vbkmdr/image/upload/v1666266332/${state.public_id}`}/> */}
+                                            <img src={state.image ? state.image : imagen} alt="img not found" className='w-auto rounded-2xl' />
                                         </div>
                                     </div>
                                     <div className={estilos.contenedor_input_y_titulo}>
                                         <label htmlFor="image" className={estilos.titulos}>
                                             Imagen:
                                         </label>
-                                        <input type="file" id="image" name="image" className={estilos.input} onChange={(e) => handleImage(e)} placeholder="Dirección URL de la imagen..." />
-                                        {/* <button onClick={uploadImage}>upload</button> */}
+                                        <input type="file" id="image" name="image" className={estilos.input} onChange={(e) => uploadImage(e.target.files)} placeholder="Dirección URL de la imagen..." />
                                     </div>
 
                                     <label className={estilos.titulos}>
