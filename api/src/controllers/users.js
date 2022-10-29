@@ -66,7 +66,7 @@ const getEmails = async (req, res) => {
 
 const createUser = async (req, res) => {
   //    try {
-  const { password, firstName, lastName, mail, whatsApp, address } = req.body;
+  const { password, firstName, lastName, mail, whatsApp, address, imgPerfil } = req.body;
 
   const usernew = await User.create({
     password,
@@ -75,6 +75,7 @@ const createUser = async (req, res) => {
     mail,
     whatsApp,
     address,
+    imgPerfil
   });
   res.json(usernew);
   //      res.send("user created");
@@ -85,7 +86,7 @@ const createUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const found = await User.findByPk(req.params.id, { include: [Car, Consult] });
-  console.log(found);
+  
   if (!found) {
     return res.status(404).send("Error: user not found");
   }

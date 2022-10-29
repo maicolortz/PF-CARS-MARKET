@@ -39,6 +39,7 @@ function FormRegister() {
         mail: "",
         whatsApp: "",
         address: "",
+        imgPerfil: ""
     });
 
     //VALIDACIONES
@@ -140,6 +141,7 @@ function FormRegister() {
                 mail: "",
                 whatsApp: "",
                 address: "",
+                imgPerfil: ""
             });
             getUsers();
             history('/home');

@@ -72,6 +72,17 @@ export default function Home() {
     setCurrentPage(1);
   }, [cars]);
 
+  if ((cars[0] === "none" || cars[0] === "n") && !loading) {
+    Swal.fire({
+      title: 'Lo sentimos!',
+      text: 'No se han encontrado vehiculos con esas especificaciones',
+      icon: 'warning',
+      confirmButtonColor: "#1d4ed8"
+    }).then(function () {
+      dispatch(getCars());
+    });
+  }
+
   if (loading) {
     return <Loading />;
   }
@@ -88,21 +99,20 @@ export default function Home() {
           </div>
           <div className="contenedor-Home3">
             <div class="grid grid-cols-3 gap-0">
-              {cars[0] === "none" || cars[0] === "n" ?
-                <strong><h1 className="text-6xl">No se ha encontrado el carro deseado</h1></strong> : currentCarsPerPage?.map((el) => {
-                  return (
-                    <Card
-                      id={el.id}
-                      image={el.image}
-                      descriptionShort={el.descriptionShort}
-                      price={el.price}
-                      kilometres={el.kilometres}
-                      transmition={el.transmition}
-                      year={el.year}
-                      prem={el.premium}
-                    />
-                  );
-                })}
+              {currentCarsPerPage?.map((el) => {
+                return (
+                  <Card
+                    id={el.id}
+                    image={el.image}
+                    descriptionShort={el.descriptionShort}
+                    price={el.price}
+                    kilometres={el.kilometres}
+                    transmition={el.transmition}
+                    year={el.year}
+                    prem={el.premium}
+                  />
+                );
+              })}
             </div>
             <div class="mx-6 my-6">
               {cars.length > 0 && cars[0] !== "none" ?
