@@ -10,7 +10,8 @@
     border-width: 2px;
     min-width: 100%;
     position: fixed;
-    background-color: rgb(17, 44, 117)
+    background-color: rgb(17, 44, 117);
+    z-index: 10;
 }
 
 .btn-NavBar {
