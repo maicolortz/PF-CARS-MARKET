@@ -8,18 +8,24 @@ import { infoUser, infoUseremail } from "../../Redux/Actions";
 import { useEffect } from "react";
 import FormUpdateCar from "./FormUpdateCar";
 import Swal from "sweetalert2";
+import { Navigate, useNavigate } from "react-router-dom";
+import BienvenidoPanel from "./BienvenidoPanel";
 
 export const Dashboard = ({ user }) => {
+  const navigate =useNavigate()
   useEffect(() => {}, []);
   const estilos = {
     buttonlight:
       "text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 py-3 my-3",
       buttonred:
       "text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 py-3 my-3",
-    li: "p-3 text-white shadow-xl w-max  hover:text-red-800  font-semibold ease-in duration-300 text-center rounded-3xl cursor-pointer",
-    li2: "p-3 text-gray-100 shadow-xl hover:text-red-800  font-semibold ease-in duration-300 text-center rounded-3xl cursor-pointer",
+      mensaje:" text-3xl tex-center p-3 text-white  shadow-blue-500 shadow-md w-max    font-semibold ease-in duration-300 text-center rounded-3xl ",
+      titulo:" text-8xl tex-center p-3 text-white w-max    font-semibold ease-in duration-300 text-center rounded-3xl ",
+      li: "p-3 text-white  shadow-blue-500 shadow-md w-max  hover:text-blue-800  font-semibold ease-in duration-300 text-center rounded-3xl cursor-pointer",
+    li2: "p-3 text-red-100 shadow-md hover:text-red-800  font-semibold ease-in duration-300 text-center rounded-3xl cursor-pointer",
+    li3:"  p-3 text-white shadow-yellow-800 shadow-md w-max  hover:text-yellow-800  font-semibold ease-in duration-300 text-center rounded-3xl cursor-pointer",
     lisesion:
-      " p-3 text-gray-500 shadow-blue-500/500 shadow-xl w-max  hover:text-red-800  font-semibold ease-in duration-300 text-center rounded-3xl cursor-pointer",
+      " p-3 my-5 text-blue-500 shadow-blue-800 shadow-md w-max  hover:text-blue-800  font-semibold ease-in duration-300 text-center rounded-3xl cursor-pointer",
     label: "",
     input: "p-2 rounded ",
     contenedorInput: "flex flex-col border-4 w-96",
@@ -38,6 +44,8 @@ export const Dashboard = ({ user }) => {
   };
   const opcion = (e) => {
     switch (e) {
+      case "":
+        return <BienvenidoPanel estilos={estilos}></BienvenidoPanel>
       case "FormUpdate":
         return <FormUpdateUser user={user} estilos={estilos}></FormUpdateUser>;
 
@@ -81,19 +89,8 @@ export const Dashboard = ({ user }) => {
     }
   };
   const cerrarSesion=(e)=>{
-    Swal.fire({
-      title: " ¿ Desea Cerrar Sesion ?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText:"si",
-      showConfirmButton: true,
-      timer: 20000
-    }).then(resultado => {
-      /* if (resultado.value) {
-      } else {
-         // Swal.fire("*NO se elimina la venta*");
-      } */
-    })
+    
+   navigate("/home")
   }
   return (
     <div class=" flex bg-gradient-to-r from-sky-500   to-sky-800 ">
@@ -113,11 +110,12 @@ export const Dashboard = ({ user }) => {
               Mis Publicaciones{" "}
             </li>
             <li onClick={() => setCaso("favoritos")} className={estilos.li}>Favoritos</li>
+            <li onClick={() => setCaso("favoritos")} className={estilos.li3}>Publicaciones <br/> Pausadas</li>
             <li
               onClick={(e) => cerrarSesion(e)}
               className={estilos.lisesion}
             >
-              Cerrar Sesion
+              Volver a Home
             </li>
           </ul>
         </div>

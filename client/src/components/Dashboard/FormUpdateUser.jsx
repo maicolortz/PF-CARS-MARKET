@@ -1,8 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../Redux/Actions";
 
 function FormUpdateUser({ estilos, user }) {
   const [activo, setActivo] = useState(true);
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
     name: user.firstName,
     email: user.mail,
@@ -12,6 +15,17 @@ function FormUpdateUser({ estilos, user }) {
   });
   function handleSubmit(e) {
     e.preventDefault();
+    setActivo(!activo);
+    dispatch(
+      updateUser(user.id, {
+        firstName: values.name,
+        lastName: values.apellido,
+        mail: values.email,
+        whatsApp: values.telefono,
+        address: values.direccion,
+      })
+    );
+    console.log(values);
   }
   function handleChange(e) {
     const { target } = e;
@@ -69,7 +83,6 @@ function FormUpdateUser({ estilos, user }) {
           <div className={estilos.contenedorInput}>
             <label className={estilos.labela}> Email</label>
             <input
-
               value={user.mail}
               disabled={activo}
               className={estilos.input}
@@ -98,7 +111,7 @@ function FormUpdateUser({ estilos, user }) {
               </button>
             ) : (
               <button
-                onClick={() => setActivo(!activo)}
+                onClick={(e) => handleSubmit(e)}
                 className={estilos.buttonlight}
               >
                 {" "}
