@@ -965,20 +965,20 @@ const car = [
 const user = [
   {
     password: "An1frr3rt55y2uut",
-    firstName: "Juan Pablo",
-    lastName: "Perez",
-    mail: "juanpablop02@gmail.com",
+    firstName: "franco ",
+    lastName: " navarro",
+    mail: "Navarrofranco246@gmail.com",
     whatsApp: "5493876455689",
-    address: "Neuquen, Cipolletti, San Martin 32",
+    address: "argentina, Cipolletti, San Martin 32",
   },
 
   {
     password: "Bglkdklm2uut",
-    firstName: "Franco Etcheverri",
-    lastName: "Etcheverri",
-    mail: "frankeche@gmail.com",
+    firstName: "jose ",
+    lastName: "lezema",
+    mail: "Stx_jose@hotmail.com",
     whatsApp: "54938123545689",
-    address: "Buenos Aires, CABA, Avda de Mayo 532",
+    address: "venezuela, CABA, Avda de Mayo 532",
   },
   {
     password: "njbndcbdb",

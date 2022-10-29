@@ -211,16 +211,14 @@ catch (error) {
 };
 
 const updateActive = async (req,res)=>{
+
   const{active}=req.query
   const{id}=req.params
   try {
     const modificacion = await Car.findByPk(id)
-
-    modificacion.active= active
-
+    modificacion.update({ active: active})
     await modificacion.save()
-
-    res.json('actualizado')
+    res.json(modificacion)
   } catch (error) {
 
     res.status(400).json(error)
