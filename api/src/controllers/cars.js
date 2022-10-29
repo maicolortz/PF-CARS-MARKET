@@ -210,7 +210,21 @@ catch (error) {
     };
 };
 
+const updateActive = async (req,res)=>{
+  const{active}=req.query
+  const{id}=req.params
+  try {
+    const modificacion = await Car.findByPk(id)
 
+    modificacion.active= active
+
+    await modificacion.save()
+
+    res.json('actualizado')
+  } catch (error) {
+    res.send('jose da mala suerte')
+  }
+}
 
 module.exports = {
   //updateCar,
@@ -223,6 +237,7 @@ module.exports = {
   sortprice,
   getRangeModel,
   updateCar,
-  phisicaldeletionCar
+  phisicaldeletionCar,
+  updateActive
   // logicaldeletionCar
 };

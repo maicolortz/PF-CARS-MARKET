@@ -12,6 +12,7 @@ const {
   getRangeModel,
   updateCar,
   phisicaldeletionCar,
+  updateActive,
 //  logicaldeletionCar,
 } = require("../controllers/cars");
 //importa mercadopago
@@ -27,6 +28,7 @@ router.get("/sortprice",sortprice)
 router.get("/range",getRangeModel)
 router.get("/:id",getAutoById)
 router.delete("/:id", phisicaldeletionCar);
+router.put("/:id",updateActive)
 router.put("/:id", updateCar);
 
 module.exports = router;
