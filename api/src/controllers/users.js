@@ -1,4 +1,4 @@
-const { Car, User, Consult } = require("../db");
+const { Car, User, Consult, Review } = require("../db");
 const axios = require("axios");
 //const user = require("./userJson");
 const { Sequelize } = require("sequelize");
@@ -85,7 +85,7 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const found = await User.findByPk(req.params.id, { include: [Car, Consult] });
+  const found = await User.findByPk(req.params.id, { include: [Car, Consult,Review] });
   
   if (!found) {
     return res.status(404).send("Error: user not found");
@@ -134,6 +134,28 @@ const updateUser = async (req, res) => {
       };
   };
 
+  const createReview = async (req,res)=>{
+    const{rating,userId,description}=req.body
+    try {
+      await Review.create({rating,userId,description})
+      res.send('ratingOK')
+    } catch (error) {
+      res.send(error)
+    }
+  }
+  
+  const getRating = async (req,res)=>{
+    const{userId} = req.body;
+    try {
+      const usuario = await Review.findAll({where:{userId}})
+      const prueba = usuario.map(r=> r.rating)
+      const sumArr = prueba.reduce((previousValue, currentValue) => previousValue + currentValue)
+      const promedio = Math.ceil(sumArr/prueba.length)
+      res.json(promedio)
+    } catch (error) {
+      res.status(400).json(error)
+    }
+  }
 
 
 module.exports = {
@@ -145,6 +167,8 @@ module.exports = {
   getEmails,
   getInfoUserByEmail,
   getInfoUserByEmail2,
-  updateUser
+  updateUser,
+  getRating,
+  createReview
 
 };
