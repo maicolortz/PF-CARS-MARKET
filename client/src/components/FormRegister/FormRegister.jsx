@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, postUser } from '../../Redux/Actions';
 import Swal from "sweetalert2";
 import NavBar from '../NavBar/NavBar';
-import img from '../Card/imagenes/usuario.png';
-import Loading from '../Loading/Loading.jsx'
+import imagen from '../Card/imagenes/usuario.png';
+import Loading from '../Loading/Loading.jsx';
+import axios from 'axios';
 
 //ESTILOS TAILWIND
 const estilos = {
@@ -32,6 +33,7 @@ function FormRegister() {
     const userEmail = user && user.email;
     const buscados = usuarios && usuarios.find(u => u.mail === userEmail);
     const [switche, setSwitche] = useState(false);
+    const [img, setImg] = useState("");
 
     const [dataPerfil, setDataPerfil] = useState({
         firstName: "",
@@ -41,6 +43,17 @@ function FormRegister() {
         address: "",
         imgPerfil: ""
     });
+
+    async function uploadImage(file) {
+        const formData = new FormData();
+        formData.append("file", file[0]);
+        formData.append("upload_preset", "iduftmjv");
+        const imgUrl = await axios
+            .post("https://api.cloudinary.com/v1_1/da1vbkmdr/image/upload", formData)
+            .then((response) => response.data.secure_url);
+        setImg(imgUrl);
+        dataPerfil.imgPerfil = imgUrl
+    }
 
     //VALIDACIONES
     const [errors, setErrors] = useState({});
@@ -215,16 +228,14 @@ function FormRegister() {
                                     <div className="container mx-auto">
                                         <div className='flex justify-center mb-6'>
                                             <div className='border-blue-900 border-4 rounded-2xl w-2/4 flex justify-center'>
-                                                <img src={img} alt="img not found" className='w-auto rounded-2xl' />
-                                                {/* <Image cloudName='da1vbkmdr' publicId={`https://res.cloudinary.com/da1vbkmdr/image/upload/v1666266332/${state.public_id}`}/> */}
+                                                <img src={dataPerfil.imgPerfil ? dataPerfil.imgPerfil : imagen} alt="img not found" className='w-auto rounded-2xl' />
                                             </div>
                                         </div>
                                         <div className={estilos.contenedor_input_y_titulo}>
                                             <label htmlFor="image" className={estilos.titulos}>
                                                 Imagen de perfil:
                                             </label>
-                                            <input type="file" id="image" name="image" className={estilos.input} onChange="{(e) => handleImage(e)}" placeholder="Dirección URL de la imagen..." />
-                                            {/* <button onClick={uploadImage}>upload</button> */}
+                                            <input type="file" id="image" name="image" className={estilos.input} onChange={(e) => uploadImage(e.target.files)} placeholder="Dirección URL de la imagen..." />
                                         </div>
                                         <div className={estilos.contenedor_input_y_titulo}>
                                             <label htmlFor="address" className={estilos.titulos}>
