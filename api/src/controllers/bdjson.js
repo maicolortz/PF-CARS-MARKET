@@ -965,6 +965,7 @@ const car = [
 const user = [
   {
     password: "An1frr3rt55y2uut",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
     firstName: "Juan Pablo",
     lastName: "Perez",
     mail: "juanpablop02@gmail.com",
@@ -974,6 +975,7 @@ const user = [
 
   {
     password: "Bglkdklm2uut",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
     firstName: "Franco Etcheverri",
     lastName: "Etcheverri",
     mail: "frankeche@gmail.com",
@@ -982,6 +984,7 @@ const user = [
   },
   {
     password: "njbndcbdb",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
     firstName: "Julian ",
     lastName: "Vazquez",
     mail: "fvazquez@gmail.com",
@@ -991,6 +994,7 @@ const user = [
 
   {
     password: "hcdhiuiucsdlñ",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
     firstName: "Enzo ",
     lastName: "Francescoli",
     mail: "efran@gmail.com",
@@ -999,6 +1003,7 @@ const user = [
   },
   {
     password: "jijoiojipko",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
     firstName: "Luis Fernando ",
     lastName: "Alvarez",
     mail: "fernando_0694@hotmail.com",
@@ -1009,6 +1014,7 @@ const user = [
 
   {
     password: "kako",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
     firstName: "maicol ortiz",
     lastName: "Hernandez",
     mail: "maicolortiz28971@gmail.com",
@@ -1019,6 +1025,7 @@ const user = [
 
   {
     password: "jiaiojojhju",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
     firstName: "Roberto",
     lastName: "Gonzalez",
     mail: "robergonza@gmail.com",
