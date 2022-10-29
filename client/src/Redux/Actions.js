@@ -61,6 +61,7 @@ export function getUser(id) {
 }
 export function getCardDetail(id) {
   return async function (dispatch) {
+    dispatch({ type: "LOADING" })
     const { data } = await axios.get(`/cars/${id}`);
     return dispatch({
       type: "GET_CAR_DETAIL",

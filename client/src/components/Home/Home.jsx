@@ -10,6 +10,7 @@ import Filters from "../filtros/Filters.jsx";
 import Loading from "../Loading/Loading.jsx";
 import { useAuth0 } from '@auth0/auth0-react';
 import Swal from "sweetalert2";
+import Carrusel from "../Carrusel/Carrusel.jsx"
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -87,6 +88,9 @@ export default function Home() {
             <Filters />
           </div>
           <div className="contenedor-Home3">
+            <div>
+              <Carrusel />
+            </div>
             <div class="grid grid-cols-3 gap-0">
               {cars[0] === "none" || cars[0] === "n" ?
                 <strong><h1 className="text-6xl">No se ha encontrado el carro deseado</h1></strong> : currentCarsPerPage?.map((el) => {

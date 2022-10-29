@@ -53,9 +53,9 @@ function Card({
   };
   const estilos = {
     Premium:
-      "text-white bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:focus:ring-yellow-800 font-medium rounded-lg text-sm px-2 py-1.5 text-center mr-2 mb-2",
+      "text-white bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-yellow-300  font-medium rounded-lg text-sm text-center md:w-40 h-full bg-white lg:w-52 xl:w-64 2xl:w-80  shadow-2xl rounded-lg",
     normal:
-      "md:w-40 h-full  bg-white  lg:w-52 xl:w-64 2xl:w-80  shadow-2xl rounded-lg",
+      "md:w-40 h-full bg-white lg:w-52 xl:w-64 2xl:w-80 shadow-2xl rounded-lg",
   };
   return (
     <>
@@ -68,16 +68,16 @@ function Card({
           />
           <div class="px-5 py-4 space-y-2">
             <div class="h-16 mb-1 md:mb-2  ">
-              <h3 class="md:text-sm lg:text-base  xl:text-lg 2xl:text-xl font-semibold">
+              <h3 class="md:text-sm lg:text-base xl:text-lg 2xl:text-xl font-semibold">
                 {descriptionShort}
               </h3>
             </div>
-            <p class="space-x-2 border-t pt-2   border-gray-300 text-gray-700">
+            <p class={prem ? "space-x-2 border-t pt-2 border-gray-300 text-white" : "space-x-2 border-t pt-2 border-gray-300 text-gray-700"}>
               <span class="md:text-base xl:text-lg 2xl:text-xl lg:mb-1 font-medium">
                 Precio: {price}$
               </span>
             </p>
-            <div class="flex flex-col p-2 border-t border-gray-300 text-gray-700">
+            <div class={prem ? "flex flex-col p-2 border-t border-gray-300 text-white" : "flex flex-col p-2 border-t border-gray-300 text-gray-700"}>
               <div class="flex-1  md:text-sm lg:text-base xl:text-lg  inline-flex items-center  font-medium">
                 <img src={icon1} class="mr-4" alt="" />
                 <p>Kilometros: {kilometres} Km</p>
