@@ -8,10 +8,10 @@ import FormUpdateCar from "./FormUpdateCar";
 import {  useNavigate } from "react-router-dom";
 import BienvenidoPanel from "./BienvenidoPanel";
 import { useEffect } from "react";
-
-export const Dashboard = ({ user, infoUser }) => {
+import UserTable from "./UserTable";
+export const Dashboard = ({ user, infoUser ,getUsers,allUsers}) => {
   useEffect(()=>{
-    
+    getUsers()
   },[])
   const navigate = useNavigate();
   const [admin,setAdmin]=useState(true)
@@ -85,6 +85,9 @@ export const Dashboard = ({ user, infoUser }) => {
               );
             })
         );
+        case "usuarios":
+          return <UserTable users={allUsers} estilo={estilos}></UserTable>
+          
       case "publicaciones pausadas":
         return (
           user &&
@@ -109,7 +112,7 @@ export const Dashboard = ({ user, infoUser }) => {
         );
 
       case "updatecar":
-        return <FormUpdateCar car={carro}></FormUpdateCar>;
+        return <FormUpdateCar  car={carro}></FormUpdateCar>;
       case "favoritos":
         return (
           <h1>hola</h1>
@@ -151,7 +154,7 @@ export const Dashboard = ({ user, infoUser }) => {
             </li>
             {admin?  <><li onClick={() => setCaso("estadisticas")} className={caso === "estadisticas" ? estilos.li3 : estilos.li}> Estadisticas</li><li onClick={() => setCaso("usuarios")} className={caso === "usuarios" ? estilos.li3 : estilos.li}> usuarios</li></>
             :"" }
-           
+            {console.log(caso)}
             <li onClick={(e) => cerrarSesion(e)} className={estilos.lisesion}>
               Volver a Home
             </li>
@@ -166,6 +169,9 @@ export const Dashboard = ({ user, infoUser }) => {
         </div>
         <section>
           <div>{opcion(caso)}</div>
+         
+          <div>
+          </div>
         </section>
       </section>
     </div>
