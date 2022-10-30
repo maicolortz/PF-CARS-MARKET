@@ -1,5 +1,3 @@
-import React, { useMemo } from "react";
-import { useTable } from "react-table";
 function UserTable({ users }) {
   const estilo = {
     tabla: "flex  w-max bg-slate-400 text-center m-5",
