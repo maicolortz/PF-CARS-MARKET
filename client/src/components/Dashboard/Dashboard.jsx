@@ -8,10 +8,11 @@ import FormUpdateCar from "./FormUpdateCar";
 import {  useNavigate } from "react-router-dom";
 import BienvenidoPanel from "./BienvenidoPanel";
 import { useEffect } from "react";
+import UserTable from "./UserTable";
 
-export const Dashboard = ({ user, infoUser }) => {
+export const Dashboard = ({ user, infoUser,getUsers,allUsers }) => {
   useEffect(()=>{
-    
+    getUsers()
   },[])
   const navigate = useNavigate();
   const [admin,setAdmin]=useState(true)
@@ -115,7 +116,8 @@ export const Dashboard = ({ user, infoUser }) => {
           <h1>hola</h1>
           
         );
-
+          case "usuarios":
+            return <UserTable users={allUsers}/>
       default:
         break;
     }
