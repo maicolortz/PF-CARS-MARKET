@@ -1,4 +1,4 @@
-const { Car, User, Consult } = require("../db");
+const { Car, User, Consult, Favourite } = require("../db");
 const axios = require("axios");
 const {car, user} = require("./bdjson");
 const { Sequelize, Op } = require("sequelize");
