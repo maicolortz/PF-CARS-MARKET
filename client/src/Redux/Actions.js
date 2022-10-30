@@ -81,20 +81,20 @@ export function postCar(data) {
     }
   };
 }
-export function updateCar(id,data) {
+export function updateCar(id, data) {
   return async function (dispatch) {
     try {
-      const carCreado = await axios.put("/cars/"+id, data);
+      const carCreado = await axios.put("/cars/" + id, data);
       return dispatch({ type: "UPDATE_CAR", payload: carCreado.data });
     } catch (error) {
       console.log(error);
     }
   };
 }
-export function updateUser(id,data) {
+export function updateUser(id, data) {
   return async function (dispatch) {
     try {
-      const userCreado = await axios.put("/users/"+id, data);
+      const userCreado = await axios.put("/users/" + id, data);
       return dispatch({ type: "UPDATE_USER", payload: userCreado.data });
     } catch (error) {
       console.log(error);
@@ -167,7 +167,7 @@ export function get_Payment_Link() {
 }
 export function infoUseremail(email) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/users/infoUser2/`+email);
+    const { data } = await axios.get(`/users/infoUser2/` + email);
 
     return dispatch({
       type: "INFO_USER_EMAIL",
@@ -187,7 +187,20 @@ export function infoUser(data) {
 export function sendEmailSeller(data) {
   return async function () {
     try {
-      const email = await axios.post("/sendEmail", data);
+      const email = await axios.post("/sendEmail/ForSeller", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
+export function sendEmailBuyer(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail/ForBuyer", data);
       console.log(email);
       return email;
     } catch (error) {
@@ -198,10 +211,10 @@ export function sendEmailSeller(data) {
 }
 
 export function postConsults(data) {
-  return async function(dispatch){
+  return async function (dispatch) {
     try {
       const consultCreado = await axios.post("/consults", data)
-      return dispatch({type: "POST_CONSULTS", payload: consultCreado.data})
+      return dispatch({ type: "POST_CONSULTS", payload: consultCreado.data })
     } catch (error) {
       console.log(error)
     }
@@ -214,5 +227,17 @@ export function getConsults() {
       type: "GET_CONSULTS",
       payload: json.data,
     });
+  };
+}
+
+//Obtener informacion de un usuario por Email enviado por body
+export function UserEmail(email) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post("/users/infoUser", email);
+      return dispatch({ type: "EMAIL_USER", payload: data, });
+    } catch (error) {
+      console.log(error)
+    }
   };
 }

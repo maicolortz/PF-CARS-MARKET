@@ -29,7 +29,7 @@ function CardDetail() {
     carId: ""
   });
 
-  const { user } = useAuth0();
+  // const { user } = useAuth0();
 
   const users = useSelector((state) => state.allUsers)
   const consults = useSelector((state) => state.consult)
@@ -66,7 +66,7 @@ function CardDetail() {
     condition,
     transmition,
     userId,
-    //user,
+    user,
   } = carsDetail;
   const details = [
     { name: "Marca: ", detalle: brand },
@@ -89,20 +89,20 @@ useEffect(() => {
     dispatch(getConsults())
   }, [dispatch, id, user]);
 
-  useEffect(() => {
-    if (user) {
-      const buscadoAuth = user.email
-      users.find(el => {
-        if (el.mail === buscadoAuth) {
-          setState({
-            userId: el.id,
-            description: "",
-            carId: id
-          })
-        }
-      })
-    }
-  }, [user, id]);
+  // useEffect(() => {
+  //   if (user) {
+  //     const buscadoAuth = user.email
+  //     users.find(el => {
+  //       if (el.mail === buscadoAuth) {
+  //         setState({
+  //           userId: el.id,
+  //           description: "",
+  //           carId: id
+  //         })
+  //       }
+  //     })
+  //   }
+  // }, [user, id]);
 
   const { loginWithRedirect, isAuthenticated } = useAuth0();
 

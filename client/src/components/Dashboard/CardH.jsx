@@ -15,15 +15,16 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car }) {
       showCancelButton: true,
       confirmButtonText: "pausar",
       showConfirmButton: true,
+      confirmButtonColor: "#1d4ed8",
       timer: 20000,
     }).then((resultado) => {
       if (resultado.value) {
-        
+
         setEsconder("none");
         Swal.fire({
           title: "Se Pauso La Publicacion",
-          text:" Encuentrala en Publicaciones Pausadas"
-      });
+          text: " Encuentrala en Publicaciones Pausadas"
+        });
       } else {
         // Swal.fire("*NO se elimina la venta*");
       }
@@ -33,6 +34,22 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car }) {
     e.preventDefault();
     editar("updatecar", car);
   };
+
+  const CarroVendido = () => {
+    Swal.fire({
+      title: '¿Logro vender el vehiculo?',
+      text: 'En caso de confirmar sera redirigido a un formulario para que llene algunos datos del comprador y asi pueda calificar su venta.',
+      icon: 'warning',
+      confirmButtonColor: "#1d4ed8",
+      cancelButtonColor: "#1d4ed8",
+      showCancelButton: true,
+      confirmButtonText: "Si, continuar",
+      cancelButtonText: "No, cancelar",
+    }).then((result) => {
+      result.isConfirmed && navigate("/BuyerForm");
+    })
+  }
+
   return (
     <div
       style={{ display: esconder }}
@@ -58,6 +75,9 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car }) {
 
         <button onClick={(e) => eliminar(e)} className={estilos.buttonred}>
           Pausar
+        </button>
+        <button onClick={() => CarroVendido()} className={estilos.buttonred}>
+          Vendido
         </button>
       </div>
     </div>
