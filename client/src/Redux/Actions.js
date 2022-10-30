@@ -195,7 +195,20 @@ export function infoUser(data) {
 export function sendEmailSeller(data) {
   return async function () {
     try {
-      const email = await axios.post("/sendEmail", data);
+      const email = await axios.post("/sendEmail/ForSeller", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
+export function sendEmailBuyer(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail/ForBuyer", data);
       console.log(email);
       return email;
     } catch (error) {
@@ -223,3 +236,16 @@ export function getConsults() {
     });
   };
 }
+
+//Obtener informacion de un usuario por Email enviado por body
+export function UserEmail(email) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post("/users/infoUser", email);
+      return dispatch({ type: "EMAIL_USER", payload: data, });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+}
+

@@ -53,7 +53,10 @@ export default function NavBar() {
       </Link>
       {window.location.pathname !== "/createuser" &&
         window.location.pathname !== `/cars/${carId.id}` &&
-        window.location.pathname !== "/createcar" && <SearchBar />}
+        window.location.pathname !== "/createcar" &&
+        window.location.pathname !== "/sellerRatingForm" &&
+        window.location.pathname !== "/BuyerForm"
+        && <SearchBar />}
       {isAuthenticated ? (
         <div
           class={

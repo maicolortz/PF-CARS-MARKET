@@ -17,7 +17,7 @@ const {
 const router = Router();
 
 router.get("/", getAllUsers);
-router.get('/infoUser',getInfoUserByEmail)
+router.post('/infoUser',getInfoUserByEmail)
 router.get('/infoUser2/:email',getInfoUserByEmail2)
 router.get("/emails", getEmails);
 router.get('/rating', getRating)

@@ -18,9 +18,11 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car,email }
       showCancelButton: true,
       confirmButtonText: `${car.active?"pausar":"activar"}`,
       showConfirmButton: true,
+      confirmButtonColor: "#1d4ed8",
       timer: 20000,
     }).then((resultado) => {
       if (resultado.value) {
+
         dispatch(infoUseremail(email))
         dispatch(updateActiveCar(car.id, car.active?false:true))
         dispatch(infoUseremail(email))
@@ -35,6 +37,22 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car,email }
     e.preventDefault();
     editar("updatecar", car,car.active);
   };
+
+  const CarroVendido = () => {
+    Swal.fire({
+      title: '¿Logro vender el vehiculo?',
+      text: 'En caso de confirmar sera redirigido a un formulario para que llene algunos datos del comprador y asi pueda calificar su venta.',
+      icon: 'warning',
+      confirmButtonColor: "#1d4ed8",
+      cancelButtonColor: "#1d4ed8",
+      showCancelButton: true,
+      confirmButtonText: "Si, continuar",
+      cancelButtonText: "No, cancelar",
+    }).then((result) => {
+      result.isConfirmed && navigate("/BuyerForm");
+    })
+  }
+
   return (
     <div
       class={car.active?estilos.activo:estilos.noactivo}
@@ -59,6 +77,9 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car,email }
 
         <button onClick={(e) => pausar(e)} className={estilos.buttonred}>
           {car.active?"pausar":"activar"}
+        </button>
+        <button onClick={() => CarroVendido()} className={estilos.buttonred}>
+          Vendido
         </button>
       </div>
     </div>

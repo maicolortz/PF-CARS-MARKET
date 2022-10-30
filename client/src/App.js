@@ -13,6 +13,8 @@ import LandingPage from './components/LandingPage/LandingPage';
 import ConctactForm from './components/contactForm/contactForm';
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import FormUpdateCar from './components/Dashboard/FormUpdateCar';
+import SellerRatingForm from './components/RatingForms/SellerRatingForm.jsx';
+import BuyerForm from './components/RatingForms/BuyerForm.jsx'
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
           <Route path='/cars/:id' element={<CardDetail/>} />
           <Route path='/Contact' element={<ConctactForm/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path="/SellerRatingForm" element={<SellerRatingForm />} />
+          <Route path="/BuyerForm" element={<BuyerForm />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
