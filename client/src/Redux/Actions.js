@@ -50,8 +50,7 @@ export function getUsers() {
 }
 export function getUser(id) {
   return async function (dispatch) {
-
-    dispatch({ type: "LOADING" })
+    dispatch({ type: "LOADING" });
     const { data } = await axios.get(`/users/${id}`);
     return dispatch({
       type: "GET_USER",
@@ -61,7 +60,7 @@ export function getUser(id) {
 }
 export function getCardDetail(id) {
   return async function (dispatch) {
-    dispatch({ type: "LOADING" })
+    dispatch({ type: "LOADING" });
     const { data } = await axios.get(`/cars/${id}`);
     return dispatch({
       type: "GET_CAR_DETAIL",
@@ -73,9 +72,8 @@ export function getCardDetail(id) {
 export function postCar(data) {
   return async function (dispatch) {
     try {
-
-      const carCreado = await axios.post("/cars", data)
-      return dispatch({ type: "POST_CAR", payload: carCreado.data })
+      const carCreado = await axios.post("/cars", data);
+      return dispatch({ type: "POST_CAR", payload: carCreado.data });
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +84,17 @@ export function updateCar(id, data) {
     try {
       const carCreado = await axios.put("/cars/" + id, data);
       return dispatch({ type: "UPDATE_CAR", payload: carCreado.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+export function updateActiveCar(id, active) {
+  return async function (dispatch) {
+    try {
+      const carCreado = await axios.put(
+        "/cars/" + id + "/active/?active=" + active);
+      return dispatch({ type: "UPDATE_ACTIVE_CAR", payload: carCreado.data });
     } catch (error) {
       console.log(error);
     }
@@ -176,12 +185,11 @@ export function infoUseremail(email) {
   };
 }
 
-
 export function infoUser(data) {
   return {
     type: "INFO_USER",
-    payload: data
-  }
+    payload: data,
+  };
 }
 
 export function sendEmailSeller(data) {
@@ -207,18 +215,17 @@ export function sendEmailBuyer(data) {
       console.log(error);
     }
   };
-
 }
 
 export function postConsults(data) {
   return async function (dispatch) {
     try {
-      const consultCreado = await axios.post("/consults", data)
-      return dispatch({ type: "POST_CONSULTS", payload: consultCreado.data })
+      const consultCreado = await axios.post("/consults", data);
+      return dispatch({ type: "POST_CONSULTS", payload: consultCreado.data });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 }
 export function getConsults() {
   return async function (dispatch) {
@@ -241,3 +248,4 @@ export function UserEmail(email) {
     }
   };
 }
+

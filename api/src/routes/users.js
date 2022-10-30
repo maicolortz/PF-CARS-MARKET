@@ -7,7 +7,9 @@ const {
   getEmails,
   getInfoUserByEmail,
   getInfoUserByEmail2,
-  updateUser
+  updateUser,
+  getRating,
+  createReview
 
  
 } = require("../controllers/users");
@@ -18,7 +20,9 @@ router.get("/", getAllUsers);
 router.post('/infoUser',getInfoUserByEmail)
 router.get('/infoUser2/:email',getInfoUserByEmail2)
 router.get("/emails", getEmails);
+router.get('/rating', getRating)
 router.post("/", createUser);
+router.post('/rating',createReview)
 router.get("/:id", getUserById);
 router.put("/premium/:email",premiumUser);
 router.put("/:id", updateUser);
