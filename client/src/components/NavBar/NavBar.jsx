@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import imgDefault from "../Card/imagenes/usuario.png";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers,infoUseremail } from "../../Redux/Actions";
+import { getUsers, infoUseremail } from "../../Redux/Actions";
 import Premium from "../Premium/Premium";
 
 const estilos = {
@@ -24,16 +24,16 @@ const estilos = {
 export default function NavBar() {
   const carId = useSelector((state) => state.carDetail);
   const dispatch = useDispatch();
-  const usuario = useSelector((state) => state.D_user)
+  const usuario = useSelector((state) => state.D_user);
   const [show, setShow] = useState(false);
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const history = useNavigate();
-  
+
   useEffect(() => {
-    
+
     dispatch(getUsers());
   }, [dispatch]);
-  const enviarDashboard = async() => {
+  const enviarDashboard = async () => {
     dispatch(infoUseremail(user.email))
     history("/dashboard");
   };
@@ -74,14 +74,14 @@ export default function NavBar() {
             </div>
             <div className="flex">
               <div class="text-white md:text-sm lg:text-sm w-auto xl:text-base font-medium ml-2 justify-center flex flex-col ">
-                <div>{user ? user.name : ""}</div>
-                <div>{user ? user.email : ""}</div>
+                <div>{usuario ? `${usuario.firstName} ${usuario.lastName}` : user.name}</div>
+                <div>{usuario ? usuario.mail : user.email}</div>
               </div>
               <div class="w-32 ml-2">
                 <div className=" flex md:w-auto h-5/6 ">
                   <div className="w-11/12 flex justify-center items-center">
                     <img
-                      src={!user.picture ? imgDefault : user.picture}
+                      src={usuario ? usuario.imgPerfil : user.picture}
                       alt={imgDefault}
                       class="h-5/6"
                     />
