@@ -49,21 +49,22 @@ function ConctactForm() {
         emailbuyer: "",
         message: "",
         emailSeller: "",
-        phone: ""
+        phone: "",
+        car:""
     })
-    // console.log(state)
+     console.log(state)
 
     //MANEJO DE EVENTOS
     const handleChange = (e) => {
         e.preventDefault();
-        setState({ ...state, [e.target.name]: e.target.value, emailSeller: userCardDetail.user.mail, emailbuyer: user.email });
+        setState({ ...state, [e.target.name]: e.target.value, emailSeller: userCardDetail.user.mail, emailbuyer: user.email, car: userCardDetail.name });
         setErrors(validate({ ...state, [e.target.name]: e.target.value }));
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (state.firstName && state.lastName && state.emailbuyer && state.message && state.emailSeller) {
-            state.phone === "" && setState({ ...state, phone: "Numero no especificado" });
+            !state.phone && setState({ ...state, phone: "Numero no especificado" });
 
             dispatch(sendEmailSeller(state))
             setState({

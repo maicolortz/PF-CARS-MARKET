@@ -11,6 +11,7 @@ const initialState = {
   transactions: [],
   payment_link: [],
   consult: [],
+  ratingUser: []
 };
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -106,6 +107,12 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         emailUser: [action.payload],
+      }
+    case "RATING_USER":
+      return {
+        ...state,
+        ratingUser: [action.payload],
+        loading: false,
       }
     default:
       return state;
