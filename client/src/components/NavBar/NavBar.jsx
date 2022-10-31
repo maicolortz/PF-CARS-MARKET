@@ -24,19 +24,20 @@ const estilos = {
 export default function NavBar() {
   const carId = useSelector((state) => state.carDetail);
   const dispatch = useDispatch();
-
+  const usuario = useSelector((state) => state.D_user)
   const [show, setShow] = useState(false);
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const history = useNavigate();
-
+  
+  useEffect(() => {
+    
+    dispatch(getUsers());
+  }, [dispatch]);
   const enviarDashboard = async() => {
     dispatch(infoUseremail(user.email))
     history("/dashboard");
   };
 
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
 
   return (
     <nav className="contenedor-NavBar">
@@ -68,7 +69,7 @@ export default function NavBar() {
           <div class="flex">
             <div className="flex items-center  px-2 py-2">
               {window.location.pathname !== "/createuser" && (
-                <Premium user={user}></Premium>
+                <Premium user={user} ></Premium>
               )}
             </div>
             <div className="flex">

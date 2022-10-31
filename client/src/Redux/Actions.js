@@ -165,9 +165,9 @@ export function getTransaction() {
     });
   };
 }
-export function get_Payment_Link() {
+export function get_Payment_Link(email) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/payment`);
+    const { data } = await axios.get(`/paymentprueba?email=`+email);
     return dispatch({
       type: "GET_PAYMENT_LINK",
       payload: data,

@@ -3,7 +3,7 @@ class PaymentController {
       this.subscriptionService = subscriptionService;
     }
     
-    async getPaymentLink(req, res) {
+    async getPaymentLink(req, res,email) {
       try {
         const payment = await this.subscriptionService.createPayment();
   
