@@ -25,8 +25,47 @@ router.get("/paymentdate", function (req, res, next) {
     "/subscription": "generates a subscription link",
   });
 });
-router.get("/payment", function (req, res, next) {
+router.get("/payment", function (req, res) {
   PaymentInstance.getPaymentLink(req, res);
+});
+
+///
+router.get("/paymentprueba", async function (req, res) {
+  const url = "https://api.mercadopago.com/checkout/preferences";
+ 
+  let transation = await axios.get(process.env.LINKDEBACK + "/transactions");
+  let user = transation.data;
+  const body = {
+    items: [
+      {
+        title: "Membresia Premium  CARS MARKET",
+        description: "Membresia Premium ",
+        picture_url:
+          "https://es.digitaltrends.com/wp-content/uploads/2022/07/mejores-deportivos.jpeg?p=1",
+        category_id: "MEMBRESIA",
+        id: req.query.email,
+        quantity: 1,
+        unit_price: 1000,
+      },
+    ],
+    auto_return: "approved",
+    back_urls: {
+      failure: "/failure",
+      pending: "/pending",
+      success: process.env.linkfront + "/home",
+    },
+    ///cambiar por heroku
+    notification_url:
+      process.env.LINKAUTENTICADO + "/notificacion?source_news=webhooks",
+  };
+
+  const payment = await axios.post(url, body, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+    },
+  });
+  res.json(payment.data);
 });
 router.get("/success", function (req, res) {
   res.send("success", req.query);
@@ -46,7 +85,7 @@ router.post("/notificacion", async function (req, res, next) {
   let d = {
     nroTransaction: req.query["data.id"],
   };
-  axios.post(process.env.linkdeback+"/transactionsMercadoPago", d);
+  axios.post(process.env.LINKDEBACK + "/transactionsMercadoPago", d);
   /*  let d = {
     nroTransaction: req.query["data.id"],
     type: "Compra",
@@ -63,9 +102,8 @@ router.post("/notificacion", async function (req, res, next) {
   res.sendStatus(200);
 });
 const getInfototal = async (id) => {
-
   const dataid = await getInfoMP(id);
-  console.log(dataid)
+  console.log(dataid);
   let d = {
     nroTransaction: id,
     type: "Compra",
@@ -77,14 +115,12 @@ const getInfototal = async (id) => {
     statusTransaction: "",
   };
 
-  axios.post(process.env.linkdeback+ "/transactions", d);
+  axios.post(process.env.LINKDEBACK + "/transactions", d);
 };
-const funct =async()=>{
-  
-}
+const funct = async () => {};
 const getInfoMP = async (id) => {
   const apiExterna = await axios.get(
-    process.env.linkdeback+"/transMercado/" + id
+    process.env.LINKDEBACK + "/transMercado/" + id
   );
   return apiExterna;
 };
@@ -95,22 +131,22 @@ router.get("/transMercadoUltimo", async (req, res) => {
 }); ///transMercado/50733196450
 router.get("/transMercado/:id", async (req, res) => {
   const data = await getInfoAPI(req.params.id);
-const datos={
-  idMercadopago:req.params.id,
-  email:data.data.additional_info.items[0].id,
-  status:data.data.status
-}
-let d = {
-  nroTransaction: req.params.id,
-  type: "Compra",
-  amount: "75000",
-  email: data.data.additional_info.items[0].id,
-  date: "2022/10/18",
-  userId: "1",
-  idTransaction: "245",
-  statusTransaction: data.data.status,
-};
-axios.post(process.env.linkdeback+"/transactions", d);
+  const datos = {
+    idMercadopago: req.params.id,
+    email: data.data.additional_info.items[0].id,
+    status: data.data.status,
+  };
+  let d = {
+    nroTransaction: req.params.id,
+    type: "Compra",
+    amount: "75000",
+    email: data.data.additional_info.items[0].id,
+    date: "2022/10/18",
+    userId: "1",
+    idTransaction: "245",
+    statusTransaction: data.data.status,
+  };
+  axios.post(process.env.LINKDEBACK + "/transactions", d);
   res.jsonp(datos);
   //data.payer --->informacion no sirve
   //data.status---->estado de pago
