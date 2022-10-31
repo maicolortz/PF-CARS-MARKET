@@ -33,7 +33,7 @@ class PaymentService {
       back_urls: {
         failure: "/failure",
         pending: "/pending",
-        success: process.env.linkfront+"/home",
+        success: process.env.LINKFRONT+"/home",
       },
       ///cambiar por heroku
       notification_url:
