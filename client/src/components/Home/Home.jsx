@@ -99,7 +99,7 @@ export default function Home() {
             <Filters />
           </div>
           <div className="contenedor-Home3">
-            <div>
+            <div className="flex">
               <Carrusel />
             </div>
             <div class="grid grid-cols-3 gap-0">

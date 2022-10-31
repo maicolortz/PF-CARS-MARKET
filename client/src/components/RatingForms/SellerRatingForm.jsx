@@ -1,11 +1,10 @@
 import { React, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
+import { postRating } from '../../Redux/Actions.js';
 import { useAuth0 } from '@auth0/auth0-react';
-import { sendEmailSeller } from '../../Redux/Actions.js';
-import Loading from '../Loading/Loading.jsx';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 const estilos = {
     input: "border-4 border-gray-300 pl-3 py-4 shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
@@ -23,9 +22,14 @@ function ConctactForm() {
 
     const dispatch = useDispatch()
     const { search } = useLocation();
+    const history = useNavigate();
     const query = new URLSearchParams(search);
-    const idSeller = query.get("id")
-    console.log(idSeller);
+    const idSeller = query.get("id");
+    const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+
+    useEffect(() => {
+        console.log(isLoading);
+    })
 
     //ESTADO LOCAL DE LOS DATOS A ENVIAR EN EL CORREO
     const [inputCheckBox, setInputCheckBox] = useState({
@@ -55,11 +59,31 @@ function ConctactForm() {
 
     }
 
-    console.log(inputCheckBox);
+    if (!isLoading && !isAuthenticated) {
+        Swal.fire({
+            title: 'ERROR!',
+            text: 'Usuario no registrado!!!',
+            icon: 'error',
+            confirmButtonColor: "#1d4ed8"
+        }).then(() => {
+            loginWithRedirect();
+        });
+
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (inputCheckBox.question1 && inputCheckBox.question2 && inputCheckBox.question3 && inputCheckBox.question4 && inputCheckBox.question5 && inputCheckBox.question6 && inputCheckBox.question7) {
+        if (!idSeller) {
+            Swal.fire({
+                title: 'ERROR!!!',
+                text: 'Este formulario no se le ha autorizado!!',
+                icon: 'error',
+                confirmButtonColor: "#1d4ed8"
+            }).then(() => {
+                history("/home");
+            });
+        }
+        else if (inputCheckBox.question1 && inputCheckBox.question2 && inputCheckBox.question3 && inputCheckBox.question4 && inputCheckBox.question5 && inputCheckBox.question6 && inputCheckBox.question7) {
 
             let sumRating = 0;
             for (const question in inputCheckBox) {
@@ -69,7 +93,14 @@ function ConctactForm() {
             }
 
             console.log(Math.round(sumRating));
-            // dispatch(sendEmailSeller(state))
+
+            dispatch(postRating(
+                {
+                    rating: Math.round(sumRating),
+                    userId: idSeller,
+                    description: inputCheckBox.review
+                }))
+
             setInputCheckBox({
                 question1: false,
                 question2: false,
@@ -85,7 +116,7 @@ function ConctactForm() {
                 icon: 'success',
                 confirmButtonColor: "#1d4ed8"
             }).then(() => {
-                // history("/home")
+                history("/home");
             });
         }
         else {
@@ -119,13 +150,13 @@ function ConctactForm() {
                         <div className={estilos.contenedor_input_y_titulo}>
                             <div className='flex flex-col'>
                                 <div class={estilos.input}>
-                                    <label for="firstName" class={estilos.titulos}>1. ¿Como fue el tiempo de respuesta o comunicación con el vendedor?</label>
+                                    <label htmlFor="firstName" class={estilos.titulos}>1. ¿Como fue el tiempo de respuesta o comunicación con el vendedor?</label>
                                     <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mt-4">
                                         {options1.map((e) => {
                                             return (
                                                 <div class="flex items-center ">
                                                     <input id="inline-checkbox" type="radio" name="question1" value={e.value} onChange={(e) => handleCheckBox(e)} class="w-6 h-6 text-blue-800 bg-white rounded border-2" />
-                                                    <label for="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
+                                                    <label htmlFor="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
                                                 </div>
                                             )
                                         })}
@@ -136,13 +167,13 @@ function ConctactForm() {
                         <div className={estilos.contenedor_input_y_titulo}>
                             <div className='flex flex-col'>
                                 <div class={estilos.input}>
-                                    <label for="firstName" class={estilos.titulos}>2. ¿Como fue la atención del vendedor?</label>
+                                    <label htmlFor="firstName" class={estilos.titulos}>2. ¿Como fue la atención del vendedor?</label>
                                     <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mt-4">
                                         {options1.map((e) => {
                                             return (
                                                 <div class="flex items-center ">
                                                     <input id="inline-checkbox" type="radio" name="question2" value={e.value} onChange={(e) => handleCheckBox(e)} class="w-6 h-6 text-blue-800 bg-white rounded" required />
-                                                    <label for="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
+                                                    <label htmlFor="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
                                                 </div>
                                             )
                                         })}
@@ -153,13 +184,13 @@ function ConctactForm() {
                         <div className={estilos.contenedor_input_y_titulo}>
                             <div className='flex flex-col'>
                                 <div class={estilos.input}>
-                                    <label for="firstName" class={estilos.titulos}>3. ¿El vendedor fue transparente con los detalles del vehículo?</label>
+                                    <label htmlFor="firstName" class={estilos.titulos}>3. ¿El vendedor fue transparente con los detalles del vehículo?</label>
                                     <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mt-4">
                                         {options2.map((e) => {
                                             return (
                                                 <div class="flex items-center ">
                                                     <input id="inline-checkbox" type="radio" name="question3" value={e.value} onChange={(e) => handleCheckBox(e)} class="w-6 h-6 text-blue-800 bg-white rounded" required />
-                                                    <label for="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
+                                                    <label htmlFor="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
                                                 </div>
                                             )
                                         })}
@@ -170,13 +201,13 @@ function ConctactForm() {
                         <div className={estilos.contenedor_input_y_titulo}>
                             <div className='flex flex-col'>
                                 <div class={estilos.input}>
-                                    <label for="firstName" class={estilos.titulos}>4. ¿El vendedor tenia la documentación al dia?</label>
+                                    <label htmlFor="firstName" class={estilos.titulos}>4. ¿El vendedor tenia la documentación al dia?</label>
                                     <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mt-4">
                                         {options2.map((e) => {
                                             return (
                                                 <div class="flex items-center ">
                                                     <input id="inline-checkbox" type="radio" name="question4" value={e.value} onChange={(e) => handleCheckBox(e)} class="w-6 h-6 text-blue-800 bg-white rounded" required />
-                                                    <label for="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
+                                                    <label htmlFor="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
                                                 </div>
                                             )
                                         })}
@@ -187,13 +218,13 @@ function ConctactForm() {
                         <div className={estilos.contenedor_input_y_titulo}>
                             <div className='flex flex-col'>
                                 <div class={estilos.input}>
-                                    <label for="firstName" class={estilos.titulos}>5. ¿El precio establecido en la publicación lo considera acorde a las condiciones del vehiculo?</label>
+                                    <label htmlFor="firstName" class={estilos.titulos}>5. ¿El precio establecido en la publicación lo considera acorde a las condiciones del vehiculo?</label>
                                     <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mt-4">
                                         {options2.map((e) => {
                                             return (
                                                 <div class="flex items-center ">
                                                     <input id="inline-checkbox" type="radio" name="question5" value={e.value} onChange={(e) => handleCheckBox(e)} class="w-6 h-6 text-blue-800 bg-white rounded" required />
-                                                    <label for="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
+                                                    <label htmlFor="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
                                                 </div>
                                             )
                                         })}
@@ -204,13 +235,13 @@ function ConctactForm() {
                         <div className={estilos.contenedor_input_y_titulo}>
                             <div className='flex flex-col'>
                                 <div class={estilos.input}>
-                                    <label for="firstName" class={estilos.titulos}>6. Grado de satisfacción con la experiencia de compra</label>
+                                    <label htmlFor="firstName" class={estilos.titulos}>6. Grado de satisfacción con la experiencia de compra</label>
                                     <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mt-4">
                                         {options3.map((e) => {
                                             return (
                                                 <div class="flex items-center ">
                                                     <input id="inline-checkbox" type="radio" name="question6" value={e.value} onChange={(e) => handleCheckBox(e)} class="w-6 h-6 text-blue-800 bg-white rounded" required />
-                                                    <label for="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
+                                                    <label htmlFor="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
                                                 </div>
                                             )
                                         })}
@@ -221,13 +252,13 @@ function ConctactForm() {
                         <div className={estilos.contenedor_input_y_titulo}>
                             <div className='flex flex-col'>
                                 <div class={estilos.input}>
-                                    <label for="firstName" class={estilos.titulos}>7. ¿Recomendarias al vendedor?</label>
+                                    <label htmlFor="firstName" class={estilos.titulos}>7. ¿Recomendarias al vendedor?</label>
                                     <div class="flex items-center justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 mt-4">
                                         {options2.map((e) => {
                                             return (
                                                 <div class="flex items-center ">
                                                     <input id="inline-checkbox" type="radio" name="question7" value={e.value} onChange={(e) => handleCheckBox(e)} class="w-6 h-6 text-blue-800 bg-white rounded" required />
-                                                    <label for="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
+                                                    <label htmlFor="inline-checkbox" class="ml-1 md:ml-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium text-gray-900">{e.text}</label>
                                                 </div>
                                             )
                                         })}

@@ -1,6 +1,6 @@
-const { Car, User, Consult } = require("../db");
+const { Car, User, Consult, Review } = require("../db");
 const axios = require("axios");
-const {car, user} = require("./bdjson");
+const { car, user } = require("./bdjson");
 const { Sequelize, Op } = require("sequelize");
 
 /* async function updateCar() {
@@ -27,7 +27,7 @@ const { Sequelize, Op } = require("sequelize");
 
 const getAllCars = async (req, res) => {
   try {
-    const cars = await Car.findAll({include:User});
+    const cars = await Car.findAll({ include: User });
 
     const autosP = cars.filter(a => a.user.premium === true);
     const autosN = cars.filter(a => a.user.premium === false)
@@ -43,10 +43,10 @@ const getAllCars = async (req, res) => {
 
 const getCarForName = async (req, res) => {
   try {
-    const {name}=req.query;
-      const infototal = await Car.findAll({include:User});
-    const filtered=infototal.filter(e=>e.name.toLowerCase()
-    .includes(name.toLowerCase()))
+    const { name } = req.query;
+    const infototal = await Car.findAll({ include: User });
+    const filtered = infototal.filter(e => e.name.toLowerCase()
+      .includes(name.toLowerCase()))
     filtered.length
       ? res.status(200).send(filtered)
       : res.status(200).send("not has been founded");
@@ -56,46 +56,46 @@ const getCarForName = async (req, res) => {
 };
 
 // ordena por precio por query modo= priceAsc, o en su defecto priceDesc
-const sortprice = async (req,res)=>{
-  var sorted=[]
-  const all = await Car.findAll({include: User})
-     if (req.query.modo) {
-         try{
-          let {modo} = req.query
+const sortprice = async (req, res) => {
+  var sorted = []
+  const all = await Car.findAll({ include: User })
+  if (req.query.modo) {
+    try {
+      let { modo } = req.query
       // En el Front es...
-     
-          sorted =
-             modo === 'priceAsc'
-               ? all.sort((a, b) => a.price - b.price)
-               : all.sort((a, b) => b.price - a.price)
-          }
-         catch(error){
-             console.log(error)
-         } 
-       }
-  res.json(sorted)
-  }
-const getCarForCondition=async(req,res)=>{
-    try{
-        const {condition}=req.query;
-        if(condition.toLowerCase()==="nuevo" ||condition.toLowerCase()==="usado" ){
 
-          const infototal = await Car.findAll({ where: { condition: condition } },{include:User});
-          infototal.length
-          ? res.status(200).send(infototal)
-          : res.status(200).send([]);
-        }else {
-          res.send("la condicion deber ser nuevo o usado")
-        }
-    } catch (error) {
-        res.send(error.message);
-      }
+      sorted =
+        modo === 'priceAsc'
+          ? all.sort((a, b) => a.price - b.price)
+          : all.sort((a, b) => b.price - a.price)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+  res.json(sorted)
+}
+const getCarForCondition = async (req, res) => {
+  try {
+    const { condition } = req.query;
+    if (condition.toLowerCase() === "nuevo" || condition.toLowerCase() === "usado") {
+
+      const infototal = await Car.findAll({ where: { condition: condition } }, { include: User });
+      infototal.length
+        ? res.status(200).send(infototal)
+        : res.status(200).send([]);
+    } else {
+      res.send("la condicion deber ser nuevo o usado")
+    }
+  } catch (error) {
+    res.send(error.message);
+  }
 }
 const getCarForBrand = async (req, res) => {
-  
+
   try {
     const { name } = req.query;
-    const infototal = await Car.findAll({ where: { brand: name } },{include:User});
+    const infototal = await Car.findAll({ where: { brand: name } }, { include: User });
     infototal.length
       ? res.status(200).send(infototal)
       : res.status(404).send("not has been founded");
@@ -141,7 +141,7 @@ const createCar = async (req, res) => {
       condition,
       transmition,
       userId
-    },{include:User});
+    }, { include: User });
     res.send("created");
   } catch (error) {
     res.send(error.message);
@@ -149,25 +149,25 @@ const createCar = async (req, res) => {
 };
 
 //http://localhost:3001/cars/range?min=2008&max=2010
-const getRangeModel = async(req,res)=>{
-  const{min,max} = req.query;
+const getRangeModel = async (req, res) => {
+  const { min, max } = req.query;
   try {
-   const range  = await Car.findAll({
-      where:{
-          year:{
-              [Op.between]:[min,max]
-          }
+    const range = await Car.findAll({
+      where: {
+        year: {
+          [Op.between]: [min, max]
+        }
       }
-   })
-   
-   res.json(range) 
+    })
+
+    res.json(range)
   } catch (error) {
-      res.status(400).json(error)
+    res.status(400).json(error)
   }
 }
 const getAutoById = async (req, res) => {
 
-  const found = await Car.findByPk(req.params.id, { include: [User, Consult] });
+  const found = await Car.findByPk(req.params.id, { include: [ {model: User, include: [Review]}, Consult] });
 
   console.log(found);
   if (!found) {
@@ -178,45 +178,45 @@ const getAutoById = async (req, res) => {
 };
 
 
-const phisicaldeletionCar = async (req,res)=>{
-  const{id}=req.params;
-  try{
-  await Car.destroy({
-      where:{
+const phisicaldeletionCar = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Car.destroy({
+      where: {
         id,
       },
-  })
-  res.send("eliminado")
-  }catch(err){
-  res.json(err.message)
-  return res.json(found);
-};
+    })
+    res.send("eliminado")
+  } catch (err) {
+    res.json(err.message)
+    return res.json(found);
+  };
 }
 
 const updateCar = async (req, res) => {
-const {id}= req.params;
-const found = await Car.findByPk(id)
-try{
-  for (const property in req.body) {
-            if (property !== undefined) {
-                found[property] = req.body[property];
-            };
-          };
-  await found.save();
-  res.send("Actualizado");
-}
-catch (error) {
-  return error;
+  const { id } = req.params;
+  const found = await Car.findByPk(id)
+  try {
+    for (const property in req.body) {
+      if (property !== undefined) {
+        found[property] = req.body[property];
+      };
     };
+    await found.save();
+    res.send("Actualizado");
+  }
+  catch (error) {
+    return error;
+  };
 };
 
-const updateActive = async (req,res)=>{
+const updateActive = async (req, res) => {
 
-  const{active}=req.query
-  const{id}=req.params
+  const { active } = req.query
+  const { id } = req.params
   try {
     const modificacion = await Car.findByPk(id)
-    modificacion.update({ active: active})
+    modificacion.update({ active: active })
     await modificacion.save()
     res.json(modificacion)
   } catch (error) {

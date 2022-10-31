@@ -249,3 +249,21 @@ export function UserEmail(email) {
   };
 }
 
+export function postRating(rating) {
+  return async function () {
+    const d = await axios.post("/users/rating", rating);
+    return d;
+  };
+}
+
+export function getRatingUser(id) {
+  return async function (dispatch) {
+    try {
+      dispatch({ type: "LOADING" });
+      const rating = await axios.get(`users/rating/${id}`);
+      return dispatch({ type: "RATING_USER", payload: rating, });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+}

@@ -100,11 +100,9 @@ function ConctactForm() {
                     icon: 'success',
                     confirmButtonColor: "#1d4ed8"
                 }).then(() => {
-                    // history(`/cars/${userCardDetail.id}`)
+                    history("/home");
                 });
-
             }
-
         }
         else {
             Swal.fire({

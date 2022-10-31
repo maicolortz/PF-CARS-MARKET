@@ -146,7 +146,7 @@ const updateUser = async (req, res) => {
   }
   
   const getRating = async (req,res)=>{
-    const{userId} = req.body;
+    const{userId} = req.params;
     try {
       const usuario = await Review.findAll({where:{userId}})
       const prueba = usuario.map(r=> r.rating)
