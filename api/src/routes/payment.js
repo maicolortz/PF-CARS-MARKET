@@ -16,7 +16,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const { parse, stringify } = require("flatted");
 router.use(bodyParser.json());
 mercadopago.configure({
-  access_token: process.env.access_token,
+  access_token: process.env.ACCESS_TOKEN,
   integrator_id: "dev_24c65fb163bf11ea96500242ac130004",
 });
 router.get("/paymentdate", function (req, res, next) {
@@ -32,40 +32,43 @@ router.get("/payment", function (req, res) {
 ///
 router.get("/paymentprueba", async function (req, res) {
   const url = "https://api.mercadopago.com/checkout/preferences";
- 
-  let transation = await axios.get(process.env.LINKDEBACK + "/transactions");
-  let user = transation.data;
-  const body = {
-    items: [
-      {
-        title: "Membresia Premium  CARS MARKET",
-        description: "Membresia Premium ",
-        picture_url:
-          "https://es.digitaltrends.com/wp-content/uploads/2022/07/mejores-deportivos.jpeg?p=1",
-        category_id: "MEMBRESIA",
-        id: req.query.email,
-        quantity: 1,
-        unit_price: 1000,
+  try {
+    let transation = await axios.get(process.env.LINKDEBACK + "/transactions");
+    let user = transation.data;
+    const body = {
+      items: [
+        {
+          title: "Membresia Premium  CARS MARKET",
+          description: "Membresia Premium ",
+          picture_url:
+            "https://es.digitaltrends.com/wp-content/uploads/2022/07/mejores-deportivos.jpeg?p=1",
+          category_id: "MEMBRESIA",
+          id: req.query.email,
+          quantity: 1,
+          unit_price: 1000,
+        },
+      ],
+      auto_return: "approved",
+      back_urls: {
+        failure: "/failure",
+        pending: "/pending",
+        success: process.env.LINKFRONT + "/home",
       },
-    ],
-    auto_return: "approved",
-    back_urls: {
-      failure: "/failure",
-      pending: "/pending",
-      success: process.env.linkfront + "/home",
-    },
-    ///cambiar por heroku
-    notification_url:
-      process.env.LINKAUTENTICADO + "/notificacion?source_news=webhooks",
-  };
+      ///cambiar por heroku
+      notification_url:
+        process.env.LINKAUTENTICADO + "/notificacion?source_news=webhooks",
+    };
 
-  const payment = await axios.post(url, body, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-    },
-  });
-  res.json(payment.data);
+    const payment = await axios.post(url, body, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+      },
+    });
+    res.json(payment.data);
+  } catch (error) {
+    console.error(error);
+  }
 });
 router.get("/success", function (req, res) {
   res.send("success", req.query);
@@ -130,24 +133,28 @@ router.get("/transMercadoUltimo", async (req, res) => {
   res.json(JSON.parse(stringify(data)));
 }); ///transMercado/50733196450
 router.get("/transMercado/:id", async (req, res) => {
-  const data = await getInfoAPI(req.params.id);
-  const datos = {
-    idMercadopago: req.params.id,
-    email: data.data.additional_info.items[0].id,
-    status: data.data.status,
-  };
-  let d = {
-    nroTransaction: req.params.id,
-    type: "Compra",
-    amount: "75000",
-    email: data.data.additional_info.items[0].id,
-    date: "2022/10/18",
-    userId: "1",
-    idTransaction: "245",
-    statusTransaction: data.data.status,
-  };
-  axios.post(process.env.LINKDEBACK + "/transactions", d);
-  res.jsonp(datos);
+  try {
+    const data = await getInfoAPI(req.params.id);
+    const datos = {
+      idMercadopago: req.params.id,
+      email: data.data.additional_info.items[0].id,
+      status: data.data.status,
+    };
+    let d = {
+      nroTransaction: req.params.id,
+      type: "Compra",
+      amount: "75000",
+      email: data.data.additional_info.items[0].id,
+      date: "2022/10/18",
+      userId: "1",
+      idTransaction: "245",
+      statusTransaction: data.data.status,
+    };
+    axios.post(process.env.LINKDEBACK + "/transactions", d);
+    res.jsonp(datos);
+  } catch (error) {
+    console.error(error);
+  }
   //data.payer --->informacion no sirve
   //data.status---->estado de pago
   //data.items
@@ -156,10 +163,14 @@ router.get("/transMercado/:id", async (req, res) => {
 });
 
 const getInfoAPI = async (id) => {
-  const apiExterna = await axios.get(
-    "https://api.mercadopago.com/v1/payments/" + id
-  );
-  return apiExterna;
+  try {
+    const apiExterna = await axios.get(
+      "https://api.mercadopago.com/v1/payments/" + id
+    );
+    return apiExterna;
+  } catch (error) {
+    console.error(error);
+  }
 };
 router.get("/notificacion", function (req, res) {
   //res.send(id);  /* 'https://api.mercadopago.com/v1/payments/{id}' \
