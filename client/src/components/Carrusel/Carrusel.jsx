@@ -9,7 +9,7 @@ export default function Index() {
 
     const history = useNavigate();
     const cars = useSelector((state) => state.allCars)
-    const carsPremium = cars.filter((e) => e.premium === true);
+    const carsPremium = cars.filter(e=>e.active).filter((e) => e.premium === true);
 
     return (
         <div className="container mx-auto w-full flex items-center justify-center ml-5">

@@ -1,4 +1,4 @@
-const { Car, User, Consult, Review } = require("../db");
+const { Car, User, Consult, Review, Favourite } = require("../db");
 const axios = require("axios");
 //const user = require("./userJson");
 const { Sequelize } = require("sequelize");
@@ -29,6 +29,8 @@ const premiumUser = async (req, res) => {
     const found = await User.findOne({ where: { mail: req.params.email } });
     const otro = await User.findByPk(found.id, { include: Car });
     otro.cars.map((e) => e.update({ premium: true }));
+    otro.update({premium:true})
+    await otro.save()
     await found.save();
     res.json(otro.cars);
   } catch (error) {
@@ -85,7 +87,7 @@ const createUser = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const found = await User.findByPk(req.params.id, { include: [Car, Consult,Review] });
+  const found = await User.findByPk(req.params.id, { include: [Car, Consult,Review,{model:Favourite, include:[Car]}] });
   
   if (!found) {
     return res.status(404).send("Error: user not found");

@@ -7,6 +7,7 @@ import axios from "axios";
 import {
   getTransaction,
   get_Payment_Link,
+  infoUseremail,
   postTransaction,
 } from "../../Redux/Actions.js";
 export const Premium = ({
@@ -16,6 +17,9 @@ export const Premium = ({
   transactions,
   get_Payment_Link,
   payment_link,
+  premium2,
+  usuario,
+  infoUseremail,
 }) => {
   const [premium, setPremium] = useState(false);
   //const [pay_Link, setPay_Link] = useState("");
@@ -26,7 +30,8 @@ export const Premium = ({
     return data.init_point;
   } */
   useEffect(() => {
-    
+    console.log("------usuario-------")
+    setPremium(usuario.premium)
     getTransaction();
     const data = {
       nroTransaction: user.email,
@@ -34,48 +39,64 @@ export const Premium = ({
       amount: "75000",
       email: user.email,
       date: "2022/10/18",
-      userId: "2",
+      userId: usuario.id,
       idTransaction: "245",
       statusTransaction: "Pendiente",
     };
+    console.log(user.email);
+    infoUseremail(user.email);
     postTransaction(data);
-    get_Payment_Link();
-    listadepremiums()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log("----data------");
+    console.log(data);
+    get_Payment_Link(user.email);
+    listadepremiums();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getListaID = async () => {
-    const data = await axios.get(
-      "/transactionsMercadoPago"
-    );
+    const data = await axios.get("/transactionsMercadoPago");
     return data;
   };
 
   const getdataporid = async (id) => {
-    const apiExterna = await axios.get(
-      "/transMercado/" + id
-    );
+    const apiExterna = await axios.get("/transMercado/" + id);
     return apiExterna;
   };
 
   const listadepremiums = async () => {
     const { data } = await getListaID();
     if (data.length) {
+      //transacciones que fueron hechas
       const d = data.map((e) => e.nroTransaction);
-      const dato = await getdataporid(d[d.length - 1]);
-      console.log(dato.data.status)
-      console.log("---------------")
-      console.log(user.email)
-      console.log("---------------")
-        console.log(dato.data.email)
-      console.log("---------------")
-      console.log(dato.data.status)
-      if (user.email==dato.data.email && dato.data.status=="approved") {
+      console.log("-----------d------------");
+      console.log(d);
+      const dato = [];
+      for (let i = 0; i < d.length; i++) {
+        dato.push(await getdataporid(d[i]));
+      }
+
+      for (let j = 0; j < dato.length; j++) {
+        if (
+          dato[j].data.email == user.email &&
+          dato[j].data.status == "approved"
+        ) {
+          setPremium(true);
+          await axios.put("/users/premium/" + user.email);
+        }
+      }
+      console.log("------dato arreglo------");
+      console.log(dato);
+      console.log("----------------");
+      console.log(dato.data.status);
+      console.log("------email de auth 0---------");
+      console.log(user.email);
+      console.log("-------email--------");
+      console.log(dato.data.email);
+      console.log("---------------");
+      console.log(dato.data.status);
+      if (user.email == dato.data.email && dato.data.status == "approved") {
         setPremium(true);
-        await axios.put(
-          "/users/premium/" + user.email
-          
-        );
-        ///enviar el id de la publicacion 
+        await axios.put("/users/premium/" + user.email);
+        ///enviar el id de la publicacion
         ///premium activado
       }
     }
@@ -100,13 +121,14 @@ export const Premium = ({
   };
   return (
     <div>
+      {console.log("--------------")}
+      {console.log(user.email)}
       <button
         disabled={premium === true}
         onClick={(e) => envio(e)}
         className={premium === false ? estilos.noPremium : estilos.Premium}
       >
         {premium === false ? "¿Quieres Ser Premium?" : "Premium"}
-        
       </button>
       {/* <button onClick={(e) => listadepremiums(e)}>mostrar lista</button> */}
     </div>
@@ -117,6 +139,7 @@ function mapStateToProps(state) {
   return {
     transactions: state.transactions,
     payment_link: state.payment_link,
+    usuario: state.D_user,
   };
 }
 
@@ -124,7 +147,8 @@ function mapDispatchToProps(dispatch) {
   return {
     postTransaction: (e) => dispatch(postTransaction(e)),
     getTransaction: () => dispatch(getTransaction()),
-    get_Payment_Link: () => dispatch(get_Payment_Link()),
+    get_Payment_Link: (e) => dispatch(get_Payment_Link(e)),
+    infoUseremail: (e) => dispatch(infoUseremail(e)),
   };
 }
 

@@ -1,4 +1,5 @@
-const { Car, User, Consult, Review } = require("../db");
+
+const { Car, User, Consult, Favourite, Review } = require("../db");
 const axios = require("axios");
 const { car, user } = require("./bdjson");
 const { Sequelize, Op } = require("sequelize");
