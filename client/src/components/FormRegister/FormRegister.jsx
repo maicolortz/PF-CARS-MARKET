@@ -86,7 +86,7 @@ function FormRegister() {
 
   if (!user && isLoading) {
     return <Loading />;
-  } else if (isAuthenticated && buscados.active===false ) {
+  } else if (isAuthenticated && buscados && buscados.active===false ) {
     Swal.fire({
       title: "Usuario Baneado",
       text: "Por favor verifique su bandeja de correo, ahi tendra las instrucciones pertinentes para  recuperar su cuenta",
