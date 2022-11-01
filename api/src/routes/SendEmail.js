@@ -19,6 +19,7 @@ router.post("/ForSeller", async (req, res) => {
             <span><strong>Nombre: </strong>${firstName} ${lastName}</span><br/>
             <span><strong>Email: </strong>${emailbuyer}</span><br/>
             <span><strong>Telefono: </strong>${phone ? phone : "No especificado"}</span>
+            
             <hr />
             <h3>Instrucciones:</h3>
             <p><strong>1. </strong>No responda directectamente este correo, dar click al correo proporcionado.</p>
@@ -32,6 +33,7 @@ router.post("/ForSeller", async (req, res) => {
             <p><strong>8. </strong>Una vez le de click en "vendido" sera redirigido a un formulario donde debera llenarlo con los datos 
             del comprador para que le califique.</p>
             <hr />
+            
             <h3>Mensaje:</h3>
             <p>${message}</p>
             `

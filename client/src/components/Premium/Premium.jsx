@@ -30,7 +30,7 @@ export const Premium = ({
     return data.init_point;
   } */
   useEffect(() => {
-    console.log("------usuario-------");
+    //console.log("------usuario-------");
     getTransaction();
     const data = {
       nroTransaction: user.email,
@@ -42,12 +42,18 @@ export const Premium = ({
       idTransaction: "245",
       statusTransaction: "Pendiente",
     };
-    console.log(user.email);
+   // console.log(user.email);
     infoUseremail(user.email);
     postTransaction(data);
-    console.log("----data------");
-    console.log(data);
-    get_Payment_Link(user.email);
+   // console.log("----data------");
+    //console.log(data);
+    if (usuario && usuario.premium === true) {
+      setPremium(true);
+    }
+    if(user && user.email){
+
+      get_Payment_Link(user.email);
+    }
     listadepremiums();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -69,8 +75,8 @@ export const Premium = ({
       if (data.length) {
         //transacciones que fueron hechas
         const d = data.map((e) => e.nroTransaction);
-        console.log("-----------d------------");
-        console.log(d);
+        //console.log("-----------d------------");
+        //console.log(d);
         const dato = [];
         for (let i = 0; i < d.length; i++) {
           dato.push(await getdataporid(d[i]));
@@ -80,10 +86,10 @@ export const Premium = ({
             dato[j].data.email === user.email &&
             dato[j].data.status === "approved"
           ) {
-            console.log("-----dacas--------");
+            /* console.log("-----dacas--------");
             console.log(dato[j]);
             console.log(user.email);
-            console.log("............");
+            console.log("............"); */
             setPremium(true);
             await axios.put("/users/premium/" + user.email);
           }
@@ -128,8 +134,6 @@ export const Premium = ({
   };
   return (
     <div>
-      {console.log("--------------")}
-      {console.log(user.email)}
       <button
         disabled={premium === true}
         onClick={(e) => envio(e)}

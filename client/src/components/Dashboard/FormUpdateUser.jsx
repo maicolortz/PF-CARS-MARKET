@@ -13,21 +13,27 @@ function FormUpdateUser({ estilos, user }) {
     telefono: user.whatsApp,
     apellido: user.lastName,
   });
+    //VALIDACIONES
+
+  
   function handleSubmit(e) {
     e.preventDefault();
-    setActivo(!activo);
-    dispatch(
-      updateUser(user.id, {
-        firstName: values.name,
-        lastName: values.apellido,
-        mail: values.email,
-        whatsApp: values.telefono,
-        address: values.direccion,
-      })
-    );
-    console.log(values);
+      setActivo(!activo);
+      dispatch(
+        updateUser(user.id, {
+          firstName: values.name,
+          lastName: values.apellido,
+          mail: values.email,
+          whatsApp: values.telefono,
+          address: values.direccion,
+        })
+        );
+        console.log(values);
+      
   }
   function handleChange(e) {
+    console.log(values)
+   
     const { target } = e;
     const { name, value } = target;
     const newValues = {
@@ -37,7 +43,7 @@ function FormUpdateUser({ estilos, user }) {
     setValues(newValues);
   }
   return (
-    <div className="flex justify-center p-8">
+    <form onSubmit={handleSubmit} className="flex justify-center p-8">
       <div>
         <div
           className=" flex flex-col  p-8 rounded-3xl
@@ -53,6 +59,7 @@ function FormUpdateUser({ estilos, user }) {
               onChange={handleChange}
               disabled={activo}
               className={estilos.input}
+              required
             ></input>
           </div>
 
@@ -66,6 +73,7 @@ function FormUpdateUser({ estilos, user }) {
               onChange={handleChange}
               disabled={activo}
               className={estilos.input}
+              required
             ></input>
           </div>
           <div className={estilos.contenedorInput}>
@@ -73,19 +81,22 @@ function FormUpdateUser({ estilos, user }) {
             <input
               id="telefono"
               name="telefono"
-              type={"tel"}
+              type={"number"}
               value={values.telefono}
               onChange={handleChange}
               disabled={activo}
               className={estilos.input}
+              required
             ></input>
           </div>
           <div className={estilos.contenedorInput}>
             <label className={estilos.labela}> Email</label>
             <input
+            type={"email"}
               value={user.mail}
               disabled={activo}
               className={estilos.input}
+              required
             ></input>
           </div>
           <div className={estilos.contenedorInput}>
@@ -98,12 +109,14 @@ function FormUpdateUser({ estilos, user }) {
               onChange={handleChange}
               disabled={activo}
               className={estilos.input}
+              required
             ></input>
           </div>
           <div className={estilos.contenedorInput}>
+          {console.log(activo)}
             {activo === true ? (
               <button
-                onClick={() => setActivo(!activo)}
+                onClick={() => setActivo(true)}
                 className={estilos.buttonlight}
               >
                 {" "}
@@ -111,17 +124,18 @@ function FormUpdateUser({ estilos, user }) {
               </button>
             ) : (
               <button
-                onClick={(e) => handleSubmit(e)}
+              type="submit"
+              
                 className={estilos.buttonlight}
               >
-                {" "}
+                
                 Actualizar Datos
               </button>
             )}
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

@@ -17,7 +17,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
     getCars()
   }, []);
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState(true);
+  const [admin, setAdmin] = useState(user.mail==="maicolortiz2882@gmail.com");
   const [pauso, setPauso] = useState(null);
   const [caso, setCaso] = useState("");
   const [carro, setCarro] = useState(null);
