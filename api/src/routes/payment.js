@@ -50,9 +50,9 @@ router.get("/paymentprueba", async function (req, res) {
       ],
       auto_return: "approved",
       back_urls: {
-        failure: "/failure",
+        failure: process.env.LINKFRONT + "/failed",
         pending: "/pending",
-        success: process.env.LINKFRONT + "/home",
+        success: process.env.LINKFRONT + "/sucessfull",
       },
       ///cambiar por heroku
       notification_url:

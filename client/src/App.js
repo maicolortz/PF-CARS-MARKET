@@ -15,6 +15,8 @@ import Dashboard from './components/Dashboard/Dashboard.jsx';
 import FormUpdateCar from './components/Dashboard/FormUpdateCar';
 import SellerRatingForm from './components/RatingForms/SellerRatingForm.jsx';
 import BuyerForm from './components/RatingForms/BuyerForm.jsx'
+import PaymentSucessfull from './components/Payment/PaymentSucessfull';
+import PaymentFallid from './components/Payment/PaymentFallid';
 import PerfilUser from './components/PerfilUser/PerfilUser';
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path="/SellerRatingForm" element={<SellerRatingForm />} />
           <Route path="/BuyerForm" element={<BuyerForm />} />
+          <Route path="/sucessfull" element={<PaymentSucessfull/>} />
+          <Route path="/failed" element={<PaymentFallid/>} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="/perfil/:id" element={<PerfilUser/>}/>
         </Routes>
