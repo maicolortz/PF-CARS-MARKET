@@ -1,6 +1,6 @@
 const car = [
   {
-    name: "Toyota Hilux 2.8 Cd Srx 177cv 4x4",
+    name: "Toyota Hilux 2-8 Cd Srx 177cv 4x4",
     brand: "Toyota",
     model: "Hilux",
     year: 2008,
@@ -8,9 +8,9 @@ const car = [
     oil: "diesel",
     gate: 4,
     kilometres: 20000,
-    descriptionShort: "Toyota Hilux 2.8 Cd Srx 177cv 4x4",
+    descriptionShort: "Toyota Hilux 2-8 Cd Srx 177cv 4x4",
     descriptionLong:
-      "MOTOR 2.8 TURBODIESEL 204CV, 4X2, 4X4 Y 4X4 REDUCIDA CON ACCIONAMIENTO ELECTRÓNICO, FAROS DELANTEROS BI-LED, FAROS TRASEROS DE LED, LUCES DIURNAS DE LED, PROTECTOR DE CÁRTER HEAVY DUTY, SISTEMA DE INGRESO INTELIGENTE, SISTEMA DE INGRESO INTELIGENTE, CONECTIVIDAD ANDROID AUTO Y APPLE CARPLAY, SISTEMA DE AUDIO PREMIUM JBL CON 8 PARLANTES Y SUBWOOFER, ECO Y POWER MODE, ETC.",
+      "MOTOR 2-8 TURBODIESEL 204CV, 4X2, 4X4 Y 4X4 REDUCIDA CON ACCIONAMIENTO ELECTRÓNICO, FAROS DELANTEROS BI-LED, FAROS TRASEROS DE LED, LUCES DIURNAS DE LED, PROTECTOR DE CÁRTER HEAVY DUTY, SISTEMA DE INGRESO INTELIGENTE, SISTEMA DE INGRESO INTELIGENTE, CONECTIVIDAD ANDROID AUTO Y APPLE CARPLAY, SISTEMA DE AUDIO PREMIUM JBL CON 8 PARLANTES Y SUBWOOFER, ECO Y POWER MODE, ETC.",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_869695-MLA51918662241_102022-O.webp",
     price: 43900,
@@ -21,7 +21,7 @@ const car = [
     premium: false,
   },
   {
-    name: "BMW X1 2.0 Sdrive 25i Xline 231cv",
+    name: "BMW X1 2-0 Sdrive 25i Xline 231cv",
     brand: "BMW",
     model: "X1",
     year: 2017,
@@ -29,7 +29,7 @@ const car = [
     oil: "Nafta",
     gate: 5,
     kilometres: 117000,
-    descriptionShort: "BMW X1 2.0 Sdrive 25i Xline 231cv",
+    descriptionShort: "BMW X1 2-0 Sdrive 25i Xline 231cv",
     descriptionLong:
       "Excelente estado. Todos los servicios en concesionario oficial.Versión tope de gama. Traccion integral. Motor 2 litros de 231 CV. Aceptamos permutas.",
     image:
@@ -41,7 +41,7 @@ const car = [
     premium: false,
   },
   {
-    name: "Chevrolet Corsa 1.4 Classic Gls",
+    name: "Chevrolet Corsa 1-4 Classic Gls",
     brand: "Chevrolet",
     model: "Corsa",
     year: 2009,
@@ -49,19 +49,19 @@ const car = [
     oil: "nafta",
     gate: 4,
     kilometres: 119000,
-    descriptionShort: "Chevrolet Corsa 1.4 Classic Gls",
+    descriptionShort: "Chevrolet Corsa 1-4 Classic Gls",
     descriptionLong:
       "Chevrolet Corsa Classic 1.4 Gls 4ptas Año 2009 - LivMotors MUY BUENAS CONDICIONES MECANICAS!!! USADOS CON GARANTIA!!!",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_782419-MLA51920906270_102022-O.webp",
-    price: 8203.5,
+    price: 8203,
     condition: "Usado",
     transmition: "Sincronico",
     userId: 1,
     premium: false,
   },
   {
-    name: "Chevrolet Cruze II 1.4 Sedan Ltz",
+    name: "Chevrolet Cruze II 1-4 Sedan Ltz",
     brand: "Chevrolet",
     model: "Cruze II",
     year: 2017,
@@ -81,7 +81,7 @@ const car = [
     premium: false,
   },
   {
-    name: "Renault Kangoo 1.6 Furgon Ph3 Confort 5as Lc",
+    name: "Renault Kangoo 1-6 Furgon Ph3 Confort 5as Lc",
     brand: "Renault",
     model: "Kangoo",
     year: 2014,
@@ -101,7 +101,7 @@ const car = [
     premium: false,
   },
   {
-    name: "Citroën C4 Lounge 1.6 Thp 165 At6 Feel",
+    name: "Citroën C4 Lounge 1-6 Thp 165 At6 Feel",
     brand: "Citroën",
     model: "C4 Lounge",
     year: 2017,
@@ -121,7 +121,7 @@ const car = [
     premium: false
   },
   {
-    name: "Volkswagen Suran 1.6 I Trendline 90b",
+    name: "Volkswagen Suran 1-6 I Trendline 90b",
     brand: "Volkswagen",
     model: "Suran",
     year: 2010,
@@ -141,7 +141,7 @@ const car = [
     premium: false
   },
   {
-    name: "Peugeot 208 1.6 Gt Thp",
+    name: "Peugeot 208 1-6 Gt Thp",
     brand: "Peugeot",
     model: "206",
     year: 2019,
@@ -161,7 +161,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi A3 Sportback 2.0 T Fsi Stronic 200cv",
+    name: "Audi A3 Sportback 2-0 T Fsi Stronic 200cv",
     brand: "Audi",
     model: "A3 Sportbaclk",
     year: 2009,
@@ -181,7 +181,7 @@ const car = [
     premium: false
   },
   {
-    name: "Jeep Renegade 1.8 Longitude At6",
+    name: "Jeep Renegade 1-8 Longitude At6",
     brand: "Jeep",
     model: "Renegade",
     year: 2019,
@@ -201,7 +201,7 @@ const car = [
     premium: false
   },
   {
-    name: "Fiat Pulse 1.3 Drive Gse Cvt",
+    name: "Fiat Pulse 1-3 Drive Gse Cvt",
     brand: "Fiat",
     model: "Pulse",
     year: 2022,
@@ -214,7 +214,7 @@ const car = [
       "Concesionaria Oficial FIAT Auto Generali - NO ES PLAN DE AHORROS /**UNIDAD CON ENTREGA INMEDIATA**/ **Financiamos con la mejor TASA en CUOTAS FIJAS LA 1ra CUOTA SE PAGA A LOS 90 DÍAS* *Tomamos TU Usados como parte de Pago** ",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_2X_848044-MLA51968640677_102022-F.webp",
-    price: 26073.14,
+    price: 26073,
     condition: "Nuevo",
     transmition: "Automatico",
     userId: 4,
@@ -222,7 +222,7 @@ const car = [
   },
 
   {
-    name: "Chevrolet Cruze 5 1.4 Rs At 5 p",
+    name: "Chevrolet Cruze 5 1-4 Rs At 5 p",
     brand: "Chevrolet",
     model: "Cruze 5",
     year: 2022,
@@ -242,7 +242,7 @@ const car = [
     premium: true
   },
   {
-    name: "Toyota Hilux 2.4 Cd Dx 150cv 4x4",
+    name: "Toyota Hilux 2-4 Cd Dx 150cv 4x4",
     brand: "Toyota",
     model: "Hilux",
     year: 2022,
@@ -262,7 +262,7 @@ const car = [
     premium: true
   },
   {
-    name: "Chevrolet S10 2.8 Cd 4x4 Z71",
+    name: "Chevrolet S10 2-8 Cd 4x4 Z71",
     brand: "Chevrolet",
     model: "S10",
     year: 2022,
@@ -275,14 +275,14 @@ const car = [
       "ANTICIPO Y CUOTAS FIJAS EN PESOS /COMPRA TU 0KM SOLO CON ENTREGA INMEDIATA!!/VENDEMOS AUTOS FISICOS CON NRO DE MOTOR Y CHASIS!!",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_2X_615093-MLA51966761470_102022-F.webp",
-    price: 60768.69,
+    price: 60768,
     condition: "Nuevo",
     transmition: "Automatico",
     userId: 5,
     premium: true
   },
   {
-    name: "Volkswagen Amarok 3.0 V6 Cd Highline",
+    name: "Volkswagen Amarok 3-0 V6 Cd Highline",
     brand: "Volkswagen",
     model: "Amarok",
     year: 2022,
@@ -294,14 +294,14 @@ const car = [
     descriptionLong: " ",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_2X_747530-MLA51966301952_102022-F.webp",
-    price: 80763.11,
+    price: 80763,
     condition: "Nuevo",
     transmition: "Automatico",
     userId: 6,
     premium: true
   },
   {
-    name: "Volkswagen Taos 1.4 250 Tsi Hero",
+    name: "Volkswagen Taos 1-4 250 Tsi Hero",
     brand: "Volkswagen",
     model: "Taos",
     year: 2022,
@@ -314,14 +314,14 @@ const car = [
       "CONCESIONARIO OFICIAL VOLKSWAGEN ESPASA PUERTO MADERO.//VENDEDOR: EDGAR LOPEZ//11.400.000 mil pesos final patentado (CABA) puesto en la calle, incluido el flete, formularios, patentamiento y hasta el sellado, más $63.000 de obleas y verificación, NO PAGAS NADA MAS en gastos Administrativo, te queda a pagar solo el proporcional de patentes.",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_2X_957721-MLA51965490866_102022-F.webp",
-    price: 66645.46,
+    price: 66645,
     condition: "Nuevo",
     transmition: "Automatico",
     userId: 6,
     premium: true
   },
   {
-    name: "Citroën C4 Cactus 1.6 Vti 115 Feel",
+    name: "Citroën C4 Cactus 1-6 Vti 115 Feel",
     brand: "Citroën",
     model: "C4 Cactus",
     year: 2022,
@@ -341,7 +341,7 @@ const car = [
     premium: false
   },
   {
-    name: "Citroën Berlingo 1.6 Vti 115 Business",
+    name: "Citroën Berlingo 1-6 Vti 115 Business",
     brand: "Citroën",
     model: "Berlingo",
     year: 2022,
@@ -361,7 +361,7 @@ const car = [
     premium: false
   },
   {
-    name: "Renault ALASKAN 2.3 Bit 16v Intens Mt 4x4",
+    name: "Renault ALASKAN 2-3 Bit 16v Intens Mt 4x4",
     brand: "Renault",
     model: "ALASKAN",
     year: 2022,
@@ -381,7 +381,7 @@ const car = [
     premium: false
   },
   {
-    name: "Renault Kangoo Ii Express Confort 5a 1.6 Sce",
+    name: "Renault Kangoo Ii Express Confort 5a 1-6 Sce",
     brand: "Renault",
     model: "Kangoo",
     year: 2022,
@@ -402,7 +402,7 @@ const car = [
   },
 
   {
-    name: "Renault Sandero Stepway 1.6 16v Intense",
+    name: "Renault Sandero Stepway 1-6 16v Intense",
     brand: "Renault",
     model: "Sandero Stepway",
     year: 2022,
@@ -415,14 +415,14 @@ const car = [
       "CONCESIONARIO OFICIAL DE RENAULT NUMERO UNO/ RENAULT LEPIC S.A/Horario de atención: Lunes a Sábados de 9:00hs a 19:00hs/Atendemos tu consulta vía ON LINE por WhatsApp, por llamada o videollamada./ ASESORA COMERCIAL: THIAGO ACOSTA/LEPIC sucursal: BOEDO/ Dirección: Av. La Plata 1588, BOEDO, CABA",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_2X_604878-MLA51967751959_102022-F.webp",
-    price: 26297.61,
+    price: 26297,
     condition: "Nuevo",
     transmition: "Sincronico",
     userId: 3,
     premium: false
   },
   {
-    name: "Renault Logan Ph2 Zen 1.6 2022",
+    name: "Renault Logan Ph2 Zen 1-6 2022",
     brand: "Renault",
     model: "Logan",
     year: 2022,
@@ -434,14 +434,14 @@ const car = [
     descriptionLong:
       "- Esta es la OPORTUNIDAD para OBTENER tu 0 km.- La oferta publicada corresponde a una promoción específica de este mes.- Vendemos a todo el país de manera ágil y sencilla. ¡Únicamente viajás para retirar la unidad!- ¡No dudes en consultar por otros modelos en promoción! - Financiamos en tasas a cuotas fijas y SIN INTERÉS. Asesorate ahora.- Sin duda la mejor toma de usados.",
     image: "",
-    price: 23070.3,
+    price: 23070,
     condition: "Nuevo",
     transmition: "Sincronico",
     userId: 3,
     premium: false
   },
   {
-    name: "Honda HR-V 1.8 Ex-l 2wd Cvt",
+    name: "Honda HR-V 1-8 Ex-l 2wd Cvt",
     brand: "Honda",
     model: "HR-V",
     year: 2022,
@@ -461,7 +461,7 @@ const car = [
     premium: false
   },
   {
-    name: "Honda CR-V 2.4 4x2 Active At Lx",
+    name: "Honda CR-V 2-4 4x2 Active At Lx",
     brand: "Honda",
     model: "CR-V",
     year: 2005,
@@ -481,7 +481,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota Corolla 1.8 Xei Cvt 140cv",
+    name: "Toyota Corolla 1-8 Xei Cvt 140cv",
     brand: "Toyota",
     model: "Corolla",
     year: 2021,
@@ -501,7 +501,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota Hilux 2.8 Cd Srx 177cv 4x4 At",
+    name: "Toyota Hilux 2-8 Cd Srx 177cv 4x4 At",
     brand: "Toyota",
     model: "Hilux",
     year: 2019,
@@ -521,7 +521,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota Hilux 2.8 Cd Srv 177cv 4x2",
+    name: "Toyota Hilux 2-8 Cd Srv 177cv 4x2",
     brand: "Toyota",
     model: "Hilux",
     year: 2022,
@@ -541,7 +541,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota Hilux 2.8 Cd Srv 4x4 At 2021",
+    name: "Toyota Hilux 2-8 Cd Srv 4x4 At 2021",
     brand: "Toyota",
     model: "Hilux",
     year: 2021,
@@ -562,7 +562,7 @@ const car = [
   },
 
   {
-    name: "Toyota Hiace 2.8 Tdi Commuter 6at 14a",
+    name: "Toyota Hiace 2-8 Tdi Commuter 6at 14a",
     brand: "Toyota",
     model: "Hiace",
     year: 2022,
@@ -582,7 +582,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota SW4 2.8 Srx 177cv 4x4 7as At",
+    name: "Toyota SW4 2-8 Srx 177cv 4x4 7as At",
     brand: "Toyota",
     model: "SW4",
     year: 2016,
@@ -602,7 +602,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota Etios 1.5 Xls At",
+    name: "Toyota Etios 1-5 Xls At",
     brand: "Toyota",
     model: "Etios",
     year: 2022,
@@ -622,7 +622,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota SW4 2.8 Tdi Diamante Ii 4x4 7as 6at",
+    name: "Toyota SW4 2-8 Tdi Diamante Ii 4x4 7as 6at",
     brand: "Toyota",
     model: "SW4",
     year: 2022,
@@ -642,7 +642,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota Corolla Cross 1.8 Xei Ecvt",
+    name: "Toyota Corolla Cross 1-8 Xei Ecvt",
     brand: "Toyota",
     model: "Corolla Cross",
     year: 2022,
@@ -662,7 +662,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota SW4 2.8 Srx 177cv 4x4 7as At",
+    name: "Toyota SW4 2-8 Srx 177cv 4x4 7as At",
     brand: "Toyota",
     model: "SW4",
     year: 2022,
@@ -682,7 +682,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi A3 Sportback 2.0 T Fsi Stronic 200cv",
+    name: "Audi A3 Sportback 2-0 T Fsi Stronic 200cv",
     brand: "Audi",
     model: "A3 Sportback",
     year: 2009,
@@ -702,7 +702,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi Q2 1.4 35 Tfsi Sport 150 Cv",
+    name: "Audi Q2 1-4 35 Tfsi Sport 150 Cv",
     brand: "Audi",
     model: "Q2",
     year: 2022,
@@ -722,7 +722,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi Q3 2.0 Tfsi Stronic Quattro 220cv",
+    name: "Audi Q3 2-0 Tfsi Stronic Quattro 220cv",
     brand: "Audi",
     model: "Q3",
     year: 2017,
@@ -742,7 +742,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi Q2 1.4 35 Tfsi Sport 150 Cv",
+    name: "Audi Q2 1-4 35 Tfsi Sport 150 Cv",
     brand: "Audi",
     model: "Q2",
     year: 2022,
@@ -762,7 +762,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi A3 1.4 Tfsi Sedan Stronic 125cv",
+    name: "Audi A3 1-4 Tfsi Sedan Stronic 125cv",
     brand: "Audi",
     model: "A3",
     year: 2018,
@@ -782,7 +782,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi Q7 3.0 Tfsi 333cv Tiptronic Quattro",
+    name: "Audi Q7 3-0 Tfsi 333cv Tiptronic Quattro",
     brand: "Audi",
     model: "Q7",
     year: 2013,
@@ -802,7 +802,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi TT 2.0 T Fsi Stronic 211cv Coupé",
+    name: "Audi TT 2-0 T Fsi Stronic 211cv Coupé",
     brand: "Audi",
     model: "TT",
     year: 2012,
@@ -822,7 +822,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi A3 Sportback 1.4 Tsi Mt",
+    name: "Audi A3 Sportback 1-4 Tsi Mt",
     brand: "Audi",
     model: "A3 Sportback",
     year: 2011,
@@ -842,7 +842,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi A5 3.0 Coupe Tfsi 272cv Stronic Quattro",
+    name: "Audi A5 3-0 Coupe Tfsi 272cv Stronic Quattro",
     brand: "Audi",
     model: "A5",
     year: 2013,
@@ -862,7 +862,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi A5 2.0 Coupe Tfsi 225cv Multitronic",
+    name: "Audi A5 2-0 Coupe Tfsi 225cv Multitronic",
     brand: "Audi",
     model: "A5",
     year: 2014,
@@ -881,7 +881,7 @@ const car = [
     premium: false
   },
   {
-    name: "Audi A5 3.0 Coupe Tfsi 272cv Stronic Quattro",
+    name: "Audi A5 3-0 Coupe Tfsi 272cv Stronic Quattro",
     brand: "Audi",
     model: "A5",
     year: 2013,
@@ -901,7 +901,7 @@ const car = [
     premium: false
   },
   {
-    name: "Toyota Hilux 2.8 Cd Srx 177cv 4x4",
+    name: "Toyota Hilux 2-8 Cd Srx 177cv 4x4",
     brand: "Toyota",
     model: "Hilux",
     year: 2008,
@@ -921,7 +921,7 @@ const car = [
     premium: false
   },
   {
-    name: "BMW X1 2.0 Sdrive 25i Xline 231cv",
+    name: "BMW X1 2-0 Sdrive 25i Xline 231cv",
     brand: "BMW",
     model: "X1",
     year: 2017,
@@ -941,7 +941,7 @@ const car = [
     premium: true
   },
   {
-    name: "Chevrolet Corsa 1.4 Classic Gls",
+    name: "Chevrolet Corsa 1-4 Classic Gls",
     brand: "Chevrolet",
     model: "Corsa",
     year: 2009,
@@ -954,7 +954,7 @@ const car = [
       "Chevrolet Corsa Classic 1.4 Gls 4ptas Año 2009 - LivMotors MUY BUENAS CONDICIONES MECANICAS!!! USADOS CON GARANTIA!!!",
     image:
       "https://http2.mlstatic.com/D_NQ_NP_782419-MLA51920906270_102022-O.webp",
-    price: 8203.5,
+    price: 8203,
     condition: "Usado",
     premium: false,
     transmition: "Sincronico",
@@ -1032,6 +1032,15 @@ const user = [
     mail: "17-10837@usb.ve",
     whatsApp: "54932l4566",
     address: "Caracas, Venezuela ",
+  },
+  {
+    password: "jiaiojojhju",
+    imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png",
+    firstName: "Administrador",
+    lastName: "Cars MARKET",
+    mail: "maicolortiz2882@gmail.com",
+    whatsApp: "4324442344",
+    address: "Argentina,Cordoba ",
   },
 ];
 

@@ -33,9 +33,9 @@ class PaymentService {
       ],
       auto_return: "approved",
       back_urls: {
-        failure: "/failure",
+        failure: "/failed",
         pending: "/pending",
-        success: process.env.LINKFRONT + "/home",
+        success: "/sucessfull",
       },
       ///cambiar por heroku
       notification_url:
