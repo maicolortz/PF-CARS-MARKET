@@ -22,10 +22,15 @@ router.post("/ForSeller", async (req, res) => {
             <hr />
             <h3>Instrucciones:</h3>
             <p><strong>1. </strong>No responda directectamente este correo, dar click al correo proporcionado.</p>
-            <p><strong>2. </strong>Responder consulta a traves del correo o por whatsapp (si se especifico) proporcionados arriba.</p>
-            <p><strong>3. </strong>Usar un lenguaje adecuado en la respuesta.</p>
-            <p><strong>4. </strong>No proporcionar información personal adicional de no estar seguro.</p>
-            <p><strong>5. </strong>En caso de concretar un encuentro para la venta, pautar un lugar seguro con el comprador.</p>
+            <p><strong>2. </strong>Guarda este correo para no perder las instrucciones.</p>
+            <p><strong>3. </strong>Responder la consulta a traves del correo o por el teléfono (si se especifico) proporcionados arriba.</p>
+            <p><strong>4. </strong>Usar un lenguaje adecuado a la hora de dar una respuesta.</p>
+            <p><strong>5. </strong>No proporcionar información personal adicional de no estar seguro.</p>
+            <p><strong>6. </strong>En caso de concretar un encuentro para la venta, pautar un lugar seguro con el comprador.</p>
+            <p><strong>7. </strong>Una vez concretada la venta, debera dirigirse a su perfil de usuario en nuestra pagina web, ir 
+            a "mis publicaciones", y dar click en "vendido" para sacar la publicación del vehiculo vendido.</p>
+            <p><strong>8. </strong>Una vez le de click en "vendido" sera redirigido a un formulario donde debera llenarlo con los datos 
+            del comprador para que le califique.</p>
             <hr />
             <h3>Mensaje:</h3>
             <p>${message}</p>
@@ -52,7 +57,17 @@ router.post("/ForBuyer", async (req, res) => {
  
             <span>Hola, <strong>${firstName} ${lastName}</strong>, <strong>${firstNameSeller} ${lastNameSeller}</strong> 
             te envio un mensaje para que lo califiques a traves del siguiente <a href=http://localhost:3000/sellerRatingForm?id=${idSeller}>link</a>.</span><br/>
+            
             <hr />
+            <h3>Instrucciones:</h3>
+            <p><strong>1. </strong>No responda directectamente este correo.</p>
+            <p><strong>2. </strong>Guarda este correo para no perder las instrucciones.</p>
+            <p><strong>3. </strong>Respondale directamente al vendedor sobre el correo con el cual se estuvo comunicando con él.</p>
+            <p><strong>4. </strong>Usar un lenguaje adecuado a la hora de dar una respuesta.</p>
+            <p><strong>5. </strong>Debe tener su sesión iniciada, antes de darle click al link, de lo contrario no le dejara llenar el formulario.</p>
+            <p><strong>6. </strong>Es importante llenar el formulario para tener un feedback del proceso compra/venta.</p>
+            <hr />
+
             <h3>Mensaje:</h3>
             <p>${message}</p>
             `
