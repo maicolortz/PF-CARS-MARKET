@@ -62,7 +62,7 @@ function ConctactForm() {
     if (!isLoading && !isAuthenticated) {
         Swal.fire({
             title: 'ERROR!',
-            text: 'Usuario no registrado!!!',
+            text: 'Usted no ha iniciado sesión o no se encuentra registrado!!!',
             icon: 'error',
             confirmButtonColor: "#1d4ed8"
         }).then(() => {
