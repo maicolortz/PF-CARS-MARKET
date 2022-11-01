@@ -14,8 +14,15 @@ import perfilImg from '../Card/imagenes/usuario.png'
 
 const estilos = {
   button_contactar_vendedor: "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black rounded-full text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800 font-semibold text-lg leading-4  w-96 py-5 lg:mt-12 mt-6",
-  button_regresar_inicio: "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black rounded-full text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800 font-semibold text-lg leading-4  w-auto py-4 px-4 lg:mt-12 mt-6"
+  button_regresar_inicio: "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black rounded-full text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800 font-semibold text-lg leading-4  w-auto py-4 px-4 lg:mt-12 mt-6",
+  input: "border-4 border-gray-300 pl-3 py-3 w-full shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
+  cajaComentarios: "border-4 border-gray-300 mb-5 pl-3 py-3 h-auto w-full shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
+  contenedor_input_y_titulo: "md:w-auto flex flex-col mb-6",
+  titulos: "text-xl leading-8 font-semibold text-gray-800 pb-2",
+
 }
+
+
 function CardDetail() {
 
   const dispatch = useDispatch();
@@ -212,12 +219,12 @@ function CardDetail() {
                 </div>
               </div>
 
-              {/* <!-- Imagen y Boton Comprar--> */}
+              {/* <!-- Rating usuario, imagen y Boton Comprar--> */}
 
               <div className=" w-full sm:w-96 md:w-8/12 lg:w-6/12 flex flex-col sm:pt-6 p-3 items-center lg:gap-8 sm:gap-6 gap-4">
                 <article className=' w-full lg:w-9/12'>
                   <div class="flex gap-5">
-                    <img class="w-20 h-20 rounded-full" src={carsDetail ? carsDetail.user.imgPerfil : perfilImg} alt={perfilImg} />
+                    <img class="w-20 h-20 rounded-full" src={carsDetail.user ? carsDetail.user.imgPerfil : perfilImg} alt={perfilImg} />
                     <div class="flex flex-col justify-between py-3 w-auto font-medium text-black">
                       <div>
                         <p className='text-2xl leading-8 font-semibold text-gray-800'> {`${carsDetail.user && carsDetail.user.firstName} ${carsDetail.user && carsDetail.user.lastName}`}</p>
@@ -253,32 +260,40 @@ function CardDetail() {
                 </div>
               </div>
             </div>
+            <div className=' mt-5 px-5'>
+              <form onSubmit={(e) => handleOnSubmit(e)} className="flex flex-col">
+                <label className={estilos.titulos}>Preguntas y respuestas:</label>
+                <div className='flex gap-5 pr-16'>
+                  <textarea type="text" name='description' value={state.description} onChange={handleChange} className={estilos.input} placeholder="Escribe tu pregunta..." rows={2} />
+                  <button type='submit' className={estilos.button_regresar_inicio}>Preguntar</button>
+                </div>
+                <div className='mt-5'>
+                  <label className="text-lg leading-8 font-semibold text-gray-800 pb-2"> Ultimas preguntas Realizadas:</label>
+                  <div className='pl-10 pr-36 mt-5'>
+                  {
+                    // eslint-disable-next-line array-callback-return
+                    consults.map(el => {
+                      if (el.cars[0].id === id) {
+                        return (
+                          <div className={estilos.cajaComentarios}>
+                            <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
+                              {el.users[0].firstName} {el.users[0].lastName}
+                            </div>
+                            <div>
+                              {el.description}
+                            </div>
+                          </div>
+                        )
+                      }
+                    })}
+                    </div>
+                </div>
+              </form>
+            </div>
           </div>
         )}
       </div>
-      <div>
-        <form onSubmit={(e) => handleOnSubmit(e)}>
-          <div>
-            {
-              // eslint-disable-next-line array-callback-return
-              consults.map(el => {
-                if (el.cars[0].id === id) {
-                  return <div>
-                    <div>
-                      {el.users[0].firstName} {el.users[0].lastName}
-                    </div>
-                    <div>
-                      {el.description}
-                    </div>
-                  </div>
-                }
-              })}
-          </div>
-          <label>Consulta al vendedor</label>
-          <textarea type="text" name='description' value={state.description} onChange={handleChange} />
-          <button type='submit'>Consultar</button>
-        </form>
-      </div>
+
     </div>
   );
 }

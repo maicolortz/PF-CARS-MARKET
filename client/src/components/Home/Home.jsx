@@ -16,6 +16,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const cars = useSelector((state) => state.car);
   const { loading } = useSelector(state => state);
+  const usuario = useSelector((state) => state.D_user);
 
   //AUTENTICACION (AUTH0)
   const { user, isAuthenticated, } = useAuth0();
@@ -25,7 +26,7 @@ export default function Home() {
   const userEmail = user && user.email;
   const buscados = usuarios && usuarios.find(u => u.mail === userEmail);
 
-  if (isAuthenticated && buscados === undefined) {
+  if (!usuario && isAuthenticated && buscados === undefined) {
     Swal.fire({
       title: 'Completa el registro',
       text: 'Llene los siguientes campos para completar el registro',
