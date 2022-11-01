@@ -28,7 +28,7 @@ export default function NavBar() {
   const [show, setShow] = useState(false);
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const history = useNavigate();
-
+  
   useEffect(() => {
 
     dispatch(getUsers());
