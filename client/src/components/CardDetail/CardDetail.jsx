@@ -38,8 +38,9 @@ function CardDetail() {
 
   const { user } = useAuth0();
 
-  const users = useSelector((state) => state.allUsers)
-  const consults = useSelector((state) => state.consult)
+  const users = useSelector((state) => state.allUsers);
+  const consults = useSelector((state) => state.consult);
+  // const currentUser = useSelector((state) => state.D_user);
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value, });
@@ -61,6 +62,7 @@ function CardDetail() {
         }
       })
     }
+
   }
 
   const { loading } = useSelector((state) => state);
@@ -78,10 +80,11 @@ function CardDetail() {
     { name: "Trasmision: ", detalle: carsDetail.transmition },
   ];
 
-  const reviewsUser = carsDetail[0] && carsDetail.user.reviews;
+  const reviewsUser = carsDetail.user && carsDetail.user.reviews;
   // const reviewsUser = [1, 5, 3, 2, 1, 2, 4]
-  const ratingUser = reviewsUser && Math.round(reviewsUser.reduce((a, b) => a + b, 0) / reviewsUser.length);
-
+  const ratings = reviewsUser.map(e => e.rating);
+  const ratingUser = ratings && Math.round(ratings.reduce((a, b) => a + b, 0) / ratings.length);
+  console.log(reviewsUser);
   console.log(ratingUser);
 
   useEffect(() => {
@@ -146,7 +149,6 @@ function CardDetail() {
     }
 
   }
-
 
   const buttonContactSeller = () => {
     if (isAuthenticated) {
@@ -262,31 +264,33 @@ function CardDetail() {
             </div>
             <div className=' mt-5 px-5'>
               <form onSubmit={(e) => handleOnSubmit(e)} className="flex flex-col">
-                <label className={estilos.titulos}>Preguntas y respuestas:</label>
-                <div className='flex gap-5 pr-16'>
-                  <textarea type="text" name='description' value={state.description} onChange={handleChange} className={estilos.input} placeholder="Escribe tu pregunta..." rows={2} />
-                  <button type='submit' className={estilos.button_regresar_inicio}>Preguntar</button>
-                </div>
+                <label className={estilos.titulos}>Preguntas y respuestas: </label>
+                {isAuthenticated ?
+                  (<div className='flex gap-5 pr-16'>
+                    <textarea type="text" name='description' value={state.description} onChange={handleChange} className={estilos.input} placeholder="Escribe tu pregunta..." rows={2} />
+                    <button type='submit' className={estilos.button_regresar_inicio}>Preguntar</button>
+                  </div>) : <div className='text-lg text-gray-500'>"Inicie sesión o registrese para realizar preguntas"</div>
+                }
                 <div className='mt-5'>
                   <label className="text-lg leading-8 font-semibold text-gray-800 pb-2"> Ultimas preguntas Realizadas:</label>
                   <div className='pl-10 pr-36 mt-5'>
-                  {
-                    // eslint-disable-next-line array-callback-return
-                    consults.map(el => {
-                      if (el.cars[0].id === id) {
-                        return (
-                          <div className={estilos.cajaComentarios}>
-                            <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
-                              {el.users[0].firstName} {el.users[0].lastName}
+                    {
+                      // eslint-disable-next-line array-callback-return
+                      consults.map(el => {
+                        if (el.cars[0].id === id) {
+                          return (
+                            <div className={estilos.cajaComentarios}>
+                              <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
+                                {el.users[0].firstName} {el.users[0].lastName}
+                              </div>
+                              <div>
+                                {el.description}
+                              </div>
                             </div>
-                            <div>
-                              {el.description}
-                            </div>
-                          </div>
-                        )
-                      }
-                    })}
-                    </div>
+                          )
+                        }
+                      })}
+                  </div>
                 </div>
               </form>
             </div>
