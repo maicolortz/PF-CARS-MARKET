@@ -48,7 +48,26 @@ const createFavourite = async (req, res) => {
     // }
   }
 
+
+  const deleteFavourite = async (req,res)=>{
+    const{userId, carId}=req.body;
+    try{
+      const found = await Favourite.findOne({
+        where:{[Op.and]:[
+          {userId:userId},
+          {carId:carId} ]
+          }
+        });
+      await found.destroy();
+      res.send("Favorito eliminado");
+      //return res.json(found);
+    }catch(err){
+      res.json(err.message);
+    };
+  };
+
   module.exports = {
     getAllFavorites,
     createFavourite,
+    deleteFavourite,
   };
