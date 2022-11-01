@@ -107,6 +107,7 @@ export const Premium = ({
   const envio = (e) => {
     Swal.fire({
       title: "Unete al Premium, obtendras excelentes beneficios",
+      confirmButtonColor: "#1d4ed8"
     }).then(function () {
       window.location = payment_link.init_point;
     });
