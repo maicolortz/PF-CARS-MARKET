@@ -15,6 +15,7 @@ import Dashboard from './components/Dashboard/Dashboard.jsx';
 import FormUpdateCar from './components/Dashboard/FormUpdateCar';
 import SellerRatingForm from './components/RatingForms/SellerRatingForm.jsx';
 import BuyerForm from './components/RatingForms/BuyerForm.jsx'
+import PerfilUser from './components/PerfilUser/PerfilUser';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/SellerRatingForm" element={<SellerRatingForm />} />
           <Route path="/BuyerForm" element={<BuyerForm />} />
           <Route path="*" element={<PageNotFound />} />
+          <Route path="/perfil/:id" element={<PerfilUser/>}/>
         </Routes>
       </BrowserRouter>
 
