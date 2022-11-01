@@ -45,6 +45,37 @@ router.post("/ForSeller", async (req, res) => {
     }
 });
 
+router.post("/copyOfMailBuyer", async (req, res) => {
+    const { firstName, lastName, emailbuyer, message, emailSeller, phone, car } = req.body;
+
+    try {
+        await transporter.sendMail({
+            from: `${firstName} ${lastName}: ${emailbuyer}`,// Quien manda el email
+            to: emailbuyer,// Email destino
+            subject: "Publicaciones Car-Market",//Asunto del correo
+            text: `${message}`,
+            html: `
+            <h2>Esto es una copia de su su mensaje al vendedor sobre ${car}</h2>
+            <p><strong>Por favor, NO responder directectamente este correo!!!</strong></p>
+            <p><strong>Su mensaje ha sido enviado exitosamente al vendedor, pronto se contactara con usted</strong></p>
+            
+            <hr />
+            <span><strong>Nombre: </strong>${firstName} ${lastName}</span><br/>
+            <span><strong>Email: </strong>${emailbuyer}</span><br/>
+            <span><strong>Telefono: </strong>${phone ? phone : "No especificado"}</span>
+            <hr />
+            <h3>Mensaje:</h3>
+            <p>${message}</p>
+            <hr />
+            `
+        });
+        res.status(200).send(`Copia de correo enviado a: ${emailbuyer}`);
+
+    } catch (error) {
+        res.status(500).send("Error en el servidor al enviar el correo");
+    }
+});
+
 router.post("/ForBuyer", async (req, res) => {
     const { firstName, lastName, emailbuyer, message, emailSeller, idSeller, firstNameSeller, lastNameSeller } = req.body;
 

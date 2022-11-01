@@ -38,8 +38,8 @@ function App() {
           <Route path="/BuyerForm" element={<BuyerForm />} />
           <Route path="/sucessfull" element={<PaymentSucessfull/>} />
           <Route path="/failed" element={<PaymentFallid/>} />
-          <Route path="*" element={<PageNotFound />} />
           <Route path="/perfil/:id" element={<PerfilUser/>}/>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
 
