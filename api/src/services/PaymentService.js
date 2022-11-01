@@ -9,14 +9,16 @@ class PaymentService {
         
       };
     } */
-    let transation = await axios.get(process.env.LINKDEBACK+"/transactions");
-    let user= transation.data
+    let transation = await axios.get(process.env.LINKDEBACK + "/transactions");
+    let user = transation.data;
     const body = {
-      payer:[{
-        payer_email: user? user[user.length-1].email:"nada",
+      payer: [
+        {
+          payer_email: user ? user[user.length - 1].email : "nada",
 
-        first_name:user? user[user.length-1].email:"nada",
-      },],
+          first_name: user ? user[user.length - 1].email : "nada",
+        },
+      ],
       items: [
         {
           title: "Membresia Premium  CARS MARKET",
@@ -24,7 +26,7 @@ class PaymentService {
           picture_url:
             "https://es.digitaltrends.com/wp-content/uploads/2022/07/mejores-deportivos.jpeg?p=1",
           category_id: "MEMBRESIA",
-          id:user? user[user.length-1].email:"nada",
+          id: user ? user[user.length - 1].email : "nada",
           quantity: 1,
           unit_price: 1000,
         },
@@ -33,11 +35,11 @@ class PaymentService {
       back_urls: {
         failure: "/failure",
         pending: "/pending",
-        success: process.env.LINKFRONT+"/home",
+        success: process.env.LINKFRONT + "/home",
       },
       ///cambiar por heroku
       notification_url:
-        process.env.LINKAUTENTICADO+"/notificacion?source_news=webhooks",
+        process.env.LINKAUTENTICADO + "/notificacion?source_news=webhooks",
     };
 
     const payment = await axios.post(url, body, {

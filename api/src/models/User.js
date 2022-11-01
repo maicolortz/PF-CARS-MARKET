@@ -40,6 +40,11 @@ module.exports = (sequelize) => {
       //allowNull: false,
       defaultValue: false,
     },
+    active: { // Que debería hacer con esto
+      type: DataTypes.BOOLEAN,
+      //allowNull: false,
+      defaultValue: true,
+    },
 
   }, { timestamps: false });
 }
