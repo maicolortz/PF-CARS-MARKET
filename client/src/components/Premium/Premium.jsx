@@ -30,8 +30,7 @@ export const Premium = ({
     return data.init_point;
   } */
   useEffect(() => {
-    console.log("------usuario-------")
-    setPremium(usuario.premium)
+    console.log("------usuario-------");
     getTransaction();
     const data = {
       nroTransaction: user.email,
@@ -63,27 +62,34 @@ export const Premium = ({
   };
 
   const listadepremiums = async () => {
-    const { data } = await getListaID();
-    if (data.length) {
-      //transacciones que fueron hechas
-      const d = data.map((e) => e.nroTransaction);
-      console.log("-----------d------------");
-      console.log(d);
-      const dato = [];
-      for (let i = 0; i < d.length; i++) {
-        dato.push(await getdataporid(d[i]));
-      }
-
-      for (let j = 0; j < dato.length; j++) {
-        if (
-          dato[j].data.email == user.email &&
-          dato[j].data.status == "approved"
-        ) {
-          setPremium(true);
-          await axios.put("/users/premium/" + user.email);
+    if (usuario && usuario.premium === true) {
+      setPremium(true);
+    } else {
+      const { data } = await getListaID();
+      if (data.length) {
+        //transacciones que fueron hechas
+        const d = data.map((e) => e.nroTransaction);
+        console.log("-----------d------------");
+        console.log(d);
+        const dato = [];
+        for (let i = 0; i < d.length; i++) {
+          dato.push(await getdataporid(d[i]));
+        }
+        for (let j = 0; j < dato.length; j++) {
+          if (
+            dato[j].data.email === user.email &&
+            dato[j].data.status === "approved"
+          ) {
+            console.log("-----dacas--------");
+            console.log(dato[j]);
+            console.log(user.email);
+            console.log("............");
+            setPremium(true);
+            await axios.put("/users/premium/" + user.email);
+          }
         }
       }
-      console.log("------dato arreglo------");
+      /*   console.log("------dato arreglo------");
       console.log(dato);
       console.log("----------------");
       console.log(dato.data.status);
@@ -92,13 +98,13 @@ export const Premium = ({
       console.log("-------email--------");
       console.log(dato.data.email);
       console.log("---------------");
-      console.log(dato.data.status);
-      if (user.email == dato.data.email && dato.data.status == "approved") {
+      console.log(dato.data.status); */
+      /* if (user.email == dato.data.email && dato.data.status == "approved") {
         setPremium(true);
         await axios.put("/users/premium/" + user.email);
         ///enviar el id de la publicacion
         ///premium activado
-      }
+      } */
     }
   };
   //const datos=d.map(async e=> await getdataporid(e))
@@ -107,7 +113,7 @@ export const Premium = ({
   const envio = (e) => {
     Swal.fire({
       title: "Unete al Premium, obtendras excelentes beneficios",
-      confirmButtonColor: "#1d4ed8"
+      confirmButtonColor: "#1d4ed8",
     }).then(function () {
       window.location = payment_link.init_point;
     });
