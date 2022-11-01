@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux"
-import { infoUseremail, updateActiveCar } from "../../Redux/Actions";
+import {useDispatch} from "react-redux"
+import { getCars, infoUseremail, updateActiveCar } from "../../Redux/Actions";
+import { useEffect } from "react";
 
 function CardH({ image, estilos, id, descriptionShort, editar, name, car, email }) {
   const dispatch = useDispatch();
@@ -24,14 +25,16 @@ function CardH({ image, estilos, id, descriptionShort, editar, name, car, email 
     }).then((resultado) => {
       if (resultado.value) {
 
-        dispatch(infoUseremail(email))
-        dispatch(updateActiveCar(car.id, car.active ? false : true))
+        dispatch(getCars())
+        dispatch(updateActiveCar(car.id, car.active?false:true))
         dispatch(infoUseremail(email))
         Swal.fire({
           title: `Se ${car.active ? "Pauso" : "Activo"} La Publicación`,
           text: `Encuentralo en Publicaciones ${car.active ? "Pausadas " : ""}`,
           confirmButtonColor: "#1d4ed8",
         });
+        dispatch(infoUseremail(email))
+        dispatch(getCars())
       }
     });
   };
