@@ -136,7 +136,7 @@ const updateUser = async (req, res) => {
     }
       found.active=active
       await found.save()
-      res.send('active')
+      res.send(found)
    
     }catch (error) {
       return error;

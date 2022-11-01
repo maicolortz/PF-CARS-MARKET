@@ -100,6 +100,18 @@ export function updateActiveCar(id, active) {
     }
   };
 }
+//http://localhost:3001/users/1?active=false
+export function updateActiveUser(id, active) {
+  return async function (dispatch) {
+    try {
+      const carCreado = await axios.put(
+        "/users/" + id + "?active=" + active);
+      return dispatch({ type: "UPDATE_ACTIVE_USER", payload: carCreado.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 export function updateUser(id, data) {
   return async function (dispatch) {
     try {

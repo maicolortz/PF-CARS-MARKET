@@ -1,13 +1,20 @@
 import Swal from "sweetalert2";
-
+import { getUsers, updateActiveUser } from "../../Redux/Actions";
+import {useDispatch,useSelector} from "react-redux"
+import { useState } from "react";
+import { useEffect } from "react";
 function UserTable({ users, estilos }) {
+  const dispatch=useDispatch();
+  const [activo,setActivo]=useState()
   const estilo = {
     tabla: "flex flex-vwrap  w-max bg-slate-400 text-center m-5",
     td: " ",
     th: "bg-slate-500 px-3 border py-2 border-x-2 border-white ",
   };
+useEffect(()=>{
+
+},[dispatch])
   const bloquear = (e, user) => {
-    e.preventDefault();
 
     Swal.fire({
       title: `👀 \n ¿ Desea  ${user.active ? "bloquear" : "desbloquear"} a ${
@@ -24,15 +31,18 @@ function UserTable({ users, estilos }) {
         /*   dispatch(getCars())
       dispatch(updateActiveCar(car.id, car.active?false:true))
       dispatch(infoUseremail(email)) */
-        Swal.fire({
-          title: `Se ${user.active ? "Bloqueo" : "Desbloqueo"}  a ${
-            user.firstName
-          } `,
-        });
-        /*   dispatch(infoUseremail(email))
+      dispatch(getUsers())
+      Swal.fire({
+        title: `Se ${user.active ? "Bloqueo" : "Desbloqueo"}  a ${
+          user.firstName
+        } `,
+      });
+      /*   dispatch(infoUseremail(email))
       dispatch(getCars()) */
-      }
-    });
+    }
+  });
+  dispatch(updateActiveUser(user.id, user.active? "false":"true"))
+  
   };
   return (
     <div className={estilo.tabla}>
@@ -73,7 +83,7 @@ function UserTable({ users, estilos }) {
                     className={estilos.buttonBloquear}
                     onClick={(e) => bloquear(e, user)}
                   >
-                    Bloquear
+                    {user.active?"Bloquear":"Desbloquear"}
                   </button>
                 </tr>
               </>
