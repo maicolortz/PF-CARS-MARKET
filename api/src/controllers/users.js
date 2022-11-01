@@ -122,19 +122,25 @@ const getInfoUserByEmail2 = async (req,res)=>{
 
 const updateUser = async (req, res) => {
   const {id}= req.params;
+  const {active} = req.query
   const found = await User.findByPk(id)
   try{
-    for (const property in req.body) {
-              if (property !== undefined) {
-                  found[property] = req.body[property];
-              };
-            };
-    await found.save();
-    res.send("Actualizado");
-  }
-  catch (error) {
-    return error;
+    if(!active){
+      for (const property in req.body) {
+        if (property !== undefined) {
+            found[property] = req.body[property];
+        };
       };
+      await found.save();
+      res.send("Actualizado");
+    }
+      found.active=active
+      await found.save()
+      res.send('active')
+   
+    }catch (error) {
+      return error;
+    };
   };
 
   const createReview = async (req,res)=>{
