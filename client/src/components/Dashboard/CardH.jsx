@@ -9,6 +9,7 @@ import {
   updateVendidoCar,
 } from "../../Redux/Actions";
 import { useEffect } from "react";
+import Loading from "../Loading/Loading";
 
 function CardH({
   image,
@@ -69,7 +70,10 @@ function CardH({
   const CarroVendido = () => {
     if (car.vendido) {
       Swal.fire({ title: "carro disponible para venta" });
+      dispatch(getCars())
+      dispatch(Loading())
       dispatch(updateVendidoCar(car.id, car.vendido ? false : true));
+      dispatch(getCars());
     } else {
       Swal.fire({
         title: "¿Logro vender el vehiculo?",
