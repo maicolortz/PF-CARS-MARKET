@@ -50,7 +50,7 @@ const createFavourite = async (req, res) => {
 
 
   const deleteFavourite = async (req,res)=>{
-    const{userId, carId}=req.body;
+    const{userId, carId}=req.query;
     try{
       const found = await Favourite.findOne({
         where:{[Op.and]:[

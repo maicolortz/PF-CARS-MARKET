@@ -40,7 +40,7 @@ const premiumUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      include: [Car, Review]
+      include: [Car, Review, Favourite]
       //where: {userId:{[Op.not]:null}},
       //       where: { name: { [Op.iLike]: '%'+name+'%'} },
     });
