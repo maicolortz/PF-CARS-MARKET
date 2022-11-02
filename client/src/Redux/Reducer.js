@@ -124,6 +124,11 @@ export default function rootReducer(state = initialState, action) {
           ...state,
           favorite: action.payload,
         }
+      case "POST_RESPONSE":
+        return{
+          ...state
+        }
+    
     default:
       return state;
   }
