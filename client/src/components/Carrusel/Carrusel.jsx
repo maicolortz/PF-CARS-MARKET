@@ -40,7 +40,7 @@ export default function Index() {
                                 </div>
                             </Slider>
                         </div>
-                        <ButtonNext role="button" aria-label="slide forward" className="absolute z-0 right-0 mr-8" id="next">
+                        <ButtonNext role="button" aria-label="slide forward" className="absolute z-10 right-0 mr-8" id="next">
                             <svg width={30} height={30} viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 1L7 7L1 13" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -50,7 +50,7 @@ export default function Index() {
                 {/* Carousel for tablet and medium size devices */}
                 <CarouselProvider className="lg:hidden md:block hidden" naturalSlideWidth={100} isIntrinsicHeight={true} totalSlides={6} visibleSlides={2} step={1} infinite={true}>
                     <div className="w-full relative flex items-center justify-center">
-                        <ButtonBack role="button" aria-label="slide backward" className="absolute z-30 left-0 ml-8" id="prev">
+                        <ButtonBack role="button" aria-label="slide backward" className="absolute z-10 left-0 ml-8" id="prev">
                             <svg width={30} height={30} viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 1L1 7L7 13" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -73,7 +73,7 @@ export default function Index() {
                                 </div>
                             </Slider>
                         </div>
-                        <ButtonNext role="button" aria-label="slide forward" className="absolute z-30 right-0 mr-8" id="next">
+                        <ButtonNext role="button" aria-label="slide forward" className="absolute z-10 right-0 mr-8" id="next">
                             <svg width={30} height={30} viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 1L7 7L1 13" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -83,7 +83,7 @@ export default function Index() {
                 {/* Carousel for mobile and Small size Devices */}
                 <CarouselProvider className="block md:hidden " naturalSlideWidth={100} isIntrinsicHeight={true} totalSlides={6} visibleSlides={1} step={1} infinite={true}>
                     <div className="w-full relative flex items-center justify-center">
-                        <ButtonBack role="button" aria-label="slide backward" className="absolute z-30 left-0 ml-8 " id="prev">
+                        <ButtonBack role="button" aria-label="slide backward" className="absolute z-10 left-0 ml-8 " id="prev">
                             <svg width={30} height={30} viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 1L1 7L7 13" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
@@ -106,7 +106,7 @@ export default function Index() {
                                 </div>
                             </Slider>
                         </div>
-                        <ButtonNext role="button" aria-label="slide forward" className="absolute z-30 right-0 mr-8" id="next">
+                        <ButtonNext role="button" aria-label="slide forward" className="absolute z-10 right-0 mr-8" id="next">
                             <svg width={30} height={30} viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 1L7 7L1 13" stroke="white" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
