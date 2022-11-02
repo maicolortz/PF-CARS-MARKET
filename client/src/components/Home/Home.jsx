@@ -115,6 +115,7 @@ export default function Home() {
                     transmition={el.transmition}
                     year={el.year}
                     prem={el.premium}
+                    vendido={el.vendido}
                   />
                 );
               })}
