@@ -11,6 +11,7 @@ import Loading from "../Loading/Loading.jsx";
 import { useAuth0 } from '@auth0/auth0-react';
 import Swal from "sweetalert2";
 import Carrusel from "../Carrusel/Carrusel.jsx"
+import PremiumPublic from "../Premium/PremiumPublic.jsx";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -94,8 +95,12 @@ export default function Home() {
       <div>
         <NavBar />
       </div>
+      
       <div className="contenedor-Home">
+      <PremiumPublic ></PremiumPublic>
         <div className="contenedor-Home2">
+        <div>
+      </div>
           <div className={estilos.gradienteazul}>
             <Filters />
           </div>
