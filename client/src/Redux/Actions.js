@@ -112,6 +112,18 @@ export function updateActiveUser(id, active) {
     }
   };
 }
+//http://localhost:3001/cars/id/vendido/?vendido=vendido
+export function updateVendidoCar(id, vendido) {
+  return async function (dispatch) {
+    try {
+      const carCreado = await axios.put(
+        "/cars/" + id + "/vendido/?vendido=" + vendido);
+      return dispatch({ type: "UPDATE_VENDIDO_CAR", payload: carCreado.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 export function updateUser(id, data) {
   return async function (dispatch) {
     try {

@@ -1041,6 +1041,7 @@ const user = [
     mail: "maicolortiz2882@gmail.com",
     whatsApp: "4324442344",
     address: "Argentina,Cordoba ",
+    premium: true
   },
 ];
 

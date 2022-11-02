@@ -88,6 +88,10 @@ module.exports = (sequelize) => {
       // Para el pausado de la publicación por el usuario
     
     },
+    vendido: { 
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
 
   });
 };
