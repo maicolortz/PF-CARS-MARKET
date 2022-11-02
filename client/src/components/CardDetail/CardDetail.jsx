@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCardDetail, postConsults, getConsults,  postFavorites } from "../../Redux/Actions";
+import { getCardDetail, postConsults, getConsults,  postFavorites,postResponse, getCars, getUsers } from "../../Redux/Actions";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './CardDetail.css';
@@ -39,14 +39,31 @@ function CardDetail() {
     userId: "",
   })
 
+  const[respuesta,setRespuesta] = useState({
+    userId:"",
+    description:"",
+    consultId:"",
+  })
+
   const { user } = useAuth0();
 
   const users = useSelector((state) => state.allUsers);
   const consults = useSelector((state) => state.consult);
   // const currentUser = useSelector((state) => state.D_user);
 
+  function prueba(){
+    if(user){
+      const guardo = users.find(u=>u.mail === user.email)
+      return guardo.id
+    }
+  }
+
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value, });
+  }
+
+  const handleOnChange = (e)=>{
+    setRespuesta({...respuesta,[e.target.name]:e.target.value, userId:prueba(), consultId:parseInt(e.target.id)})
   }
 
   const handleOnSubmit = (e) => {
@@ -66,6 +83,14 @@ function CardDetail() {
       })
     }
 
+  }
+  const handleSubmit = (e)=>{
+    dispatch(postResponse(respuesta))
+    setRespuesta({
+      userId:"",
+      description:"",
+      consultId:"",
+    })
   }
 
   const { loading } = useSelector((state) => state);
@@ -90,11 +115,14 @@ function CardDetail() {
 
   useEffect(() => {
     dispatch(getCardDetail(id));
+    dispatch(getCars())
+    dispatch(getUsers())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     dispatch(getConsults());
+    if(user){
     const buscadoAuth = user.email
         users.find(el => {
           if (el.mail === buscadoAuth) {
@@ -103,7 +131,7 @@ function CardDetail() {
               carId: id
             })
           }
-  }) 
+  })} 
   }, [dispatch, id, user]);
 
   useEffect(() => {
@@ -176,7 +204,7 @@ function CardDetail() {
       })
     }
   }
-  if (loading) {
+  if (user===undefined) {
     return <Loading />;
   }
 
@@ -295,6 +323,16 @@ function CardDetail() {
                               <div>
                                 {el.description}
                               </div>
+                              <div>
+                               Respuesta: {el.response === null && el.cars[0].userId === prueba()
+                              
+                                ? <form onSubmit={(e)=> handleSubmit(e) }>
+                                    <input placeholder='escribi aca' onChange={e=>handleOnChange(e)} name='description' id={el.id}/>
+                                    <button type='submit'onClick={(e)=> handleSubmit(e)}>Responder</button>
+                                  </form>
+                                
+                                :el.response? el.response.description : null} 
+                                </div>
                             </div>
                           )
                         }

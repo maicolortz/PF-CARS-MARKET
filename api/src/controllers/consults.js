@@ -1,4 +1,4 @@
-const { Car, User, Transaction,Consult } = require("../db");
+const { Car, User, Transaction,Consult,Response} = require("../db");
 const axios = require("axios");
 //const user = require("./userJson");
 const { Sequelize } = require("sequelize");
@@ -30,7 +30,7 @@ const {Op} = require('sequelize')
        // lista toda la tabla sin distinción        
         consults = await Consult.findAll(
           {
-            include: [User,Car]
+            include: [User,Car,Response]
  
             //where: {userId:{[Op.not]:null}},
    //       where: { name: { [Op.iLike]: '%'+name+'%'} },
@@ -68,7 +68,30 @@ const {Op} = require('sequelize')
   res.json(consultNew);
   }
 
+
+  const createResponse = async (req,res)=>{
+    const {userId, consultId, description} = req.body
+    try {
+      const respuesta = await Response.create({
+        userId,
+        consultId,
+        description
+      })
+      res.send(respuesta)
+    } catch (error) {
+      res.status(404).json(error)
+    }
+  }
+
+
+  const getResponse = async (req,res)=>{
+   const funciona = await Response.findAll()
+   res.send(funciona)
+  }
+
   module.exports = {
     getAllConsults,
     createConsult,
+    createResponse,
+    getResponse
   };
