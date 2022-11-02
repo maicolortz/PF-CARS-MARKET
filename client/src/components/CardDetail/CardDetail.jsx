@@ -1,8 +1,7 @@
-
 import { React, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCardDetail, postConsults, getConsults,  postFavorites,postResponse, getCars, getUsers } from "../../Redux/Actions";
+import { getCardDetail, postConsults, getConsults,  postFavorites,postResponse, getCars, getUsers, getFavorites, deleteFavorite } from "../../Redux/Actions";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './CardDetail.css';
@@ -52,7 +51,6 @@ function CardDetail() {
 
   const users = useSelector((state) => state.allUsers);
   const consults = useSelector((state) => state.consult);
-  // const currentUser = useSelector((state) => state.D_user);
 
   function prueba(){
     if(user){
@@ -122,7 +120,7 @@ function CardDetail() {
     dispatch(getCardDetail(id));
     dispatch(getCars())
     dispatch(getUsers())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(getFavorites())
   }, []);
 
   useEffect(() => {
@@ -142,7 +140,6 @@ function CardDetail() {
   useEffect(() => {
     if (user) {
       const buscadoAuth = user.email;
-      // eslint-disable-next-line array-callback-return
       users.find((el) => {
         if (el.mail === buscadoAuth) {
           setState({
@@ -152,6 +149,15 @@ function CardDetail() {
           });
         }
       });
+      users.find(el => {
+        if (el.mail === user.email){
+          el.favourites.find(e => {
+            if(e.carId === id){
+              setHeart(true)
+            }
+          })  
+        }
+      })
     }
   }, [user, id, users]);
 
@@ -174,6 +180,11 @@ function CardDetail() {
     } else {
       if (heart) {
         setHeart(false);
+        users.find(el => {
+          if (el.mail === user.email){
+            dispatch(deleteFavorite(el.id, id))
+          }
+        })
       } else {
         dispatch(postFavorites(favorite));
         setHeart(true);
@@ -186,7 +197,6 @@ function CardDetail() {
           timer: 2000,
         });
       }
-      /* si isAuthenticated es verdadero añadir este carro a los favoritos de ese usuario (ejecutar un dispatch) */
     }
   };
 

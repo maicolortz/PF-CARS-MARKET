@@ -333,3 +333,16 @@ export function postResponse (data){
     return disptach({type:"POST_RESPONSE", payload:r.data})
   }
 }
+
+export function deleteFavorite(id, carId){
+  return async function(dispatch){
+    try{
+      const { data } = await axios.delete(`/favorites/?userId=${id}&carId=${carId}`)
+      // console.log(id)
+      // console.log(data)
+      return dispatch({ type: "DELETE_FAVORITES", payload: data });
+    }catch(error){
+      console.log(error)
+    }
+  }
+}
