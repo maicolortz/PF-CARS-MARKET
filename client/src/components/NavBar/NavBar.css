@@ -2,7 +2,7 @@
     display: flex;
     background-color: grey;
     justify-content: space-between;
-    height: 80px;
+    height: 85px;
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
@@ -11,7 +11,7 @@
     min-width: 100%;
     position: fixed;
     background-color: rgb(17, 44, 117);
-    z-index: 10;
+    z-index: 20;
 }
 
 .btn-NavBar {
@@ -24,4 +24,10 @@
 
 .logo{
     border-radius: 10px;
+}
+
+.imagenPerfil{
+    width: 80px;
+    height: 74px;
+
 }
