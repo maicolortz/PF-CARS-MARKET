@@ -203,7 +203,6 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
   };
   return (
     <div className={estilos.container}>
-      {console.log(Cars)}
       <section className={estilos.container2}>
         <div className={estilos.panel}>
           <ul className="rounded flex-row px-3">

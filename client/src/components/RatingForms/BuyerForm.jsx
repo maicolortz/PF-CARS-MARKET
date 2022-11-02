@@ -23,7 +23,7 @@ function ConctactForm() {
     const confirmUserEmail = useSelector((state) => state.emailUser);
     const dataCurrentUser = useSelector((state) => state.D_user);
 
-    console.log(confirmUserEmail);
+    //console.log(confirmUserEmail);
 
     const { user } = useAuth0();
 
@@ -38,7 +38,7 @@ function ConctactForm() {
         message: "",
         emailSeller: "",
     })
-    console.log(state)
+    //console.log(state)
 
     useEffect(() => {
         dispatch(UserEmail({ email: state.emailbuyer }))

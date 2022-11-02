@@ -85,11 +85,11 @@ function CardH({
         confirmButtonText: "Si, continuar",
         cancelButtonText: "No, cancelar",
       }).then((result) => {
-        console.log("................");
+      /*   console.log("................");
         console.log(car);
         console.log("................");
         console.log(car.id);
-
+ */
         dispatch(updateVendidoCar(car.id, car.vendido ? false : true));
         result.isConfirmed && navigate("/BuyerForm");
       });
