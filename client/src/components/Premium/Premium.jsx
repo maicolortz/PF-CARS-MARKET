@@ -118,7 +118,7 @@ export const Premium = ({
 
   const envio = (e) => {
     Swal.fire({
-      title: "Unete al Premium, obtendras excelentes beneficios",
+      title: "Estas a punto de ser del grupo PREMIUM de CARS-MARKET",
       confirmButtonColor: "#1d4ed8",
     }).then(function () {
       window.location = payment_link.init_point;
