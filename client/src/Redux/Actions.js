@@ -325,3 +325,11 @@ export function getFavorites() {
     });
   };
 }
+
+
+export function postResponse (data){
+  return async function(disptach){
+    const r =await axios.post('/response',data)
+    return disptach({type:"POST_RESPONSE", payload:r.data})
+  }
+}
