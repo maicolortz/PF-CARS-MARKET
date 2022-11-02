@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import "./NavBar.css";
-import Logo from "./Logo CarMarket.png";
+import Logo from "./Logo Cars-Market.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import imgDefault from "../Card/imagenes/usuario.png";
@@ -28,7 +28,7 @@ export default function NavBar() {
   const [show, setShow] = useState(false);
   const { user, loginWithRedirect, isAuthenticated, logout } = useAuth0();
   const history = useNavigate();
-  
+
   useEffect(() => {
 
     dispatch(getUsers());
@@ -43,14 +43,15 @@ export default function NavBar() {
     <nav className="contenedor-NavBar">
       <Link to="/">
         {" "}
-        <img
-          src={Logo}
-          onClick={() => history("/")}
-          alt="img not found"
-          width="120px"
-          className="logo"
-          class="shadow-md shadow-black rounded-md"
-        />
+        <div className="w-24 ">
+          <img
+            src={Logo}
+            onClick={() => history("/")}
+            alt="img not found"
+            className="h-16 rounded-sm"
+            class="shadow-md shadow-black rounded-sm"
+          />
+        </div>
       </Link>
       {window.location.pathname !== "/createuser" &&
         window.location.pathname !== `/cars/${carId.id}` &&

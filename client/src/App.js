@@ -34,8 +34,8 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path="/SellerRatingForm" element={<SellerRatingForm />} />
           <Route path="/BuyerForm" element={<BuyerForm />} />
-          <Route path="*" element={<PageNotFound />} />
           <Route path="/perfil/:id" element={<PerfilUser/>}/>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
 
