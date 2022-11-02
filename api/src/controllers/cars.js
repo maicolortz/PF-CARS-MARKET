@@ -225,6 +225,20 @@ const updateActive = async (req, res) => {
     res.status(400).json(error)
   }
 }
+const updateVendido = async (req, res) => {
+
+  const { vendido } = req.query
+  const { id } = req.params
+  try {
+    const modificacion = await Car.findByPk(id)
+    modificacion.update({ vendido: vendido })
+    await modificacion.save()
+    res.json(modificacion)
+  } catch (error) {
+
+    res.status(400).json(error)
+  }
+}
 
 module.exports = {
   //updateCar,
@@ -238,6 +252,7 @@ module.exports = {
   getRangeModel,
   updateCar,
   phisicaldeletionCar,
-  updateActive
+  updateActive,
+  updateVendido
   // logicaldeletionCar
 };

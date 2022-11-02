@@ -13,6 +13,7 @@ const {
   updateCar,
   phisicaldeletionCar,
   updateActive,
+  updateVendido,
 //  logicaldeletionCar,
 } = require("../controllers/cars");
 //importa mercadopago
@@ -30,5 +31,6 @@ router.get("/:id",getAutoById)
 router.delete("/:id", phisicaldeletionCar);
 router.put("/:id", updateCar);
 router.put("/:id/active/",updateActive)
+router.put("/:id/vendido/",updateVendido)
 
 module.exports = router;

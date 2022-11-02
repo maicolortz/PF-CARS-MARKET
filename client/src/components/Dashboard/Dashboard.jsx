@@ -55,6 +55,10 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
     buttonred: `text-${
       admin ? "gray-700" : "white"
     } bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 py-3 my-3`,
+    buttonorange: `text-${
+      admin ? "gray-700" : "white"
+    } bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-orange-300 dark:focus:ring-orange-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 py-3 my-3`,
+    
     mensaje: ` text-3xl tex-center p-3 text-white  shadow-${
       admin ? "yellow" : "cyan"
     }-500 shadow-md w-max    font-semibold ease-in duration-300 text-center rounded-3xl `,
