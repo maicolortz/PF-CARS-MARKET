@@ -304,3 +304,24 @@ export function getRatingUser(id) {
     }
   };
 }
+
+export function postFavorites(data) {
+  return async function (dispatch) {
+    try {
+      const favoriteCreado = await axios.post("/favorites", data);
+      return dispatch({ type: "POST_FAVORITES", payload: favoriteCreado.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function getFavorites() {
+  return async function (dispatch) {
+    let json = await axios.get("/favorites");
+    return dispatch({
+      type: "GET_FAVORITES",
+      payload: json.data,
+    });
+  };
+}

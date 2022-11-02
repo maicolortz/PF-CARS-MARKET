@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCardDetail, postConsults, getConsults } from "../../Redux/Actions";
+import { getCardDetail, postConsults, getConsults,  postFavorites } from "../../Redux/Actions";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './CardDetail.css';
@@ -27,12 +27,17 @@ function CardDetail() {
   const history = useNavigate();
   let { id } = useParams();
 
-  // const [render, setRender] = useState("")
+
   const [state, setState] = useState({
     userId: "",
     description: "",
     carId: ""
   });
+
+  const [favorite, setFavorite] = useState({
+    carId: "",
+    userId: "",
+  })
 
   const { user } = useAuth0();
 
@@ -90,6 +95,15 @@ function CardDetail() {
 
   useEffect(() => {
     dispatch(getConsults());
+    const buscadoAuth = user.email
+        users.find(el => {
+          if (el.mail === buscadoAuth) {
+            setFavorite({
+              userId: el.id,
+              carId: id
+            })
+          }
+  }) 
   }, [dispatch, id, user]);
 
   useEffect(() => {
@@ -131,6 +145,7 @@ function CardDetail() {
       if (heart) {
         setHeart(false)
       } else {
+        dispatch(postFavorites(favorite))
         setHeart(true)
         Swal.fire({
           title: 'Añadido correctamente!!!',
