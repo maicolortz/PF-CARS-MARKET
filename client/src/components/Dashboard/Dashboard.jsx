@@ -10,6 +10,7 @@ import BienvenidoPanel from "./BienvenidoPanel";
 import { useEffect } from "react";
 import UserTable from "./UserTable";
 import Graficos from "./Graficos";
+import Favorite from "./Favorite";
 
 export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) => {
   useEffect(() => {
@@ -186,7 +187,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
       case "updatecar":
         return <FormUpdateCar car={carro}></FormUpdateCar>;
       case "favoritos":
-        return <h1>hola</h1>;
+        return <Favorite/>
       case "usuarios":
         return <UserTable estilos={estilos}users={allUsers} />;
       default:

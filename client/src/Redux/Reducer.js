@@ -11,7 +11,8 @@ const initialState = {
   transactions: [],
   payment_link: [],
   consult: [],
-  ratingUser: []
+  ratingUser: [],
+  favorite: []
 };
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -114,6 +115,15 @@ export default function rootReducer(state = initialState, action) {
         ratingUser: [action.payload],
         loading: false,
       }
+      case "POST_FAVORITES":
+        return{
+          ...state
+        }
+      case "GET_FAVORITES":
+        return {
+          ...state,
+          favorite: action.payload,
+        }
     default:
       return state;
   }
