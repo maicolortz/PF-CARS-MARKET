@@ -191,7 +191,7 @@ export function getTransaction() {
 }
 export function get_Payment_Link(email) {
   return async function (dispatch) {
-    const { data } = await axios.get(`/paymentprueba?email=`+email);
+    const { data } = await axios.get(`/paymentprueba?email=` + email);
     return dispatch({
       type: "GET_PAYMENT_LINK",
       payload: data,
@@ -220,6 +220,19 @@ export function sendEmailSeller(data) {
   return async function () {
     try {
       const email = await axios.post("/sendEmail/ForSeller", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
+export function copyOfMailBuyer(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail/copyOfMailBuyer", data);
       console.log(email);
       return email;
     } catch (error) {

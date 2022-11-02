@@ -24,6 +24,7 @@ function CardH({
    disponible: `font-extrabold text-transparent text-3xl bg-clip-text bg-gradient-to-r from-${car.vendido?"orange":"green"}-500 to-${car.vendido?"orange":"green"}-600  
     `
   }
+
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -35,20 +36,25 @@ function CardH({
       title: ` 😃 \n ¿ Desea  ${
         car.active ? "pausar" : "activar"
       } la publicacion ?`,
+
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: `${car.active ? "pausar" : "activar"}`,
       showConfirmButton: true,
       confirmButtonColor: "#1d4ed8",
+      cancelButtonColor: "#1d4ed8",
       timer: 20000,
     }).then((resultado) => {
       if (resultado.value) {
-        dispatch(getCars());
-        dispatch(updateActiveCar(car.id, car.active ? false : true));
-        dispatch(infoUseremail(email));
+
+
+        dispatch(getCars())
+        dispatch(updateActiveCar(car.id, car.active?false:true))
+        dispatch(infoUseremail(email))
         Swal.fire({
-          title: `Se ${car.active ? "Pauso" : "Activo"} La Publicacion`,
+          title: `Se ${car.active ? "Pauso" : "Activo"} La Publicación`,
           text: `Encuentralo en Publicaciones ${car.active ? "Pausadas " : ""}`,
+          confirmButtonColor: "#1d4ed8",
         });
         dispatch(infoUseremail(email));
         dispatch(getCars());
@@ -88,6 +94,7 @@ function CardH({
 
   return (
     <div class={car.active ? estilos.activo : estilos.noactivo}>
+   
       <div class=" rounded-lg shadow-lg bg-white max-w-sm ">
         <img class="rounded-b-lg max-h-48" src={image} alt="" />
       </div>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
 import { useAuth0 } from '@auth0/auth0-react';
-import { sendEmailSeller } from '../../Redux/Actions.js';
+import { sendEmailSeller, copyOfMailBuyer } from '../../Redux/Actions.js';
 import Loading from '../Loading/Loading.jsx';
 import Swal from 'sweetalert2'
 import {useLocalStorage} from './useLocalStorage'
@@ -66,7 +66,8 @@ function ConctactForm() {
         if (state.firstName && state.lastName && state.emailbuyer && state.message && state.emailSeller) {
             !state.phone && setState({ ...state, phone: "Numero no especificado" });
 
-            dispatch(sendEmailSeller(state))
+            dispatch(sendEmailSeller(state));
+            dispatch(copyOfMailBuyer(state));
             setState({
                 firstName: "",
                 lastName: "",

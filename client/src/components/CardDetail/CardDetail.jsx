@@ -19,9 +19,7 @@ const estilos = {
   cajaComentarios: "border-4 border-gray-300 mb-5 pl-3 py-3 h-auto w-full shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
   contenedor_input_y_titulo: "md:w-auto flex flex-col mb-6",
   titulos: "text-xl leading-8 font-semibold text-gray-800 pb-2",
-
 }
-
 
 function CardDetail() {
 
@@ -38,8 +36,9 @@ function CardDetail() {
 
   const { user } = useAuth0();
 
-  const users = useSelector((state) => state.allUsers)
-  const consults = useSelector((state) => state.consult)
+  const users = useSelector((state) => state.allUsers);
+  const consults = useSelector((state) => state.consult);
+  // const currentUser = useSelector((state) => state.D_user);
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value, });
@@ -61,6 +60,7 @@ function CardDetail() {
         }
       })
     }
+
   }
 
   const { loading } = useSelector((state) => state);
@@ -78,11 +78,10 @@ function CardDetail() {
     { name: "Trasmision: ", detalle: carsDetail.transmition },
   ];
 
-  const reviewsUser = carsDetail[0] && carsDetail.user.reviews;
+  const reviewsUser = carsDetail.user && carsDetail.user.reviews;
   // const reviewsUser = [1, 5, 3, 2, 1, 2, 4]
-  const ratingUser = reviewsUser && Math.round(reviewsUser.reduce((a, b) => a + b, 0) / reviewsUser.length);
-
-  console.log(ratingUser);
+  const ratings = reviewsUser && reviewsUser.map(e => e.rating);
+  const ratingUser = ratings && Math.round(ratings.reduce((a, b) => a + b, 0) / ratings.length);
 
   useEffect(() => {
     dispatch(getCardDetail(id));
@@ -147,7 +146,6 @@ function CardDetail() {
 
   }
 
-
   const buttonContactSeller = () => {
     if (isAuthenticated) {
       history("/Contact");
@@ -166,8 +164,6 @@ function CardDetail() {
   if (loading) {
     return <Loading />;
   }
-
-  console.log(carsDetail);
 
   return (
     <div>
@@ -224,10 +220,10 @@ function CardDetail() {
               <div className=" w-full sm:w-96 md:w-8/12 lg:w-6/12 flex flex-col sm:pt-6 p-3 items-center lg:gap-8 sm:gap-6 gap-4">
                 <article className=' w-full lg:w-9/12'>
                   <div class="flex gap-5">
-                    <img class="w-20 h-20 rounded-full" src={carsDetail.user ? carsDetail.user.imgPerfil : perfilImg} alt={perfilImg} />
+                    <img class="w-20 h-20 rounded-full cursor-pointer" title='Ver perfil de este usuario' onClick={() => history(`/perfil/${carsDetail.user && carsDetail.user.id}`)} src={carsDetail.user ? carsDetail.user.imgPerfil : perfilImg} alt={perfilImg} />
                     <div class="flex flex-col justify-between py-3 w-auto font-medium text-black">
                       <div>
-                        <p className='text-2xl leading-8 font-semibold text-gray-800'> {`${carsDetail.user && carsDetail.user.firstName} ${carsDetail.user && carsDetail.user.lastName}`}</p>
+                        <p onClick={() => history(`/perfil/${carsDetail.user && carsDetail.user.id}`)}title='Ver perfil de este usuario' className='text-2xl leading-8 font-semibold text-gray-800 cursor-pointer'> {`${carsDetail.user && carsDetail.user.firstName} ${carsDetail.user && carsDetail.user.lastName}`}</p>
                       </div>
                       <div class="flex gap-1">
                         <svg aria-hidden="true" class={(reviewsUser && ratingUser >= 1) ? "w-7 h-7 text-yellow-400" : "w-7 h-7 text-gray-300"} fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -262,31 +258,33 @@ function CardDetail() {
             </div>
             <div className=' mt-5 px-5'>
               <form onSubmit={(e) => handleOnSubmit(e)} className="flex flex-col">
-                <label className={estilos.titulos}>Preguntas y respuestas:</label>
-                <div className='flex gap-5 pr-16'>
-                  <textarea type="text" name='description' value={state.description} onChange={handleChange} className={estilos.input} placeholder="Escribe tu pregunta..." rows={2} />
-                  <button type='submit' className={estilos.button_regresar_inicio}>Preguntar</button>
-                </div>
+                <label className={estilos.titulos}>Preguntas y respuestas: </label>
+                {isAuthenticated ?
+                  (<div className='flex gap-5 pr-16'>
+                    <textarea type="text" name='description' value={state.description} onChange={handleChange} className={estilos.input} placeholder="Escribe tu pregunta..." rows={2} />
+                    <button type='submit' className={estilos.button_regresar_inicio}>Preguntar</button>
+                  </div>) : <div className='text-lg text-gray-500'>"Inicie sesión o registrese para realizar preguntas"</div>
+                }
                 <div className='mt-5'>
                   <label className="text-lg leading-8 font-semibold text-gray-800 pb-2"> Ultimas preguntas Realizadas:</label>
                   <div className='pl-10 pr-36 mt-5'>
-                  {
-                    // eslint-disable-next-line array-callback-return
-                    consults.map(el => {
-                      if (el.cars[0].id === id) {
-                        return (
-                          <div className={estilos.cajaComentarios}>
-                            <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
-                              {el.users[0].firstName} {el.users[0].lastName}
+                    {
+                      // eslint-disable-next-line array-callback-return
+                      consults.map(el => {
+                        if (el.cars[0].id === id) {
+                          return (
+                            <div className={estilos.cajaComentarios}>
+                              <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
+                                {el.users[0].firstName} {el.users[0].lastName}
+                              </div>
+                              <div>
+                                {el.description}
+                              </div>
                             </div>
-                            <div>
-                              {el.description}
-                            </div>
-                          </div>
-                        )
-                      }
-                    })}
-                    </div>
+                          )
+                        }
+                      })}
+                  </div>
                 </div>
               </form>
             </div>

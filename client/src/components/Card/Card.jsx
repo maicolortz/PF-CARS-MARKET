@@ -91,7 +91,7 @@ function Card({
                 <p>Año: {year}</p>
               </div>
             </div>
-            <div class="flex justify-between items-center">
+            <div class="flex justify-center items-center">
               <Link to={`/cars/${id}`}>
                 <button
                   title="Ver mas información del vehículo"
@@ -100,17 +100,6 @@ function Card({
                   Ver detalles
                 </button>
               </Link>
-              <button
-                onClick={() => RedirectRegister()}
-                title="Añadir a favoritos"
-                class={
-                  heart
-                    ? "sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-red-500  duration-300"
-                    : "sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-300  hover:text-red-500 duration-300"
-                }
-              >
-                &hearts;
-              </button>
             </div>
           </div>
         </div>
