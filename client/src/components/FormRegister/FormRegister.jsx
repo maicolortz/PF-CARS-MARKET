@@ -46,8 +46,6 @@ function FormRegister() {
     imgPerfil: "",
   });
 
-  console.log(dataPerfil);
-
   async function uploadImage(file) {
     const formData = new FormData();
     formData.append("file", file[0]);
@@ -91,13 +89,15 @@ function FormRegister() {
   } else if (isAuthenticated && buscados && buscados.active === false) {
     Swal.fire({
       title: "Usuario Baneado",
-      text: "Por favor verifique su bandeja de correo, ahi tendra las instrucciones pertinentes para  recuperar su cuenta",
+      text: "Por alguna razon su cuenta se encuentra bloqueada, por favor complete el siguiente formulario para desbloquear su cuenta",
       icon: "error",
       confirmButtonColor: "#1d4ed8",
       showCancelButton: false,
-      showConfirmButton: false,
+      showConfirmButton: true,
       allowOutsideClick: false,
       allowEscapeKey: false,
+    }).then(()=>{
+      history("/FormBaneo");
     })
   } else if (isAuthenticated && !user.email_verified) {
     Swal.fire({

@@ -65,8 +65,8 @@ function PerfilUser() {
               Publicaciones
             </div>
           </div>
-          <div className=' mb-10'>
-            <div className='flex  lg:flex-row justify-center'>
+          <div className='flex mb-10 lg:flex-row justify-center'>
+            <div className='grid grid-cols-3  gap-0 w-9/12'>
               {car && car.map(el => (
                 <Card
                   key={el.id}

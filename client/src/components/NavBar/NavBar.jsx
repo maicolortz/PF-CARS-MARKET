@@ -56,7 +56,8 @@ export default function NavBar() {
         window.location.pathname !== `/cars/${carId.id}` &&
         window.location.pathname !== "/createcar" &&
         window.location.pathname !== "/sellerRatingForm" &&
-        window.location.pathname !== "/BuyerForm"
+        window.location.pathname !== "/BuyerForm" &&
+        window.location.pathname !== "/FormBaneo"
         && <SearchBar />}
       {isAuthenticated ? (
         <div
@@ -68,7 +69,7 @@ export default function NavBar() {
         >
           <div class="flex">
             <div className="flex items-center  px-2 py-2">
-              {window.location.pathname !== "/createuser" && (
+              {window.location.pathname !== "/createuser" && window.location.pathname !== "/FormBaneo" && (
                 <Premium user={user} ></Premium>
               )}
             </div>
@@ -81,7 +82,7 @@ export default function NavBar() {
                 <div className=" flex md:w-auto h-20 ">
                   <div className="w-11/12 flex justify-center items-center">
                     <img
-                      src={(Array.isArray(usuario))? "https://i.ibb.co/h9PXX01/usuario.png" : usuario.imgPerfil}
+                      src={(Array.isArray(usuario)) ? "https://i.ibb.co/h9PXX01/usuario.png" : usuario.imgPerfil}
                       alt={imgDefault}
                       className="imagenPerfil"
                     />
@@ -141,7 +142,9 @@ export default function NavBar() {
                     className="font-medium w-full h-8"
                     onClick={() => enviarDashboard()}
                     disabled={
-                      window.location.pathname === "/createuser" && "true"
+                      (window.location.pathname === "/createuser" ||
+                        window.location.pathname === "/FormBaneo"
+                      ) && "true"
                     }
                   >
                     Perfil
@@ -154,7 +157,9 @@ export default function NavBar() {
                     value="Otro"
                     className="font-medium w-full h-8"
                     disabled={
-                      window.location.pathname === "/createuser" && "true"
+                      (window.location.pathname === "/createuser" ||
+                        window.location.pathname === "/FormBaneo"
+                      ) && "true"
                     }
                   >
                     Publicar tu auto

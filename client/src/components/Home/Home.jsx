@@ -26,7 +26,7 @@ export default function Home() {
   const userEmail = user && user.email;
   const buscados = usuarios && usuarios.find(u => u.mail === userEmail);
 
-  if (!usuario && isAuthenticated && buscados === undefined) {
+  if (!usuario[0] && isAuthenticated && buscados === undefined) {
     Swal.fire({
       title: 'Completa el registro',
       text: 'Llene los siguientes campos para completar el registro',
@@ -39,6 +39,19 @@ export default function Home() {
     }).then(function () {
       history("/createuser");
     })
+  } else if (isAuthenticated && usuario.active === false) {
+    Swal.fire({
+      title: "Usuario Baneado",
+      text: "Por alguna razon su cuenta se encuentra bloqueada, favor complete el siguiente formulario para desbloquear su cuenta",
+      icon: "error",
+      confirmButtonColor: "#1d4ed8",
+      showCancelButton: false,
+      showConfirmButton: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    }).then(() => {
+      history("/FormBaneo");
+    })
   }
 
   //PAGINADO
@@ -47,7 +60,7 @@ export default function Home() {
   const [carsPerPage, setCarsPerPage] = useState(6); //[3]Cantidad de cars por paginas
   const indexLastCar = currentPage * carsPerPage; //[3]Indice del ultimo car por pagina
   const indexFirstCar = indexLastCar - carsPerPage; //[0]Indice del primer car por pagina
-  const currentCarsPerPage = cars.filter(e=>e.active).slice(indexFirstCar, indexLastCar); //[0,1,2] Arreglo con los cars por pagina
+  const currentCarsPerPage = cars.filter(e => e.active).slice(indexFirstCar, indexLastCar); //[0,1,2] Arreglo con los cars por pagina
   const estilos = {
     gradienteazul: "text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
   }
