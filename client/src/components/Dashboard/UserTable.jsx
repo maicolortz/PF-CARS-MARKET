@@ -72,7 +72,8 @@ function UserTable({ users, estilos }) {
           </tr>
         </thead>
         <tbody>
-          {users.filter(e => e.mail !== "maicolortiz2882@gmail.com").map((user) => {
+          {users.filter(e=>e.mail!=="pancracio3nov@gmail.com").map((user) => {
+
             return (
               <>
                 <tr className={estilo.td} key={user.id}>

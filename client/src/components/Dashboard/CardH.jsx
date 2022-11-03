@@ -20,9 +20,10 @@ function CardH({
   name,
   car,
   email,
+admin
 }) {
   const estilosaca={
-   disponible: `font-extrabold text-transparent text-3xl bg-clip-text bg-gradient-to-r from-${car.vendido?"orange":"green"}-500 to-${car.vendido?"orange":"green"}-600  
+   disponible: `font-extrabold text-${car.vendido?"orange":"green"}-500 text-3xl bg-clip-text   
     `
   }
 
@@ -121,9 +122,11 @@ function CardH({
         <button onClick={(e) => pausar(e)} className={estilos.buttonred}>
           {car.active ? "pausar" : "activar"}
         </button>
+        {admin?console.log(""):
         <button onClick={() => CarroVendido()} className={estilos.buttonorange}>
           {car.vendido ? "activar para venta" : "marcar como vendido"}
         </button>
+        }
       </div>
     </div>
   );
