@@ -87,18 +87,7 @@ function FormRegister() {
   if (!user && isLoading) {
     return <Loading />;
   } else if (isAuthenticated && buscados && buscados.active === false) {
-    Swal.fire({
-      title: "Usuario Baneado",
-      text: "Por alguna razon su cuenta se encuentra bloqueada, por favor complete el siguiente formulario para desbloquear su cuenta",
-      icon: "error",
-      confirmButtonColor: "#1d4ed8",
-      showCancelButton: false,
-      showConfirmButton: true,
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-    }).then(()=>{
-      history("/FormBaneo");
-    })
+      history("/home");
   } else if (isAuthenticated && !user.email_verified) {
     Swal.fire({
       title: "Usuario no verificado",
