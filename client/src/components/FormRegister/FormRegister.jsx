@@ -86,18 +86,20 @@ function FormRegister() {
 
   if (!user && isLoading) {
     return <Loading />;
-  } else if (isAuthenticated && buscados && buscados.active===false ) {
+  } else if (isAuthenticated && buscados && buscados.active === false) {
     Swal.fire({
       title: "Usuario Baneado",
-      text: "Por favor verifique su bandeja de correo, ahi tendra las instrucciones pertinentes para  recuperar su cuenta",
+      text: "Por alguna razon su cuenta se encuentra bloqueada, por favor complete el siguiente formulario para desbloquear su cuenta",
       icon: "error",
       confirmButtonColor: "#1d4ed8",
       showCancelButton: false,
-      showConfirmButton: false,
+      showConfirmButton: true,
       allowOutsideClick: false,
       allowEscapeKey: false,
+    }).then(()=>{
+      history("/FormBaneo");
     })
-}   else if (isAuthenticated && !user.email_verified) {
+  } else if (isAuthenticated && !user.email_verified) {
     Swal.fire({
       title: "Usuario no verificado",
       text: "Por favor verifique su bandeja correo, valide su registro y recargue de nuevo la pagina",
@@ -144,6 +146,7 @@ function FormRegister() {
   const handleChange = (e) => {
     setSwitche(true);
     setDataPerfil({ ...dataPerfil, [e.target.name]: e.target.value });
+    !dataPerfil.imgPerfil && setDataPerfil({ ...dataPerfil, imgPerfil: "https://i.ibb.co/h9PXX01/usuario.png" })
     setErrors(validate({ ...dataPerfil, [e.target.name]: e.target.value }));
   };
   const handleSubmit = (e) => {
@@ -287,15 +290,18 @@ function FormRegister() {
                 {/*-------------------------------------------------------------------- Columna 2 ---------------------------------------------------------------------*/}
                 <div className="lg:mr-20 w-2/4 pt-8 md:items-center sm:items-center">
                   <div className="container mx-auto">
-                    <div className="flex justify-center mb-6">
+                    <div className="flex flex-col justify-center items-center mb-6">
                       <div className="border-blue-900 border-4 rounded-2xl w-2/4 flex justify-center">
                         <img
                           src={
-                            dataPerfil.imgPerfil ? dataPerfil.imgPerfil : imagen
+                            dataPerfil.imgPerfil ? dataPerfil.imgPerfil : "https://i.ibb.co/h9PXX01/usuario.png"
                           }
                           alt="img not found"
                           className="w-auto rounded-2xl"
                         />
+                      </div>
+                      <div className="pt-5 text-sm text-slate-500">
+                        Cuando suba la imagen espere unos minutos a que se muestre en el recuadro.
                       </div>
                     </div>
                     <div className={estilos.contenedor_input_y_titulo}>
@@ -308,7 +314,6 @@ function FormRegister() {
                         name="image"
                         className={estilos.input}
                         onChange={(e) => uploadImage(e.target.files)}
-                        placeholder="Dirección URL de la imagen..."
                       />
                     </div>
                     <div className={estilos.contenedor_input_y_titulo}>

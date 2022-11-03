@@ -38,7 +38,6 @@ export default function NavBar() {
     history("/dashboard");
   };
 
-
   return (
     <nav className="contenedor-NavBar">
       <Link to="/">
@@ -57,34 +56,35 @@ export default function NavBar() {
         window.location.pathname !== `/cars/${carId.id}` &&
         window.location.pathname !== "/createcar" &&
         window.location.pathname !== "/sellerRatingForm" &&
-        window.location.pathname !== "/BuyerForm"
+        window.location.pathname !== "/BuyerForm" &&
+        window.location.pathname !== "/FormBaneo"
         && <SearchBar />}
       {isAuthenticated ? (
         <div
           class={
             show
               ? "flex flex-col items-center mt-36"
-              : "flex flex-col items-center mt-0.5 h-full"
+              : "flex flex-col items-center  h-full"
           }
         >
           <div class="flex">
             <div className="flex items-center  px-2 py-2">
-              {window.location.pathname !== "/createuser" && (
+              {window.location.pathname !== "/createuser" && window.location.pathname !== "/FormBaneo" && (
                 <Premium user={user} ></Premium>
               )}
             </div>
-            <div className="flex">
+            <div className="flex h-20">
               <div class="text-white md:text-sm lg:text-sm w-auto xl:text-base font-medium ml-2 justify-center flex flex-col ">
-                <div>{usuario ? `${usuario.firstName} ${usuario.lastName}` : user.name}</div>
-                <div>{usuario ? usuario.mail : user.email}</div>
+                <div>{(Array.isArray(usuario)) ? "Esperando para cargar" : `${usuario.firstName} ${usuario.lastName}`}</div>
+                <div>{(Array.isArray(usuario)) ? "datos de usuario ..." : usuario.mail}</div>
               </div>
               <div class="w-32 ml-2">
-                <div className=" flex md:w-auto h-5/6 ">
+                <div className=" flex md:w-auto h-20 ">
                   <div className="w-11/12 flex justify-center items-center">
                     <img
-                      src={usuario ? usuario.imgPerfil : user.picture}
+                      src={(Array.isArray(usuario)) ? "https://i.ibb.co/h9PXX01/usuario.png" : usuario.imgPerfil}
                       alt={imgDefault}
-                      class="h-5/6"
+                      className="imagenPerfil"
                     />
                   </div>
 
@@ -133,7 +133,7 @@ export default function NavBar() {
             </div>
           </div>
           {show && (
-            <div class=" w-3/4 flex justify-end">
+            <div class=" w-3/4 flex justify-end mt-4">
               <ul className="visible transition duration-300 opacity-100 bg-gray-50 shadow-black shadow-md rounded mb-4 py-2 w-3/4">
                 <li className="cursor-pointer text-black text-lg leading-3 tracking-normal h-8 hover:bg-gray-200 px-3">
                   <button
@@ -142,7 +142,9 @@ export default function NavBar() {
                     className="font-medium w-full h-8"
                     onClick={() => enviarDashboard()}
                     disabled={
-                      window.location.pathname === "/createuser" && "true"
+                      (window.location.pathname === "/createuser" ||
+                        window.location.pathname === "/FormBaneo"
+                      ) && "true"
                     }
                   >
                     Perfil
@@ -155,7 +157,9 @@ export default function NavBar() {
                     value="Otro"
                     className="font-medium w-full h-8"
                     disabled={
-                      window.location.pathname === "/createuser" && "true"
+                      (window.location.pathname === "/createuser" ||
+                        window.location.pathname === "/FormBaneo"
+                      ) && "true"
                     }
                   >
                     Publicar tu auto

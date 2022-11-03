@@ -254,6 +254,32 @@ export function sendEmailBuyer(data) {
   };
 }
 
+export function sendEmailAdmi(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail/ForAdmin", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
+export function sendEmailUnlockUser(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail/ForUnlockUser", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
 export function postConsults(data) {
   return async function (dispatch) {
     try {
@@ -324,4 +350,25 @@ export function getFavorites() {
       payload: json.data,
     });
   };
+}
+
+
+export function postResponse (data){
+  return async function(disptach){
+    const r =await axios.post('/response',data)
+    return disptach({type:"POST_RESPONSE", payload:r.data})
+  }
+}
+
+export function deleteFavorite(id, carId){
+  return async function(dispatch){
+    try{
+      const { data } = await axios.delete(`/favorites/?userId=${id}&carId=${carId}`)
+      // console.log(id)
+      // console.log(data)
+      return dispatch({ type: "DELETE_FAVORITES", payload: data });
+    }catch(error){
+      console.log(error)
+    }
+  }
 }

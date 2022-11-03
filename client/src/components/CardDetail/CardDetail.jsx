@@ -1,20 +1,16 @@
-import { React, useState } from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getCardDetail,
-  postConsults,
-  getConsults,
-  postFavorites,
-} from "../../Redux/Actions";
-import { useParams, Link, useNavigate } from "react-router-dom";
-import Loading from "../Loading/Loading";
-import "./CardDetail.css";
-import img from "../Card/imagenes/Imagen_Default.png";
-import NavBar from "../NavBar/NavBar";
-import { useAuth0 } from "@auth0/auth0-react";
-import Swal from "sweetalert2";
-import perfilImg from "../Card/imagenes/usuario.png";
+import { React, useState } from 'react'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCardDetail, postConsults, getConsults,  postFavorites,postResponse, getCars, getUsers, getFavorites, deleteFavorite } from "../../Redux/Actions";
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import Loading from '../Loading/Loading';
+import './CardDetail.css';
+import img from '../Card/imagenes/Imagen_Default.png';
+import NavBar from '../NavBar/NavBar';
+import { useAuth0 } from '@auth0/auth0-react';
+import Swal from 'sweetalert2';
+import perfilImg from '../Card/imagenes/usuario.png'
+
 
 const estilos = {
   button_contactar_vendedor:
@@ -45,15 +41,31 @@ function CardDetail() {
     userId: "",
   });
 
+  const[respuesta,setRespuesta] = useState({
+    userId:"",
+    description:"",
+    consultId:"",
+  })
+
   const { user } = useAuth0();
 
   const users = useSelector((state) => state.allUsers);
   const consults = useSelector((state) => state.consult);
-  // const currentUser = useSelector((state) => state.D_user);
+
+  function prueba(){
+    if(user){
+      const guardo = users.find(u=>u.mail === user.email)
+      return guardo.id
+    }
+  }
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
+
+  const handleOnChange = (e)=>{
+    setRespuesta({...respuesta,[e.target.name]:e.target.value, userId:prueba(), consultId:parseInt(e.target.id)})
+  }
 
   const handleOnSubmit = (e) => {
     // e.preventDefault();
@@ -71,7 +83,17 @@ function CardDetail() {
         }
       });
     }
-  };
+
+
+  }
+  const handleSubmit = (e)=>{
+    dispatch(postResponse(respuesta))
+    setRespuesta({
+      userId:"",
+      description:"",
+      consultId:"",
+    })
+  }
 
   const { loading } = useSelector((state) => state);
   const carsDetail = useSelector((state) => state.carDetail);
@@ -96,26 +118,28 @@ function CardDetail() {
 
   useEffect(() => {
     dispatch(getCardDetail(id));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dispatch(getCars())
+    dispatch(getUsers())
+    dispatch(getFavorites())
   }, []);
 
   useEffect(() => {
     dispatch(getConsults());
-    const buscadoAuth = user.email;
-    users.find((el) => {
-      if (el.mail === buscadoAuth) {
-        setFavorite({
-          userId: el.id,
-          carId: id,
-        });
-      }
-    });
+    if(user){
+    const buscadoAuth = user.email
+        users.find(el => {
+          if (el.mail === buscadoAuth) {
+            setFavorite({
+              userId: el.id,
+              carId: id
+            })
+          }
+  })} 
   }, [dispatch, id, user]);
 
   useEffect(() => {
     if (user) {
       const buscadoAuth = user.email;
-      // eslint-disable-next-line array-callback-return
       users.find((el) => {
         if (el.mail === buscadoAuth) {
           setState({
@@ -125,6 +149,15 @@ function CardDetail() {
           });
         }
       });
+      users.find(el => {
+        if (el.mail === user.email){
+          el.favourites.find(e => {
+            if(e.carId === id){
+              setHeart(true)
+            }
+          })  
+        }
+      })
     }
   }, [user, id, users]);
 
@@ -147,6 +180,11 @@ function CardDetail() {
     } else {
       if (heart) {
         setHeart(false);
+        users.find(el => {
+          if (el.mail === user.email){
+            dispatch(deleteFavorite(el.id, id))
+          }
+        })
       } else {
         dispatch(postFavorites(favorite));
         setHeart(true);
@@ -159,7 +197,6 @@ function CardDetail() {
           timer: 2000,
         });
       }
-      /* si isAuthenticated es verdadero añadir este carro a los favoritos de ese usuario (ejecutar un dispatch) */
     }
   };
 
@@ -176,8 +213,9 @@ function CardDetail() {
         timer: 20000,
       });
     }
-  };
-  if (loading) {
+
+  }
+  if (user===undefined) {
     return <Loading />;
   }
 
@@ -417,7 +455,20 @@ function CardDetail() {
                               <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
                                 {el.users[0].firstName} {el.users[0].lastName}
                               </div>
-                              <div>{el.description}</div>
+
+                              <div>
+                                {el.description}
+                              </div>
+                              <div>
+                               Respuesta: {el.response === null && el.cars[0].userId === prueba()
+                              
+                                ? <form onSubmit={(e)=> handleSubmit(e) }>
+                                    <input placeholder='escribi aca' onChange={e=>handleOnChange(e)} name='description' id={el.id}/>
+                                    <button type='submit'onClick={(e)=> handleSubmit(e)}>Responder</button>
+                                  </form>
+                                
+                                :el.response? el.response.description : null} 
+                                </div>
                             </div>
                           );
                         }

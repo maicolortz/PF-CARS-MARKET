@@ -7,6 +7,7 @@ const payment = require("./payment");
 const sendEmail = require("./SendEmail");
 const consultsMain = require("./consults")
 const favoritesMain = require("./favorites")
+const responseMain = require("./response")
 const axios = require("axios")
 
 axios.defaults.headers.common = { 'Authorization': `bearer ${process.env.ACCESS_TOKEN}` }
@@ -20,6 +21,7 @@ router.use("/consults", consultsMain);
 router.use("/transactionsMercadoPago", transactionsMercadoPago)
 router.use("/sendEmail", sendEmail);
 router.use("/favorites",favoritesMain); 
+router.use("/response",responseMain)
 
 
 
