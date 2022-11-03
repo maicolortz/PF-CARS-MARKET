@@ -254,6 +254,32 @@ export function sendEmailBuyer(data) {
   };
 }
 
+export function sendEmailAdmi(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail/ForAdmin", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
+export function sendEmailUnlockUser(data) {
+  return async function () {
+    try {
+      const email = await axios.post("/sendEmail/ForUnlockUser", data);
+      console.log(email);
+      return email;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+}
+
 export function postConsults(data) {
   return async function (dispatch) {
     try {

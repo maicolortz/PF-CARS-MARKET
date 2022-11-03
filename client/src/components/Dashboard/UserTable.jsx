@@ -1,25 +1,25 @@
 import Swal from "sweetalert2";
 import { getUsers, updateActiveUser } from "../../Redux/Actions";
-import {useDispatch,useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react";
 import { useEffect } from "react";
+import { sendEmailUnlockUser } from '../../Redux/Actions.js'
 function UserTable({ users, estilos }) {
-  const dispatch=useDispatch();
-  const [activo,setActivo]=useState()
+  const dispatch = useDispatch();
+  const [activo, setActivo] = useState()
   const estilo = {
     tabla: "flex flex-vwrap  w-max bg-slate-400 text-center m-5",
     td: " ",
     th: "bg-slate-500 px-3 border py-2 border-x-2 border-white ",
   };
-useEffect(()=>{
+  useEffect(() => {
 
-},[dispatch])
+  }, [dispatch])
   const bloquear = (e, user) => {
 
     Swal.fire({
-      title: `👀 \n ¿ Desea  ${user.active ? "bloquear" : "desbloquear"} a ${
-        user.firstName
-      } ?`,
+      title: `👀 \n ¿ Desea  ${user.active ? "bloquear" : "desbloquear"} a ${user.firstName
+        } ?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: `${user.active ? "bloquear" : "desbloquear"}`,
@@ -31,22 +31,29 @@ useEffect(()=>{
         /*   dispatch(getCars())
       dispatch(updateActiveCar(car.id, car.active?false:true))
       dispatch(infoUseremail(email)) */
-      dispatch(getUsers())
-      Swal.fire({
-        title: `Se ${user.active ? "Bloqueo" : "Desbloqueo"}  a ${
-          user.firstName
-        } `,
-      });
-      /*   dispatch(infoUseremail(email))
-      dispatch(getCars()) */
-    }
-  });
-  dispatch(updateActiveUser(user.id, user.active? "false":"true"))
-  
+        dispatch(getUsers())
+        Swal.fire({
+          title: `Se ${user.active ? "Bloqueo" : "Desbloqueo"}  a ${user.firstName
+            } `,
+          confirmButtonColor: "#1d4ed8"
+        }).then(() => {
+          if (!user.active) {
+            dispatch(sendEmailUnlockUser({
+              firstName: user.firstName,
+              lastName: user.lastName,
+              emailUser: user.mail,
+            }))
+          }
+        });
+        /*   dispatch(infoUseremail(email))
+        dispatch(getCars()) */
+      }
+    });
+    dispatch(updateActiveUser(user.id, user.active ? "false" : "true"))
+
   };
   return (
     <div className={estilo.tabla}>
-      {console.log(users)}
       <table className=" table-auto ">
         <thead>
           <tr>
@@ -65,7 +72,7 @@ useEffect(()=>{
           </tr>
         </thead>
         <tbody>
-          {users.filter(e=>e.mail!=="maicolortiz2882@gmail.com").map((user) => {
+          {users.filter(e => e.mail !== "maicolortiz2882@gmail.com").map((user) => {
             return (
               <>
                 <tr className={estilo.td} key={user.id}>
@@ -83,7 +90,7 @@ useEffect(()=>{
                     className={estilos.buttonBloquear}
                     onClick={(e) => bloquear(e, user)}
                   >
-                    {user.active?"Bloquear":"Desbloquear"}
+                    {user.active ? "Bloquear" : "Desbloquear"}
                   </button>
                 </tr>
               </>

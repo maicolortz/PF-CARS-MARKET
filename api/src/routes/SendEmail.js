@@ -10,10 +10,10 @@ router.post("/ForSeller", async (req, res) => {
         await transporter.sendMail({
             from: `${firstName} ${lastName}: ${emailbuyer}`,// Quien manda el email
             to: emailSeller,// Email destino
-            subject: "Publicaciones Car-Market",//Asunto del correo
+            subject: "Publicaciones Cars-Market",//Asunto del correo
             text: `${message}`,
             html: `
-            <h2>Correo enviado desde Car-Market</h2>
+            <h2>Correo enviado desde Cars-Market</h2>
             <h4>Tiene un pregunta sobre "<strong>${car}</strong>" de:</h4>
 
             <span><strong>Nombre: </strong>${firstName} ${lastName}</span><br/>
@@ -52,7 +52,7 @@ router.post("/copyOfMailBuyer", async (req, res) => {
         await transporter.sendMail({
             from: `${firstName} ${lastName}: ${emailbuyer}`,// Quien manda el email
             to: emailbuyer,// Email destino
-            subject: "Publicaciones Car-Market",//Asunto del correo
+            subject: "Publicaciones Cars-Market",//Asunto del correo
             text: `${message}`,
             html: `
             <h2>Esto es una copia de su su mensaje al vendedor sobre ${car}</h2>
@@ -83,7 +83,7 @@ router.post("/ForBuyer", async (req, res) => {
         await transporter.sendMail({
             from: `${firstNameSeller} ${lastNameSeller}: ${emailSeller}`,// Quien manda el email
             to: emailbuyer,// Email destino
-            subject: "Califica al vendedor (Car-Market)",//Asunto del correo
+            subject: "Califica al vendedor (Cars-Market)",//Asunto del correo
             text: `${message}`,
             html: `
             <h2>Correo enviado por el vendedor</h2>
@@ -106,6 +106,62 @@ router.post("/ForBuyer", async (req, res) => {
             `
         });
         res.status(200).send(`Correo enviado a: ${emailbuyer}`);
+
+    } catch (error) {
+        res.status(500).send("Error en el servidor al enviar el correo");
+    }
+});
+
+router.post("/ForAdmin", async (req, res) => {
+    const { idUser, firstName, lastName, emailUser, message } = req.body;
+    const emailAdmin = "navarrofranco531@gmail.com";
+
+    try {
+        await transporter.sendMail({
+            from: `${firstName} ${lastName}`,// Quien manda el email
+            to: emailAdmin,// Email del administrador
+            subject: "Usuario bloqueado (Cars-Market)",//Asunto del correo
+            text: `${message}`,
+            html: `
+            <h2>Correo enviado por el usuario</h2>
+  
+            <hr />
+            <span><strong>ID Usuario: </strong>${idUser}</span><br/>
+            <span><strong>Nombre: </strong>${firstName} ${lastName}</span><br/>
+            <span><strong>Email: </strong>${emailUser}</span><br/>
+            <hr />
+
+            <h3>Mensaje:</h3>
+            <p>${message}</p>
+            `
+        });
+        res.status(200).send(`Correo enviado a: ${emailAdmin}`);
+
+    } catch (error) {
+        res.status(500).send("Error en el servidor al enviar el correo");
+    }
+});
+
+router.post("/ForUnlockUser", async (req, res) => {
+    const { firstName, lastName, emailUser } = req.body;
+
+    try {
+        await transporter.sendMail({
+            from: "Admin Car-Market",// Quien manda el email
+            to: emailUser,// Email del usuario a desbloquear
+            subject: "Usuario desbloqueado (Car-Market)",//Asunto del correo
+            text: "",
+            html: `
+            <h2>Correo enviado desde Car-Market</h2>
+  
+            <hr />
+            <h3>Mensaje:</h3>
+            <p>Hola, <strong>${firstName} ${lastName}</strong>, le notificamos que su cuenta <strong>${emailUser}<strong> ha sido desbloqueada</p>
+            <hr />
+
+            `
+        });
+        res.status(200).send(`Correo enviado a: ${emailUser}`);
 
     } catch (error) {
         res.status(500).send("Error en el servidor al enviar el correo");
