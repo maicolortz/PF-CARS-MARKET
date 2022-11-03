@@ -25,13 +25,13 @@ function BaneoForm() {
 
     //LOCAL STORAGE
     const [userStorage, setInfo] = useState(
-        JSON.parse(window.localStorage.getItem("infoUser"))
+        JSON.parse(window.sessionStorage.getItem("infoUser"))
     );
 
     const setLocalStorage = (value) => {
         try {
             setInfo(value);
-            window.localStorage.setItem("infoUser", JSON.stringify(value))
+            window.sessionStorage.setItem("infoUser", JSON.stringify(value))
         } catch (error) {
             console.error(error);
         }
@@ -39,6 +39,9 @@ function BaneoForm() {
 
     useEffect(() => {
         !Array.isArray(usuario) && setLocalStorage(usuario);
+        return()=>{
+            sessionStorage.removeItem("infoUser");
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -51,6 +54,7 @@ function BaneoForm() {
         message: "",
     })
 
+    console.log(state)
     //MANEJO DE EVENTOS
     const handleChange = (e) => {
         e.preventDefault();
@@ -58,10 +62,10 @@ function BaneoForm() {
             {
                 ...state,
                 message: e.target.value,
-                idUser: userStorage.id,
-                firstName: userStorage.firstName,
-                lastName: userStorage.lastName,
-                emailUser: userStorage.mail,
+                idUser: userStorage && userStorage.id,
+                firstName:userStorage && userStorage.firstName,
+                lastName: userStorage && userStorage.lastName,
+                emailUser: userStorage && userStorage.mail,
             });
         setErrors(validate({ ...state, [e.target.name]: e.target.value }));
     }
@@ -83,7 +87,8 @@ function BaneoForm() {
                 icon: 'success',
                 confirmButtonColor: "#1d4ed8"
             }).then(() => {
-                history('/')
+    
+                history('/');
             });
         }
         else {
@@ -133,20 +138,20 @@ function BaneoForm() {
                             <div className={estilos.contenedor_input_y_titulo}>
                                 <div className='flex flex-col'>
                                     <label for="firstName" class={estilos.titulos}>Nombre:</label>
-                                    <input type="text" id="firstName" name="firstName" value={userStorage.firstName} class={estilos.input} />
+                                    <input type="text" id="firstName" name="firstName" value={userStorage && userStorage.firstName} class={estilos.input} />
                                 </div>
                             </div>
                             <div className={estilos.contenedor_input_y_titulo}>
                                 <div className='flex flex-col'>
                                     <label for="lastName" class={estilos.titulos}>Apellido:</label>
-                                    <input type="text" id="lastName" name="lastName" class={estilos.input} value={userStorage.lastName} />
+                                    <input type="text" id="lastName" name="lastName" class={estilos.input} value={userStorage && userStorage.lastName} />
                                 </div>
                             </div>
                         </div>
                         <div className='flex '>
                             <div className={estilos.contenedor_input_y_titulo}>
                                 <label for="emailUser" class={estilos.titulos}>Correo:</label>
-                                <input type="email" id="emailUser" name="emailUser" value={userStorage.mail} class={estilos.input} />
+                                <input type="email" id="emailUser" name="emailUser" value={userStorage && userStorage.mail} class={estilos.input} />
                             </div>
                         </div>
                         <div className="mt-6 flex flex-col  w-full">

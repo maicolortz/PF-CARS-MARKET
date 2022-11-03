@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCardDetail, postConsults, getConsults,  postFavorites,postResponse, getCars, getUsers, getFavorites, deleteFavorite } from "../../Redux/Actions";
+import { getCardDetail, postConsults, getConsults, postFavorites, postResponse, getCars, getUsers, getFavorites, deleteFavorite } from "../../Redux/Actions";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import './CardDetail.css';
@@ -21,6 +21,10 @@ const estilos = {
     "border-4 border-gray-300 pl-3 py-3 w-full shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
   cajaComentarios:
     "border-4 border-gray-300 mb-5 pl-3 py-3 h-auto w-full shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
+  cajaRespuestas:
+    "border-4 border-gray-300  pl-3 py-2 h-1/2 w-full shadow-sm bg-transparent rounded text-lg focus:outline-none focus:border-blue-500 placeholder-gray-500 text-gray-700",
+  button_respuesta:
+    "text-white bg-blue-700 hover:bg-blue-800 focus:outline-none shadow-md shadow-black rounded-full text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-900 dark:focus:ring-blue-800 font-semibold text-lg leading-4  w-auto py-4 px-4 ",
   contenedor_input_y_titulo: "md:w-auto flex flex-col mb-6",
   titulos: "text-xl leading-8 font-semibold text-gray-800 pb-2",
 };
@@ -41,10 +45,10 @@ function CardDetail() {
     userId: "",
   });
 
-  const[respuesta,setRespuesta] = useState({
-    userId:"",
-    description:"",
-    consultId:"",
+  const [respuesta, setRespuesta] = useState({
+    userId: "",
+    description: "",
+    consultId: "",
   })
 
   const { user } = useAuth0();
@@ -52,9 +56,9 @@ function CardDetail() {
   const users = useSelector((state) => state.allUsers);
   const consults = useSelector((state) => state.consult);
 
-  function prueba(){
-    if(user){
-      const guardo = users.find(u=>u.mail === user.email)
+  function prueba() {
+    if (user) {
+      const guardo = users.find(u => u.mail === user.email)
       return guardo.id
     }
   }
@@ -63,8 +67,8 @@ function CardDetail() {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const handleOnChange = (e)=>{
-    setRespuesta({...respuesta,[e.target.name]:e.target.value, userId:prueba(), consultId:parseInt(e.target.id)})
+  const handleOnChange = (e) => {
+    setRespuesta({ ...respuesta, [e.target.name]: e.target.value, userId: prueba(), consultId: parseInt(e.target.id) })
   }
 
   const handleOnSubmit = (e) => {
@@ -86,12 +90,12 @@ function CardDetail() {
 
 
   }
-  const handleSubmit = (e)=>{
+  const handleSubmit = (e) => {
     dispatch(postResponse(respuesta))
     setRespuesta({
-      userId:"",
-      description:"",
-      consultId:"",
+      userId: "",
+      description: "",
+      consultId: "",
     })
   }
 
@@ -125,16 +129,17 @@ function CardDetail() {
 
   useEffect(() => {
     dispatch(getConsults());
-    if(user){
-    const buscadoAuth = user.email
-        users.find(el => {
-          if (el.mail === buscadoAuth) {
-            setFavorite({
-              userId: el.id,
-              carId: id
-            })
-          }
-  })} 
+    if (user) {
+      const buscadoAuth = user.email
+      users.find(el => {
+        if (el.mail === buscadoAuth) {
+          setFavorite({
+            userId: el.id,
+            carId: id
+          })
+        }
+      })
+    }
   }, [dispatch, id, user]);
 
   useEffect(() => {
@@ -150,12 +155,12 @@ function CardDetail() {
         }
       });
       users.find(el => {
-        if (el.mail === user.email){
+        if (el.mail === user.email) {
           el.favourites.find(e => {
-            if(e.carId === id){
+            if (e.carId === id) {
               setHeart(true)
             }
-          })  
+          })
         }
       })
     }
@@ -181,7 +186,7 @@ function CardDetail() {
       if (heart) {
         setHeart(false);
         users.find(el => {
-          if (el.mail === user.email){
+          if (el.mail === user.email) {
             dispatch(deleteFavorite(el.id, id))
           }
         })
@@ -215,9 +220,9 @@ function CardDetail() {
     }
 
   }
-  if (user===undefined) {
-    return <Loading />;
-  }
+  // if (user === undefined) {
+  //   return <Loading />;
+  // }
 
   return (
     <div>
@@ -300,9 +305,8 @@ function CardDetail() {
                           className="text-2xl leading-8 font-semibold text-gray-800 cursor-pointer"
                         >
                           {" "}
-                          {`${carsDetail.user && carsDetail.user.firstName} ${
-                            carsDetail.user && carsDetail.user.lastName
-                          }`}
+                          {`${carsDetail.user && carsDetail.user.firstName} ${carsDetail.user && carsDetail.user.lastName
+                            }`}
                         </p>
                       </div>
                       <div class="flex gap-1">
@@ -452,23 +456,27 @@ function CardDetail() {
                         if (el.cars[0].id === id) {
                           return (
                             <div className={estilos.cajaComentarios}>
-                              <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
-                                {el.users[0].firstName} {el.users[0].lastName}
-                              </div>
-
-                              <div>
-                                {el.description}
-                              </div>
-                              <div>
-                               Respuesta: {el.response === null && el.cars[0].userId === prueba()
-                              
-                                ? <form onSubmit={(e)=> handleSubmit(e) }>
-                                    <input placeholder='escribi aca' onChange={e=>handleOnChange(e)} name='description' id={el.id}/>
-                                    <button type='submit'onClick={(e)=> handleSubmit(e)}>Responder</button>
-                                  </form>
-                                
-                                :el.response? el.response.description : null} 
+                              <div className='ml-5'>
+                                <div className="text-base leading-8 font-semibold text-gray-800 pb-2">
+                                  {el.users[0].firstName} {el.users[0].lastName}
                                 </div>
+
+                                <div>
+                                  {el.description}
+                                </div>
+                                <div className=' mt-2'>
+                                  Respuesta: {el.response === null && el.cars[0].userId === prueba()
+
+                                    ? <form onSubmit={(e) => handleSubmit(e)}>
+                                      <div className='flex justify-between gap-4 items-baseline mt-2'>
+                                        <input className={estilos.cajaRespuestas} placeholder=' Responde esta pregunta ...' onChange={(e) => handleOnChange(e)} name='description' id={el.id} />
+                                        <button type='submit' className={estilos.button_respuesta} onClick={(e) => handleSubmit(e)}>Responder</button>
+                                      </div>
+                                    </form>
+
+                                    : el.response ? el.response.description : null}
+                                </div>
+                              </div>
                             </div>
                           );
                         }

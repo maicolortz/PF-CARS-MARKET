@@ -2,6 +2,7 @@ import React from "react";
 import "./LandingPage.css";
 import auto from "./autoLanding.png";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 function LandingPage() {
   const estilos = {
     buttonlight:
@@ -9,6 +10,10 @@ function LandingPage() {
     buttonvacio:
       " text-white bg-gradient-to-r from-cyan-10 to-cyan-10 px-10  text-4xl py-10 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-10 dark:focus:ring-cyan-10 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2",
   };
+
+  useEffect(()=>{
+    sessionStorage.removeItem("infoUser");
+  },[])
 
   return (
     <div className={estilos.buttonlight} >
