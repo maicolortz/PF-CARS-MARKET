@@ -18,7 +18,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
     getCars()
   }, []);
   const navigate = useNavigate();
-  const [admin, setAdmin] = useState(user.mail==="maicolortiz2882@gmail.com");
+  const [admin, setAdmin] = useState(user.mail==="pancracio3nov@gmail.com");
   const [pauso, setPauso] = useState(null);
   const [caso, setCaso] = useState("");
   const [carro, setCarro] = useState(null);
@@ -125,6 +125,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
                 descriptionShort={el.descriptionShort}
                 name={el.name}
                 email={user.mail}
+                admin={admin}
               >
                 {" "}
               </CardH>
@@ -144,6 +145,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
                   descriptionShort={el.descriptionShort}
                   name={el.name}
                   email={user.mail}
+                  admin={admin}
                 >
                   {" "}
                 </CardH>
@@ -162,6 +164,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
               descriptionShort={el.descriptionShort}
               name={el.name}
               email={user.mail}
+              admin={admin}
             >
               {" "}
             </CardH>
@@ -181,6 +184,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
                   editar={editarCar}
                   descriptionShort={el.descriptionShort}
                   name={el.name}
+                  admin={admin}
                 >
                   {" "}
                 </CardH>
@@ -268,7 +272,7 @@ export const Dashboard = ({ user, infoUser, getUsers, allUsers ,Cars,getCars}) =
       <section className={estilos.panelsuperior}>
         <div className={estilos.panelnombre}>
           <strong>
-            {admin ? "Administrador" : user.firstName + " " + user.lastName}
+            {admin ? "Administrador" : "Perfil De Usuario"}
           </strong>
         </div>
         <section>
