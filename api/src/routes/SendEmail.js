@@ -114,7 +114,7 @@ router.post("/ForBuyer", async (req, res) => {
 
 router.post("/ForAdmin", async (req, res) => {
     const { idUser, firstName, lastName, emailUser, message } = req.body;
-    const emailAdmin = "navarrofranco531@gmail.com";
+    const emailAdmin = "pancracio3nov@gmail.com";
 
     try {
         await transporter.sendMail({
